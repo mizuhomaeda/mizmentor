@@ -100,7 +100,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
       {/* Toolbar */}
       <div className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap no-print">
         <div className="flex items-center gap-2">
-          <span className="font-serif-body font-bold text-slate-900 text-sm">Session Summary</span>
+          <span className="font-sans-body font-bold text-slate-900 text-sm">Session Summary</span>
           {summary.updatedAt && (
             <span className="text-[11px] text-slate-500">
               updated{' '}
@@ -147,7 +147,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
               <FileText className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-serif-body font-semibold text-slate-900 text-lg mb-1">
+              <h3 className="font-sans-body font-semibold text-slate-900 text-lg mb-1">
                 Your session notes will build up here
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -159,9 +159,9 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
             <div className="pt-2">
               <button
                 onClick={onStart}
-                className="px-4 py-2 bg-[#294f68] hover:bg-[#1d3a4f] text-white rounded-lg text-xs font-semibold shadow-xs transition-colors inline-flex items-center gap-1.5"
+                className="px-4 py-2 bg-mint-400 hover:bg-mint-500 text-deep-900 rounded-lg text-xs font-semibold shadow-xs transition-colors inline-flex items-center gap-1.5"
               >
-                <Sparkles className="w-3.5 h-3.5 text-iris-300" />
+                <Sparkles className="w-3.5 h-3.5 text-mint-300" />
                 <span>Describe your idea to get started</span>
               </button>
             </div>
@@ -175,7 +175,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
                 <span>What you want out of this session</span>
               </h3>
               {summary.sessionGoal.trim() ? (
-                <p className="font-serif-body text-sm leading-relaxed text-slate-800">
+                <p className="font-sans-body text-sm leading-relaxed text-slate-800">
                   {summary.sessionGoal}
                 </p>
               ) : (
@@ -186,11 +186,11 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
             {/* How the idea was understood */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
               <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
-                <Compass className="w-4 h-4 text-[#294f68]" />
+                <Compass className="w-4 h-4 text-deep-700" />
                 <span>How the idea was understood</span>
               </h3>
               {summary.understanding.trim() ? (
-                <p className="font-serif-body text-sm leading-relaxed text-slate-800 whitespace-pre-wrap">
+                <p className="font-sans-body text-sm leading-relaxed text-slate-800 whitespace-pre-wrap">
                   {summary.understanding}
                 </p>
               ) : (
@@ -204,11 +204,11 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
             {/* The point we are working on */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
               <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
-                <Target className="w-4 h-4 text-[#294f68]" />
+                <Target className="w-4 h-4 text-deep-700" />
                 <span>The point we are working on</span>
               </h3>
               {summary.currentPoint.trim() ? (
-                <p className="font-serif-body text-sm leading-relaxed text-slate-800">
+                <p className="font-sans-body text-sm leading-relaxed text-slate-800">
                   {summary.currentPoint}
                 </p>
               ) : (
@@ -219,14 +219,14 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
             {/* Still unstated */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
               <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
-                <Sparkles className="w-4 h-4 text-iris-600" />
+                <Sparkles className="w-4 h-4 text-mint-600" />
                 <span>Still unstated</span>
               </h3>
               {summary.unstated.length > 0 ? (
                 <ul className="space-y-1.5">
                   {summary.unstated.map((item, idx) => (
                     <li key={idx} className="flex gap-2 text-sm text-slate-800 leading-relaxed">
-                      <span className="text-iris-600 shrink-0">•</span>
+                      <span className="text-mint-800 shrink-0">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -246,7 +246,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
                 <ul className="space-y-1.5">
                   {summary.actions.map((item, idx) => (
                     <li key={idx} className="flex gap-2 text-sm text-slate-800 leading-relaxed">
-                      <span className="text-mint-700 shrink-0">•</span>
+                      <span className="text-mint-800 shrink-0">•</span>
                       <span>{item}</span>
                     </li>
                   ))}

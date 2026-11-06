@@ -24,8 +24,8 @@ export const ResetConfirmModal: React.FC<ResetConfirmModalProps> = ({
       <div className="relative w-full max-w-md bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
         <div className="bg-rose-700 text-white px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5 text-iris-300" />
-            <span className="font-serif-body text-base font-semibold">
+            <AlertTriangle className="w-5 h-5 text-mint-300" />
+            <span className="font-sans-body text-base font-semibold">
               Start over
             </span>
           </div>

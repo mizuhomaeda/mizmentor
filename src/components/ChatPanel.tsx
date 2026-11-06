@@ -8,8 +8,6 @@ import { Message, InteractionStage, ErrorNotice } from '../types';
 import { SAMPLE_JOURNEYS } from '../data/sampleJourneys';
 import {
   Send,
-  Mic,
-  MicOff,
   User,
   Sparkles,
   FileText,
@@ -48,11 +46,9 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
   onSelectRevisionOption,
 }) => {
   const [inputText, setInputText] = useState('');
-  const [isListening, setIsListening] = useState(false);
   const [isAtBottom, setIsAtBottom] = useState(true);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
 
   // Check if scroll container is at the bottom
   const checkIfAtBottom = useCallback(() => {
@@ -80,48 +76,6 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
       scrollToBottom('smooth');
     }
   }, [messages.length, isLoading, errorNotice]);
-
-  // Set up speech recognition if supported
-  useEffect(() => {
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      const recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = 'en-US';
-
-      recognition.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript;
-        setInputText((prev) => (prev ? `${prev} ${transcript}` : transcript));
-        setIsListening(false);
-      };
-
-      recognition.onerror = () => {
-        setIsListening(false);
-      };
-
-      recognition.onend = () => {
-        setIsListening(false);
-      };
-
-      recognitionRef.current = recognition;
-    }
-  }, []);
-
-  const toggleSpeech = () => {
-    if (!recognitionRef.current) {
-      alert('Speech recognition is not supported in this browser.');
-      return;
-    }
-    if (isListening) {
-      recognitionRef.current.stop();
-      setIsListening(false);
-    } else {
-      setIsListening(true);
-      recognitionRef.current.start();
-    }
-  };
 
   const handleSend = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -151,11 +105,11 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
           <div className="max-w-xl mx-auto py-4 space-y-6">
             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-xs">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-full bg-[#294f68] text-iris-300 flex items-center justify-center font-serif-body font-bold text-base">
+                <div className="w-9 h-9 rounded-full bg-mint-200 text-deep-800 flex items-center justify-center font-sans-body font-bold text-base">
                   M
                 </div>
                 <div>
-                  <h3 className="font-serif-body font-semibold text-slate-900 text-lg">
+                  <h3 className="font-sans-body font-semibold text-slate-900 text-lg">
                     Mizmentor
                   </h3>
                   <p className="text-xs text-slate-500">
@@ -186,21 +140,21 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   <button
                     key={j.id}
                     onClick={() => onSelectJourney(j.initialPrompt)}
-                    className="text-left p-4 bg-white hover:bg-slate-50/80 border border-slate-200 hover:border-[#294f68]/40 rounded-xl transition-all shadow-2xs group flex flex-col justify-between"
+                    className="text-left p-4 bg-white hover:bg-slate-50/80 border border-slate-200 hover:border-mint-500 rounded-xl transition-all shadow-2xs group flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-serif-body font-semibold text-slate-900 group-hover:text-[#294f68]">
+                        <span className="font-sans-body font-semibold text-slate-900 group-hover:text-deep-700">
                           {j.name}'s idea
                         </span>
                         <span className="text-[10px] text-slate-500">{j.persona}</span>
                       </div>
-                      <p className="text-xs font-medium text-iris-800 mb-1.5">{j.tagline}</p>
+                      <p className="text-xs font-medium text-mint-800 mb-1.5">{j.tagline}</p>
                       <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
                         {j.description}
                       </p>
                     </div>
-                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center text-xs font-medium text-[#294f68] gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center text-xs font-medium text-deep-700 gap-1 group-hover:translate-x-0.5 transition-transform">
                       <span>Start here</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>
@@ -246,8 +200,8 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               <div
                 className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-medium ${
                   isUser
-                    ? 'bg-slate-800 text-white'
-                    : 'bg-[#294f68] text-iris-300 font-serif-body'
+                    ? 'bg-mint-400 text-deep-900'
+                    : 'bg-mint-200 text-deep-800 font-sans-body'
                 }`}
               >
                 {isUser ? <User className="w-4 h-4" /> : 'M'}
@@ -258,7 +212,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                 <div
                   className={`p-4 rounded-2xl text-sm leading-relaxed shadow-2xs ${
                     isUser
-                      ? 'bg-[#294f68] text-white rounded-tr-xs'
+                      ? 'bg-mint-300 text-deep-900 rounded-tr-xs'
                       : 'bg-white text-slate-800 border border-slate-200 rounded-tl-xs'
                   }`}
                 >
@@ -317,13 +271,13 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
         {/* Loading state indicator with Cancel control */}
         {isLoading && (
           <div className="flex gap-3 max-w-xl mr-auto animate-in fade-in">
-            <div className="w-8 h-8 rounded-full bg-[#294f68] text-iris-300 font-serif-body shrink-0 flex items-center justify-center text-xs">
+            <div className="w-8 h-8 rounded-full bg-mint-200 text-deep-800 font-sans-body shrink-0 flex items-center justify-center text-xs">
               M
             </div>
             <div className="p-4 bg-white border border-slate-200 rounded-2xl rounded-tl-xs shadow-2xs space-y-2.5 flex-1 min-w-0">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-xs text-slate-600 font-medium truncate">
-                  <span className="inline-block w-2 h-2 rounded-full bg-[#294f68] animate-pulse shrink-0"></span>
+                  <span className="inline-block w-2 h-2 rounded-full bg-mint-500 animate-pulse shrink-0"></span>
                   <span className="truncate">
                     {currentStage === 'purpose' && 'Taking in the idea...'}
                     {currentStage === 'missing' && 'Working out what is still missing...'}
@@ -360,7 +314,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
           <button
             type="button"
             onClick={() => scrollToBottom('smooth')}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[#294f68] text-white shadow-md hover:bg-[#1d3a4f] rounded-full transition-all border border-white/20 animate-in fade-in slide-in-from-bottom-2 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-mint-400 text-deep-900 shadow-md hover:bg-mint-500 rounded-full transition-all border border-mint-500 animate-in fade-in slide-in-from-bottom-2 cursor-pointer"
           >
             <ArrowDown className="w-3.5 h-3.5" />
             <span>Jump to latest</span>
@@ -411,20 +365,6 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
       {/* Input area: ALWAYS usable even after failure */}
       <div className="p-3 sm:p-4 bg-white border-t border-slate-200 shrink-0">
         <form onSubmit={handleSend} className="relative flex items-end gap-2">
-          {/* Dictation / Microphone button */}
-          <button
-            type="button"
-            onClick={toggleSpeech}
-            className={`p-2.5 rounded-lg border transition-colors cursor-pointer ${
-              isListening
-                ? 'bg-rose-50 border-rose-400 text-rose-600 animate-pulse'
-                : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-600'
-            }`}
-            title={isListening ? 'Stop dictation' : 'Dictate your thoughts using microphone'}
-          >
-            {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-          </button>
-
           {/* Textarea */}
           <div className="relative flex-1">
             <textarea
@@ -433,7 +373,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               onKeyDown={handleKeyDown}
               placeholder="Describe your idea, or answer the question above..."
               rows={2}
-              className="w-full px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-[#294f68]/20 focus:border-[#294f68] resize-none"
+              className="w-full px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-mint-400/40 focus:border-mint-500 resize-none"
             />
           </div>
 
@@ -441,7 +381,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
           <button
             type="submit"
             disabled={!inputText.trim() || isLoading}
-            className="p-2.5 rounded-xl bg-[#294f68] text-white hover:bg-[#1d3a4f] disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 shadow-xs cursor-pointer"
+            className="p-2.5 rounded-xl bg-mint-400 text-deep-900 hover:bg-mint-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 shadow-xs cursor-pointer"
             title="Send message"
           >
             <Send className="w-4 h-4" />

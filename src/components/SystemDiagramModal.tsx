@@ -34,18 +34,18 @@ export const SystemDiagramModal: React.FC<SystemDiagramModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-3 sm:p-6 overflow-y-auto">
       <div className="relative w-full max-w-5xl bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden my-4 flex flex-col max-h-[92vh]">
         {/* Modal Header */}
-        <div className="bg-deep-600 text-white px-6 py-4 flex items-center justify-between shrink-0">
+        <div className="bg-mint-200 text-deep-900 px-6 py-4 flex items-center justify-between shrink-0">
           <div>
-            <h2 className="font-serif-body text-xl font-bold tracking-wide flex items-center gap-2">
+            <h2 className="font-sans-body text-xl font-bold tracking-wide flex items-center gap-2">
               <span>System Diagram: How This App Actually Works</span>
             </h2>
-            <p className="text-xs text-slate-300 mt-0.5">
+            <p className="text-xs text-deep-700 mt-0.5">
               What happens between your message and the reply: what is sent, what is fixed, and what the model never gets
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-deep-700 hover:text-deep-900 hover:bg-mint-300 transition-colors cursor-pointer"
             aria-label="Close architecture modal"
           >
             <X className="w-5 h-5" />
@@ -314,7 +314,7 @@ export const SystemDiagramModal: React.FC<SystemDiagramModalProps> = ({
         <div className="bg-slate-100 px-6 py-3 border-t border-slate-200 flex justify-end shrink-0">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold bg-deep-600 text-white rounded-lg hover:bg-deep-800 transition-colors cursor-pointer"
+            className="px-4 py-2 text-xs font-semibold bg-mint-400 text-deep-900 rounded-lg hover:bg-mint-500 transition-colors cursor-pointer"
           >
             Close System Diagram
           </button>

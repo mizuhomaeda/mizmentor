@@ -239,24 +239,49 @@ cannot load into Mizmentor.
 
 ## Look and feel
 
-Light theme only: white and light grey base, with the palette defined as Tailwind
-scales at the top of `src/index.css`.
+Light theme only: white and light grey base. The palette is defined as Tailwind
+scales at the top of `src/index.css`. **Use the scales, never a raw hex value in a
+component** - there are currently none left.
 
 ```
-mint #94c7b9   the main accent        -> bg-mint-*, text-mint-*
-sea  #59838e   secondary, quieter     -> bg-sea-*
-deep #294f68   darkest, text & edges  -> bg-deep-*, text-deep-*
-iris #aca8ff   the standout accent    -> bg-iris-*
+mint #94c7b9   the main accent, and the colour seen MOST
+               buttons, the user's speech bubbles, avatars, modal headers
+sea  #59838e   secondary, quieter
+deep #294f68   TEXT AND SMALL DETAILS ONLY - never a large fill
 ```
 
-Greys are Tailwind `slate`. Errors keep `rose`. There is no dark mode and the
-header is a white bar, not the navy one the complaint agent had. If you need a
-colour that is not in the palette, add a shade to the `@theme` block rather than
-hardcoding a hex value in a component.
+Because mint is light, anything filled with it takes dark text (`text-deep-900`),
+not white. Greys are Tailwind `slate`; errors keep `rose`. There is no dark mode,
+and the header is a white bar.
 
-The owner is a design student and intends to rework the **layout** separately. Do
-not restructure panels, spacing or hierarchy without being asked; colour and copy
+A fourth accent (#aca8ff periwinkle, "iris") was tried and removed: it competed
+with the mint rather than supporting it. Do not add a second accent without being
+asked.
+
+Typeface is **Inter** throughout, loaded in `index.html`. The serif (Crimson Pro)
+was removed as too formal - if you see `font-serif-body` anywhere, it is a
+regression. `font-mono-code` is still used for the model name.
+
+Deliberately removed from the UI, do not restore without being asked:
+
+- The Interaction Loop indicator in the header (Purpose / What is missing /
+  Analyse / Dig). It exposed internal state users do not need. The `currentStage`
+  value still exists and is still sent to the server; it is just not displayed.
+  The space left behind is intentionally empty.
+- The microphone / dictation button, along with its SpeechRecognition setup.
+
+The owner is a design student and reworks the **layout** separately. Do not
+restructure panels, spacing or hierarchy without being asked; colour and copy
 fixes are fine.
+
+### Contrast
+
+The UI passes WCAG AA across 193 text elements in three states (empty, mid-session,
+info modal). If you re-check this, note that **Tailwind v4 emits `oklch()` colours**
+and a naive `rgb()` parser silently reports them as black, which produces false
+passes - an earlier audit here was wrong for exactly that reason. Any checker must
+convert oklch properly, composite semi-transparent backgrounds against their
+ancestors, and self-test (black on white must give 21.00).
 
 ## What was removed with the ghostwriter
 

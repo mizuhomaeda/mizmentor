@@ -6,13 +6,17 @@
  * Light base (white and light grey) with a mint-led accent set. Replaces the
  * Berkeley blue + amber scheme inherited from the complaint letter agent.
  *
- *   mint #94c7b9 - the main accent
+ *   mint #94c7b9 - the main accent, and the colour seen most: buttons, the
+ *                  user's own speech bubbles, avatars, modal headers
  *   sea  #59838e - secondary, quieter
- *   deep #294f68 - darkest, for text and strong edges
- *   iris #aca8ff - the standout accent, used sparingly
+ *   deep #294f68 - darkest. TEXT AND SMALL DETAILS ONLY, never a large fill
+ *
+ * A fourth accent (#aca8ff, periwinkle) was tried and removed: it competed with
+ * the mint instead of supporting it. Do not reintroduce a second accent without
+ * being asked.
  *
  * Shades are generated around each base so Tailwind utilities (bg-mint-400,
- * text-deep-600, border-iris-200, and /opacity variants) all work.
+ * text-deep-600, border-mint-200, and /opacity variants) all work.
  */
 @theme {
   --color-mint-50:  #f1f8f6;
@@ -48,28 +52,13 @@
   --color-deep-800: #1d3a4f;
   --color-deep-900: #162c3c;
 
-  --color-iris-50:  #f4f3ff;
-  --color-iris-100: #eae8ff;
-  --color-iris-200: #d9d6ff;
-  --color-iris-300: #c6c2ff;
-  --color-iris-400: #aca8ff;
-  --color-iris-500: #918bfa;
-  --color-iris-600: #7a71ef;
-  --color-iris-700: #635ad4;
-  --color-iris-800: #4f48aa;
-  --color-iris-900: #403a85;
 }
 
 @layer base {
   :root {
-    --font-serif: 'Crimson Pro', Georgia, Cambria, 'Times New Roman', serif;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
   }
-}
-
-.font-serif-body {
-  font-family: var(--font-serif);
 }
 
 .font-sans-body {
