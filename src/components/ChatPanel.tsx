@@ -35,7 +35,7 @@ interface ChatPanelProps {
 /** Mizmentor's avatar. Every message the agent sends uses this one component. */
 /** The full message the example button puts in the input box, unsent. */
 const EXAMPLE_IDEA_PROMPT =
-  'I want to build a service for international students who cannot tell which part-time jobs accept their visa status.';
+  'I have an idea for an app that shows students which places on campus still have free seats to study, because the library is always full around exams. I have not talked to anyone about it yet. I am not sure if this is a real problem or just my own annoyance.';
 
 const MentorAvatar: React.FC = () => (
   <img
@@ -146,7 +146,10 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                 }}
                 className="group w-full flex items-center justify-between gap-4 text-left px-5 py-4 rounded-xl bg-mint-400 hover:bg-mint-500 text-ink-900 text-sm font-medium transition-colors"
               >
-                <span>An idea that helps international students find jobs their visa allows.</span>
+                <span>
+                  An idea that helps students find a free place to study on campus when the library
+                  is full
+                </span>
                 <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </button>
             </div>

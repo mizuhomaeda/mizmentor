@@ -195,7 +195,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
           /* One sheet of paper. The sections are separated by spacing and small
              labels only - no inner boxes, borders or cards, so this side does
              not read like the chat bubbles on the left. */
-          <div className="w-full max-w-2xl h-fit bg-white rounded-2xl shadow-sm px-7 py-7 sm:px-9 sm:py-8">
+          <div className="w-full max-w-2xl h-fit bg-white rounded-none shadow-[0_2px_10px_rgba(23,49,42,0.10),0_8px_28px_rgba(23,49,42,0.07)] px-7 py-7 sm:px-9 sm:py-8">
             <Section label="What you want out of this session" icon={<Target className="w-4 h-4" />}>
               {summary.sessionGoal.trim() ? (
                 <p className="font-sans-body text-[15px] font-normal leading-relaxed text-ink-800">
