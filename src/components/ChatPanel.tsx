@@ -12,7 +12,6 @@ import {
   MicOff,
   User,
   Sparkles,
-  CheckCircle,
   FileText,
   AlertCircle,
   ArrowRight,
@@ -34,7 +33,6 @@ interface ChatPanelProps {
   onDismissError: () => void;
   onSelectJourney: (initialPrompt: string) => void;
   onSelectRevisionOption: (optionText: string) => void;
-  onConfirmUnderstanding: (isConfirmed: boolean) => void;
   onJumpToDraft: () => void;
 }
 
@@ -49,7 +47,6 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
   onDismissError,
   onSelectJourney,
   onSelectRevisionOption,
-  onConfirmUnderstanding,
   onJumpToDraft,
 }) => {
   const [inputText, setInputText] = useState('');
@@ -275,36 +272,6 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   )}
                 </div>
 
-                {/* How the agent has read the idea, for the person to correct */}
-                {m.summaryOfUnderstanding && (
-                  <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-2.5">
-                    <div className="flex items-center gap-2 font-semibold text-amber-900">
-                      <Sparkles className="w-4 h-4 text-amber-700" />
-                      <span>How I have read your idea:</span>
-                    </div>
-                    <p className="leading-relaxed whitespace-pre-wrap font-serif-body text-sm text-stone-800">
-                      {m.summaryOfUnderstanding}
-                    </p>
-                    <div className="pt-2 border-t border-amber-200/60 flex items-center gap-2 flex-wrap">
-                      <span className="text-[11px] text-amber-800">
-                        Have I read that right?
-                      </span>
-                      <button
-                        onClick={() => onConfirmUnderstanding(true)}
-                        className="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer"
-                      >
-                        <CheckCircle className="w-3.5 h-3.5" />
-                        <span>Yes, that is it</span>
-                      </button>
-                      <button
-                        onClick={() => onConfirmUnderstanding(false)}
-                        className="px-2.5 py-1 bg-white hover:bg-stone-100 text-stone-700 border border-amber-300 rounded text-xs font-medium transition-colors cursor-pointer"
-                      >
-                        Not quite
-                      </button>
-                    </div>
-                  </div>
-                )}
 
               </div>
             </div>

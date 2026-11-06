@@ -103,7 +103,6 @@ What future or what society they want to bring about through this service, if th
 Outputs
 
 What they want out of the session, asked for at the start and used to aim everything that follows.
-A statement of how the idea has been understood, so they can correct it if it has been read wrong, given when the idea is first analysed.
 What is genuinely good or interesting in the idea, said before anything else, also when the idea is first analysed and not repeated every turn.
 One point, the most fundamental one, with the reason it matters, backed by a theory or a case where that helps.
 Either a question that makes them think about that point, or the next action to take.

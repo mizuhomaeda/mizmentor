@@ -319,14 +319,6 @@ export default function App() {
     handleSendMessage(choiceText);
   };
 
-  const handleConfirmUnderstanding = (isConfirmed: boolean) => {
-    if (isConfirmed) {
-      handleSendMessage('Yes, that is it. Carry on from there.');
-    } else {
-      handleSendMessage('Not quite. Let me describe the idea again.');
-    }
-  };
-
   // Requirement 3: Reset clears everything, sets stage to Step 1, works in error states
   const handleConfirmReset = () => {
     if (activeControllerRef.current) {
@@ -380,7 +372,6 @@ export default function App() {
               onDismissError={() => setErrorNotice(null)}
               onSelectJourney={handleSelectJourney}
               onSelectRevisionOption={handleSelectRevisionOption}
-              onConfirmUnderstanding={handleConfirmUnderstanding}
               onJumpToDraft={handleJumpToDraft}
             />
             <SessionSummaryPanel
@@ -401,7 +392,6 @@ export default function App() {
               onDismissError={() => setErrorNotice(null)}
               onSelectJourney={handleSelectJourney}
               onSelectRevisionOption={handleSelectRevisionOption}
-              onConfirmUnderstanding={handleConfirmUnderstanding}
               onJumpToDraft={() => setViewMode('document')}
             />
           </div>
