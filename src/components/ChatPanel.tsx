@@ -5,14 +5,12 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Message, InteractionStage, ErrorNotice } from '../types';
-import { SAMPLE_JOURNEYS } from '../data/sampleJourneys';
 import {
   Send,
   User,
   Sparkles,
   FileText,
   AlertCircle,
-  ArrowRight,
   ArrowDown,
   SplitSquareVertical,
   HelpCircle,
@@ -29,7 +27,6 @@ interface ChatPanelProps {
   onRetry: () => void;
   onCancel: () => void;
   onDismissError: () => void;
-  onSelectJourney: (initialPrompt: string) => void;
   onSelectRevisionOption: (optionText: string) => void;
 }
 
@@ -41,6 +38,10 @@ interface ChatPanelProps {
  *   <img src="/mizuho.jpg" alt="" className="w-8 h-8 rounded-full shrink-0 object-cover" />
  * Nothing else needs to change; every message uses this one component.
  */
+/** The full message the example button puts in the input box, unsent. */
+const EXAMPLE_IDEA_PROMPT =
+  'I want to build a service for international students who cannot tell which part-time jobs accept their visa status.';
+
 const MentorAvatar: React.FC = () => (
   <div
     className="w-8 h-8 rounded-full shrink-0 bg-mint-300 text-ink-900 flex items-center justify-center text-xs font-semibold"
@@ -59,13 +60,13 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
   onRetry,
   onCancel,
   onDismissError,
-  onSelectJourney,
   onSelectRevisionOption,
 }) => {
   const [inputText, setInputText] = useState('');
   const [isAtBottom, setIsAtBottom] = useState(true);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Check if scroll container is at the bottom
   const checkIfAtBottom = useCallback(() => {
@@ -135,37 +136,23 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               </div>
             </div>
 
-            {/* Example ideas */}
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-ink-500 mb-3">
-                Start with an example idea:
+            {/* One example. Indented by the avatar width (w-8) plus the gap
+                (gap-2.5) so its left edge lines up with the bubble above. */}
+            <div className="ml-[42px]">
+              <div className="text-xs font-semibold uppercase tracking-wider text-ink-500 mb-2">
+                Try an example
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {SAMPLE_JOURNEYS.map((j) => (
-                  <button
-                    key={j.id}
-                    onClick={() => onSelectJourney(j.initialPrompt)}
-                    className="text-left p-4 bg-white hover:bg-slate-50/80 border border-slate-200 hover:border-mint-500 rounded-xl transition-all shadow-2xs group flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-sans-body font-semibold text-ink-900 group-hover:text-ink-700">
-                          {j.name}'s idea
-                        </span>
-                        <span className="text-[10px] text-ink-500">{j.persona}</span>
-                      </div>
-                      <p className="text-xs font-medium text-mint-800 mb-1.5">{j.tagline}</p>
-                      <p className="text-xs text-ink-600 line-clamp-3 leading-relaxed">
-                        {j.description}
-                      </p>
-                    </div>
-                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center text-xs font-medium text-ink-700 gap-1 group-hover:translate-x-0.5 transition-transform">
-                      <span>Start here</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </div>
-                  </button>
-                ))}
-              </div>
+              <button
+                onClick={() => {
+                  // Fills the composer so it can be read and edited first. It is
+                  // deliberately not sent.
+                  setInputText(EXAMPLE_IDEA_PROMPT);
+                  textareaRef.current?.focus();
+                }}
+                className="w-full text-left px-4 py-3 bg-white hover:bg-mint-50 border border-slate-200 hover:border-mint-500 rounded-xl transition-colors shadow-2xs text-sm text-ink-800"
+              >
+                An idea that helps international students find jobs their visa allows.
+              </button>
             </div>
 
             {/* Short openers */}
@@ -357,6 +344,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
           {/* Textarea */}
           <div className="relative flex-1">
             <textarea
+              ref={textareaRef}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}

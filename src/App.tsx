@@ -331,10 +331,6 @@ export default function App() {
     await executeCall(conversationToSend, retryText);
   };
 
-  const handleSelectJourney = (initialPrompt: string) => {
-    handleSendMessage(initialPrompt);
-  };
-
   const handleSelectRevisionOption = (choiceText: string) => {
     handleSendMessage(choiceText);
   };
@@ -380,7 +376,6 @@ export default function App() {
               onRetry={handleRetry}
               onCancel={handleCancel}
               onDismissError={() => setErrorNotice(null)}
-              onSelectJourney={handleSelectJourney}
               onSelectRevisionOption={handleSelectRevisionOption}
             />
             <SessionSummaryPanel summary={sessionSummary} />
@@ -396,7 +391,6 @@ export default function App() {
               onRetry={handleRetry}
               onCancel={handleCancel}
               onDismissError={() => setErrorNotice(null)}
-              onSelectJourney={handleSelectJourney}
               onSelectRevisionOption={handleSelectRevisionOption}
             />
           </div>

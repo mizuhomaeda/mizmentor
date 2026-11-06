@@ -49,14 +49,6 @@ export const EMPTY_SESSION_SUMMARY: SessionSummary = {
   updatedAt: null,
 };
 
-export interface JourneyTemplate {
-  id: string;
-  name: string;
-  persona: string;
-  description: string;
-  initialPrompt: string;
-  tagline: string;
-}
 
 export interface ErrorNotice {
   id: string;
