@@ -102,16 +102,31 @@
 
 /*
  * Soft mint mesh for the notes side, so the white summary sheet reads as paper
- * lying on a coloured surface. Four overlapping radial gradients at low alpha
- * over a near-white base: light enough that the sheet still clearly separates
- * from it, and no image file needed.
+ * lying on a coloured surface.
+ *
+ * Five radial blobs at different positions, sizes and tones sit on a separate
+ * layer that is blurred and over-sized, so the blobs melt into one another with
+ * no visible edge or band anywhere. The tones stay very pale, which keeps the
+ * white sheet on top obviously separate. No image file, and not a linear fade.
  */
 .mesh-mint {
-  background-color: #f6fbf9;
+  position: relative;
+  isolation: isolate;
+  background-color: #f7fbfa;
+}
+
+.mesh-mint::before {
+  content: '';
+  position: absolute;
+  /* Over-sized and blurred: the blur would otherwise fade out at the panel
+     edges and show as a band. */
+  inset: -15%;
+  z-index: -1;
+  filter: blur(60px);
   background-image:
-    radial-gradient(at 18% 14%, rgba(148, 199, 185, 0.50) 0px, transparent 55%),
-    radial-gradient(at 86% 22%, rgba(174, 215, 203, 0.46) 0px, transparent 50%),
-    radial-gradient(at 72% 88%, rgba(148, 199, 185, 0.42) 0px, transparent 55%),
-    radial-gradient(at 8% 80%, rgba(194, 228, 220, 0.48) 0px, transparent 50%);
-  background-attachment: local;
+    radial-gradient(38% 46% at 12% 8%,   #b9dcd1 0%, rgba(185, 220, 209, 0) 70%),
+    radial-gradient(26% 30% at 78% 16%,  #cfe6e6 0%, rgba(207, 230, 230, 0) 72%),
+    radial-gradient(46% 34% at 92% 62%,  #a9d4c6 0%, rgba(169, 212, 198, 0) 68%),
+    radial-gradient(30% 40% at 34% 84%,  #c6e7dd 0%, rgba(198, 231, 221, 0) 70%),
+    radial-gradient(22% 26% at 60% 44%,  #dcebe6 0%, rgba(220, 235, 230, 0) 74%);
 }

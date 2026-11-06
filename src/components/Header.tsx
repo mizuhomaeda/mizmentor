@@ -89,10 +89,10 @@ export const Header: React.FC<HeaderProps> = ({
                     ? 'bg-white text-ink-700 shadow-xs'
                     : 'text-ink-600 hover:text-ink-700'
                 }`}
-                title="Session Summary Focus"
+                title="Show just the notes"
               >
                 <FileCheck className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Summary</span>
+                <span className="hidden md:inline">Notes</span>
               </button>
             </div>
 
