@@ -175,7 +175,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               <div className="p-3 bg-stone-50 rounded-lg border border-stone-200/80 text-xs text-stone-600 space-y-1">
                 <p className="font-medium text-stone-800">How we work together:</p>
                 <p>• Speak freely, even if your thoughts feel messy or unorganized.</p>
-                <p>• I will listen, capture your key challenges, reflect them back, and draft the letter.</p>
+                <p>• I will take in the idea, say how I read it, and raise the one thing worth thinking about first.</p>
                 <p>• You retain final control over every word. I never send anything.</p>
               </div>
             </div>
@@ -305,88 +305,6 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   </div>
                 )}
 
-                {/* If Ghostwriter produced or revised the Draft, show full draft in chat */}
-                {m.hasDraft && m.letterDraft && (
-                  <div className="bg-white border-2 border-[#003262]/20 rounded-xl p-4 shadow-xs space-y-3">
-                    <div className="flex items-center justify-between pb-2 border-b border-stone-200">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-[#003262]">
-                        <FileText className="w-4 h-4" />
-                        <span>Formal Complaint Letter Draft</span>
-                      </div>
-                      <button
-                        onClick={onJumpToDraft}
-                        className="flex items-center gap-1 text-xs text-[#003262] font-semibold hover:underline cursor-pointer"
-                      >
-                        <span>Open in Document Workspace</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-
-                    <div className="p-3 bg-stone-50 rounded border border-stone-200 max-h-56 overflow-y-auto text-xs font-serif-body leading-relaxed whitespace-pre-wrap text-stone-800">
-                      {m.letterDraft}
-                    </div>
-
-                    {/* Unresolved items checklist if any */}
-                    {m.unresolvedItems && m.unresolvedItems.length > 0 && (
-                      <div className="bg-stone-50 p-2.5 rounded border border-stone-200 text-xs">
-                        <span className="font-medium text-stone-700 block mb-1 flex items-center gap-1.5">
-                          <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
-                          <span>Parts in [brackets] to decide or check:</span>
-                        </span>
-                        <ul className="list-disc list-inside text-stone-600 space-y-0.5 text-[11px]">
-                          {m.unresolvedItems.map((item, idx) => (
-                            <li key={idx} className="font-mono-code text-stone-700">
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Revision options (Option A vs Option B) when refining */}
-                {m.revisionOptions && m.revisionOptions.optionA && (
-                  <div className="bg-stone-100/80 border border-stone-300/80 rounded-xl p-4 space-y-3">
-                    <div className="flex items-center gap-1.5 text-xs font-semibold text-stone-800">
-                      <SplitSquareVertical className="w-4 h-4 text-[#003262]" />
-                      <span>Choose Preferred Phrasing:</span>
-                    </div>
-                    {m.revisionOptions.explanation && (
-                      <p className="text-xs text-stone-600 italic">
-                        {m.revisionOptions.explanation}
-                      </p>
-                    )}
-                    <div className="grid grid-cols-1 gap-2">
-                      <button
-                        onClick={() =>
-                          onSelectRevisionOption(
-                            `I prefer Version A: "${m.revisionOptions!.optionA}"`
-                          )
-                        }
-                        className="text-left p-3 bg-white hover:bg-stone-50 border border-stone-200 hover:border-[#003262] rounded-lg transition-all text-xs font-serif-body text-stone-800 space-y-1 group cursor-pointer"
-                      >
-                        <span className="font-sans-body font-semibold text-[11px] text-[#003262] block">
-                          Version A
-                        </span>
-                        <p>"{m.revisionOptions.optionA}"</p>
-                      </button>
-                      <button
-                        onClick={() =>
-                          onSelectRevisionOption(
-                            `I prefer Version B: "${m.revisionOptions!.optionB}"`
-                          )
-                        }
-                        className="text-left p-3 bg-white hover:bg-stone-50 border border-stone-200 hover:border-[#003262] rounded-lg transition-all text-xs font-serif-body text-stone-800 space-y-1 group cursor-pointer"
-                      >
-                        <span className="font-sans-body font-semibold text-[11px] text-[#003262] block">
-                          Version B
-                        </span>
-                        <p>"{m.revisionOptions.optionB}"</p>
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           );
@@ -441,12 +359,11 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                 <div className="flex items-center gap-2 text-xs text-stone-600 font-medium truncate">
                   <span className="inline-block w-2 h-2 rounded-full bg-[#003262] animate-pulse shrink-0"></span>
                   <span className="truncate">
-                    {currentStage === 'listening' && 'Listening and capturing key challenges...'}
-                    {currentStage === 'reflect' && 'Reflecting and structuring what you shared...'}
-                    {currentStage === 'clarify' && 'Preparing clarifying questions...'}
-                    {currentStage === 'draft' && 'Drafting the formal complaint letter...'}
-                    {currentStage === 'revise' && 'Refining wording and tone...'}
-                    {!['listening', 'reflect', 'clarify', 'draft', 'revise'].includes(currentStage) &&
+                    {currentStage === 'purpose' && 'Taking in the idea...'}
+                    {currentStage === 'missing' && 'Working out what is still missing...'}
+                    {currentStage === 'analyse' && 'Thinking about the most fundamental point...'}
+                    {currentStage === 'dig' && 'Taking that point a layer deeper...'}
+                    {!['purpose', 'missing', 'analyse', 'dig'].includes(currentStage) &&
                       'Ghostwriter is formulating response...'}
                   </span>
                 </div>

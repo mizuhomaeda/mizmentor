@@ -30,12 +30,10 @@ interface HeaderProps {
 }
 
 const STAGES: { key: InteractionStage; label: string; step: number }[] = [
-  { key: 'listening', label: 'Listen', step: 1 },
-  { key: 'capture', label: 'Capture', step: 2 },
-  { key: 'reflect', label: 'Reflect', step: 3 },
-  { key: 'clarify', label: 'Clarify', step: 4 },
-  { key: 'draft', label: 'Draft', step: 5 },
-  { key: 'revise', label: 'Revise', step: 6 },
+  { key: 'purpose', label: 'Purpose', step: 1 },
+  { key: 'missing', label: 'What is missing', step: 2 },
+  { key: 'analyse', label: 'Analyse', step: 3 },
+  { key: 'dig', label: 'Dig', step: 4 },
 ];
 
 export const Header: React.FC<HeaderProps> = ({
@@ -63,11 +61,8 @@ export const Header: React.FC<HeaderProps> = ({
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h1 className="font-serif-body text-xl font-bold tracking-tight text-white">
-                  Formal Complaint Ghostwriter
+                  Mizmentor
                 </h1>
-                <span className="text-xs px-2 py-0.5 rounded bg-amber-400/20 text-amber-200 border border-amber-400/30 font-medium">
-                  Cohort 7
-                </span>
                 <span
                   className="text-[11px] px-2 py-0.5 rounded bg-emerald-400/20 text-emerald-200 border border-emerald-400/30 font-mono-code font-medium flex items-center gap-1"
                   title="Currently active lightweight Gemini model"
@@ -77,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
                 </span>
               </div>
               <p className="text-xs text-stone-300">
-                UC Berkeley Master of Design · Workload & Academic Scheduling Advocate
+                feedback on your early business idea
               </p>
             </div>
           </div>
@@ -117,10 +112,10 @@ export const Header: React.FC<HeaderProps> = ({
                     ? 'bg-white text-[#003262] shadow-xs'
                     : 'text-stone-300 hover:text-white'
                 }`}
-                title="Letter Document Focus"
+                title="Session Summary Focus"
               >
                 <FileCheck className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Letter</span>
+                <span className="hidden md:inline">Summary</span>
               </button>
             </div>
 
@@ -150,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenResetModal}
               className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-stone-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
-              title="Reset Conversation and Letter"
+              title="Reset the session"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset</span>

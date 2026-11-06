@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type InteractionStage = 'listening' | 'capture' | 'reflect' | 'clarify' | 'draft' | 'revise';
+/** The four steps of Mizuho's mentoring loop. See knowledge/RoleCard_SyntheticPersona.md */
+export type InteractionStage = 'purpose' | 'missing' | 'analyse' | 'dig';
 
 export interface Message {
   id: string;
@@ -12,23 +13,37 @@ export interface Message {
   timestamp: string;
   stage?: InteractionStage;
   summaryOfUnderstanding?: string | null;
-  hasDraft?: boolean;
-  letterDraft?: string | null;
+  currentPoint?: string | null;
   unresolvedItems?: string[];
-  revisionOptions?: {
-    optionA: string;
-    optionB: string;
-    explanation?: string;
-  } | null;
+  agreedActions?: string[];
   modelUsed?: string;
 }
 
-export interface DraftVersion {
-  id: string;
-  timestamp: string;
-  content: string;
-  label: string;
+/**
+ * The running record of the session, shown in the right-hand panel and
+ * downloadable as a text file. Accumulated across turns rather than replaced,
+ * so a turn that omits a field does not wipe it.
+ */
+export interface SessionSummary {
+  /** How the agent has read the idea. Replaced when the agent restates it. */
+  understanding: string;
+  /** The point currently being worked on. Replaced each turn. */
+  currentPoint: string;
+  /** Still unstated. Replaced each turn, since it shrinks as things get answered. */
+  unstated: string[];
+  /** What the person said they would go and find out. Accumulates, de-duplicated. */
+  actions: string[];
+  /** ISO timestamp of the last change, for the download filename and the panel. */
+  updatedAt: string | null;
 }
+
+export const EMPTY_SESSION_SUMMARY: SessionSummary = {
+  understanding: '',
+  currentPoint: '',
+  unstated: [],
+  actions: [],
+  updatedAt: null,
+};
 
 export interface JourneyTemplate {
   id: string;

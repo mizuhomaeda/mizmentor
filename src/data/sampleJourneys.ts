@@ -7,24 +7,24 @@ import { JourneyTemplate } from '../types';
 
 export const SAMPLE_JOURNEYS: JourneyTemplate[] = [
   {
-    id: 'mina',
-    name: 'Mina',
-    persona: 'Cohort 7, 2nd Semester',
-    tagline: 'Stacked deadlines & sleeplessness',
+    id: 'kai',
+    name: 'Kai',
+    persona: 'Solo founder, pre-launch',
+    tagline: 'An app for scattered childcare information',
     description:
-      'Three major studio assignments are due in the exact same week. She went to office hours once and said she was struggling, but nothing changed. She needs a formal letter on record.',
+      'Thinks the problem is that information about local childcare is spread across too many places. Has not interviewed anyone yet.',
     initialPrompt:
-      "Hi. I'm in my second semester of MDes Cohort 7. I really need to write a formal letter to the program office about the workload. Right now we have three major deliverables all scheduled for the exact same week, and I haven't slept properly in days. I actually went to office hours last week to say I was struggling, but the conversation didn't lead to any change. I want to put this in writing so there is an official record, but my thoughts are messy and I don't want to sound whiny or overly aggressive.",
+      "I want to build an app for parents looking for childcare. The problem I see is that the information is scattered everywhere, across city websites, Facebook groups, word of mouth, so parents cannot compare options properly. My idea is one place where all the local options are listed with reviews and availability. I have not talked to any parents yet, this is still just my own observation. Where should I take this?",
   },
   {
-    id: 'theo',
-    name: 'Theo',
-    persona: 'Cohort 7, 1st Year',
-    tagline: 'Exhausted but doubting himself',
+    id: 'rina',
+    name: 'Rina',
+    persona: 'Two-person team, in-house venture',
+    tagline: 'A service that keeps beginners from quitting',
     description:
-      'Tired and falling behind, but not sure if his situation is bad enough to complain about. Suspects everyone else is handling it fine and wondering if he should even send a letter.',
+      'Believes they have validated the problem with ten interviews. Wants to know what to lock down before pitching internally.',
     initialPrompt:
-      "Hello. I'm in Cohort 7. I think I might need to write a letter to the MDes office, but to be completely honest, I'm not even sure if I should send anything. I am constantly exhausted and falling behind on project milestones, but part of me wonders if I'm just the problem and everyone else is managing fine. Can you help me sort through what's happening first?",
+      "We are building a service to stop beginners dropping out of a hobby in their first few months. We interviewed ten people and they all said they would use something like this, so we think the problem is validated. We have to pitch to our internal committee in three weeks. What should we lock down before then, and what would you cut?",
   },
 ];
 

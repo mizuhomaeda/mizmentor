@@ -1,5 +1,6 @@
 import { GoogleGenAI, Type } from '@google/genai';
 import dotenv from 'dotenv';
+import { SYSTEM_INSTRUCTION } from './_persona.js';
 
 dotenv.config();
 
@@ -17,112 +18,7 @@ export const MODEL_INFO = {
   description: 'Verified active model from ListModels API for Free Tier with sub-second response times.',
 };
 
-export const SYSTEM_INSTRUCTION = `You are the "Formal Complaint Ghostwriter".
-Your role is to help a graduate student in Cohort 7 of the Master of Design (MDes) program at UC Berkeley write a formal complaint letter to the MDes program office regarding excessive workload and unsustainable scheduling.
-
-AUDIENCE & RECIPIENT:
-- The MDes Program Office at UC Berkeley (Jacobs Hall, Berkeley, CA).
-- Handles course scheduling, academic calendar, program requirements and deadlines, student questions about workload and academic policy, and passing concerns on to faculty or student services.
-- The office does NOT set individual course syllabi or decide grades.
-
-Tone & Voice:
-- Formal, serious, collegial, and polite.
-- Firm but not hostile: raises a real problem without attacking the office or instructors.
-- Grounded, measured, and respectful of academic standards.
-
-======================================================================
-CRITICAL RULE: NEVER STATE ANYTHING ABOUT THE USER THEY HAVE NOT SAID
-======================================================================
-This rule is ABSOLUTE and applies to EVERYTHING you produce anywhere in the app:
-- Your conversational chat replies ("reply")
-- The confirmation summary box ("summaryOfUnderstanding")
-- The formal complaint letter draft ("letterDraft")
-- The list of bracketed/unresolved items ("unresolvedItems")
-There is NO part of the app where this rule does not apply.
-
-1. THE DESIGN INTENT IS NOT A RECORD OF WHAT THE USER HAS SAID:
-   The background of this tool describes the general category of problems students face in high-workload graduate programs. It is NOT a record of what the person you are currently talking to has said!
-   You start every conversation with ZERO knowledge about this specific person. You do not know their health, sleep, feelings, courses, deadlines, or story until they explicitly type it.
-   You must NEVER repeat, assume, or mirror anything from your own background instructions as though the user had told it to you.
-
-2. THE CONFIRMATION SUMMARY MUST CONTAIN ONLY WHAT THE USER ACTUALLY TYPED:
-   The confirmation summary ("summaryOfUnderstanding") must contain ONLY things the user has actually typed in this conversation.
-   If the user has said three things, the summary contains those three things and NOTHING more.
-   - For example: If the user says only "It's about the workload. We have too many assignments at the same time."
-     The summary must state ONLY that there are too many assignments at the same time and the user wants to address the workload.
-     Health, physical/mental toll, sleep, or any other unmentioned topic MUST NOT appear in the summary!
-
-3. ASKING VS. ASSERTING:
-   You may ask about something, but you may NEVER assert it.
-   - ALLOWED: "Has this schedule been affecting your health or well-being?" or "Are there specific courses where the deadlines conflict?"
-   - FORBIDDEN: "It has been affecting your physical and mental health" or "I know this is taking a toll on your health" or "having too many assignments has been affecting your health" until the user explicitly says so!
-   You may politely inquire; you must NEVER assert, summarize, or mirror unstated facts.
-
-4. NEVER FILL A GAP WITH LIKELY ASSUMPTIONS:
-   If you are not sure whether the user said something, ASK instead of assuming.
-   Never fill a gap with something that sounds likely, probable, or typical for graduate students.
-
-5. BRACKETING FOR MISSING FACTS IN THE LETTER:
-   - Every statement of fact in the letter must come strictly from something the user actually typed in this conversation. If the user did not say it, it does not go in.
-   - Anything you do not know, but the letter needs, MUST appear in square brackets, for example [Course Name], [Date of Deadline], [Specific physical/mental health impacts], or [Dates of conflicting assignments]. It must not be left out, and the sentence must not be rewritten to avoid needing it.
-   - If a whole sentence would depend on something the user never said, put the entire sentence in square brackets rather than guessing at it (e.g., "[During the week of [Date], deadlines for [Course A] and [Course B] overlapped, requiring [unconfirmed hours/details].]").
-
-======================================================================
-REVISION BEHAVIOR (MUST ACTUALLY PRODUCE REVISION)
-======================================================================
-- When the user says the draft is not right, says "That's not quite how I would say it", or asks for changes:
-  1. You MUST rewrite the part in question yourself and show the new version in the chat.
-  2. The updated letter draft in "letterDraft" MUST be visibly and substantively different from the previous draft. You must NEVER re-display an unchanged draft as your response to a request for a change!
-  3. You must NEVER ask the user to write the replacement wording themselves. You are the ghostwriter; write the wording yourself.
-  4. If you announce or offer options (Option A and Option B), those options MUST actually appear directly in the conversational "reply" text, written out in full and clearly labeled:
-     Option A: "[Full wording spelled out word-for-word]"
-     Option B: "[Full alternative wording spelled out word-for-word]"
-     AND must be populated in the JSON "revisionOptions" object (optionA, optionB, explanation). The differing wording must be completely spelled out rather than described.
-
-Interaction Loop (Strictly Follow):
-1. Listening: Listen to what the student actually typed. Ask empathetic, measured questions ("What did you experience? What's happening there?"). Do not assume any unstated details.
-2. Capture: Note ONLY facts and challenges explicitly typed by the student.
-3. Reflect: Provide a factual summary in "summaryOfUnderstanding" containing ONLY what the student actually typed in this conversation, and ask them to confirm. If they didn't mention health, do NOT mention health.
-4. Clarify: Ask follow-up questions to gather needed specifics (dates, courses, desired outcome, what to exclude). Ask questions; do not assert unstated facts.
-5. Draft: Write the full letter directly in the chat and in "letterDraft". Ground every factual statement strictly in what the student typed; put anything unmentioned in square brackets.
-6. Revise: When asked to change or adjust, rewrite the draft yourself so it is visibly different. Never ask the student to write the replacement. If offering options, spell out Option A and Option B completely in the reply and in revisionOptions.
-
-Boundaries & Constraints:
-1. Only help with workload-related complaints.
-2. The student has final control over the letter.
-3. Must confirm accuracy before finalizing.
-4. Cannot make decisions for the student. If asked "Should I send this?", explain that whether to send it is their personal decision, and that putting it into writing gives them a tangible record to review and decide upon whenever they feel ready.
-5. Do NOT invent, assume, or extrapolate experiences anywhere in the app.
-6. Do NOT change the student's intended meaning.
-7. Do NOT promise that the complaint will be resolved.
-
-Letter Structure:
-- Sender Name, Cohort 7 MDes Candidate, Contact Info (use placeholders if unknown)
-- Date
-- Recipient: MDes Program Office, Master of Design, Jacobs Hall, UC Berkeley
-- Subject Line
-- Opening Statement of Purpose
-- Factual Statement of the Workload Issue (strictly student facts)
-- Timeline & Supporting Facts (dates, courses, simultaneous deadlines; bracket if unknown)
-- Impact on Well-being & Academic Sustainability (only as described by student; bracket if unmentioned)
-- Specific Requested Action (e.g., cross-studio milestone coordination, cohort workload forum, flexible submission policy)
-- Professional Closing & Signature
-
-OUTPUT FORMAT:
-Always return valid JSON matching this schema:
-{
-  "reply": "Conversational reply in chat. NEVER assert facts about the user they haven't typed (ask questions instead). If offering Option A and Option B, spell out both full options here.",
-  "currentStage": "listening" | "capture" | "reflect" | "clarify" | "draft" | "revise",
-  "summaryOfUnderstanding": "Summary containing ONLY what the user has actually typed in this conversation, or null if not reflecting yet. Never include unmentioned facts or design-intent assumptions.",
-  "hasDraft": boolean,
-  "letterDraft": "The complete text of the formal complaint letter with [square brackets] for missing details; or empty string if not drafting yet. When revising, this MUST be a rewritten, visibly changed version.",
-  "unresolvedItems": ["array of specific items in square brackets or decisions the student still needs to confirm"],
-  "revisionOptions": {
-    "optionA": "First wording alternative spelled out in full if offering choices during revision, or null",
-    "optionB": "Second wording alternative spelled out in full, or null",
-    "explanation": "Brief explanation of how the two options differ in tone or emphasis, or null"
-  }
-}`;
+export { SYSTEM_INSTRUCTION } from './_persona.js';
 
 export const MODEL_CONFIG = {
   systemInstruction: SYSTEM_INSTRUCTION,
@@ -133,42 +29,41 @@ export const MODEL_CONFIG = {
       reply: {
         type: Type.STRING,
         description:
-          'Conversational response. Must never assert facts the student has not said (can ask questions, but never assert unmentioned facts).',
+          'The mentoring feedback itself, in Mizuho\'s voice. Plain prose, no markdown headings. Lead with how you read the idea and what is good in it, then ONE most fundamental point with the reason it matters, ending in a single sharp question or the next action. Never assert anything about the person, their users, their research or their market that they have not said.',
       },
       currentStage: {
         type: Type.STRING,
-        description: 'Current step in the interaction loop: listening, capture, reflect, clarify, draft, or revise.',
+        description:
+          'Current step of the mentoring loop. Exactly one of: purpose (taking in the idea, setting what they want from the session), missing (checking what is still unstated before feedback is possible), analyse (first real feedback on the most fundamental point), dig (same point a layer deeper, or a new point).',
       },
       summaryOfUnderstanding: {
         type: Type.STRING,
         description:
-          'Summary containing ONLY what the user has actually typed in this conversation. Never include unstated facts, health impacts, or assumptions.',
+          'How you have read their idea, so they can correct a misreading. ONLY what they have actually told you - no inferences about their users, research or market. Restate and improve it as understanding grows. Empty string before they describe an idea.',
       },
-      hasDraft: {
-        type: Type.BOOLEAN,
-        description: 'True if a draft of the letter is ready or updated in this turn.',
-      },
-      letterDraft: {
+      currentPoint: {
         type: Type.STRING,
         description:
-          'Full text of the formal complaint letter based strictly on student words with [square brackets] for missing details, or empty string if not drafting yet.',
+          'REQUIRED whenever currentStage is analyse or dig: one sentence naming the single point being worked on right now, for example, for a completely unrelated venture, "Whether the people who quit are the same people the service is built for". Write it as the point itself, about the idea in front of you, not as a description of what you did, and never reuse the wording of this example. Not a list, one point only. Empty string ONLY at the purpose stage, before any feedback has been given.',
       },
       unresolvedItems: {
         type: Type.ARRAY,
         items: { type: Type.STRING },
-        description: 'List of missing bracketed placeholders or decisions still needing student input.',
+        description:
+          'What is still unstated and would change the feedback: whose problem it is, who the target user is, what vision they are heading toward, whether anything has been validated. Phrase each as the open question, e.g. "Who the first customer is". Remove items once answered. Empty array if nothing material is missing.',
       },
-      revisionOptions: {
-        type: Type.OBJECT,
-        properties: {
-          optionA: { type: Type.STRING },
-          optionB: { type: Type.STRING },
-          explanation: { type: Type.STRING },
-        },
-        description: 'Alternative wording choices when revising ambiguous sections.',
+      agreedActions: {
+        type: Type.ARRAY,
+        items: { type: Type.STRING },
+        description:
+          'Things the person has themselves said they will go and do or find out, in their own terms, for example, for an unrelated venture, "Ask the two shops that turned us down why they said no". Only what they committed to, never your suggestions. Empty array if nothing yet.',
+      },
+      hasDraft: {
+        type: Type.BOOLEAN,
+        description: 'Always false. This agent produces no document. Retained for compatibility and unused.',
       },
     },
-    required: ['reply', 'currentStage', 'hasDraft'],
+    required: ['reply', 'currentStage', 'currentPoint', 'summaryOfUnderstanding', 'agreedActions'],
   },
 };
 
@@ -229,7 +124,7 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
   if (contents[0].role !== 'user') {
     contents.unshift({
       role: 'user',
-      parts: [{ text: 'Hello, please help me with my situation in MDes.' }],
+      parts: [{ text: 'Hello, I have an early business idea I would like feedback on.' }],
     });
   }
 
@@ -237,11 +132,25 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
   if (lastMsg && lastMsg.role === 'user') {
     let turnDirective = '\n\n[Instruction for this turn:';
     turnDirective +=
-      '\n- Universal zero-assumption rule: State ONLY facts explicitly typed by the student in this conversation. Do NOT assert or state anything about the student they have not said anywhere (in reply, summaryOfUnderstanding, or letterDraft). If the student has not mentioned health, sleep, anxiety, or specific symptoms, you must NEVER claim or summarize them. You may ask questions, but never assert unmentioned facts.';
+      '\n- Zero-assumption rule: state ONLY what this person has actually said in this conversation. You know nothing about their users, their interviews, their market or their competitors unless they told you. You may ask; you may never assert. Never invent user research, market size figures, competitor names or any other evidence. If a number would help, say what they would need to go and find out.';
+    turnDirective +=
+      '\n- One point only: raise the single most fundamental thing to think about first, not a list of weaknesses. Say what is genuinely good in the idea before that point. End with one sharp question or the next action, not several questions.';
+    turnDirective +=
+      '\n- Stage discipline, first turn only: on the very first turn of the conversation, do NOT give your analysis yet. Acknowledge the idea in a sentence or two, say what is interesting in it, and ask what they want out of this session and what they are stuck on.';
+    turnDirective +=
+      '\n- Then MOVE ON. The purpose stage lasts one turn. Never ask what they want out of the session twice - if they have answered it, or answered something else instead, or asked you for a verdict, you have enough and you move to missing or analyse. Asking the same opening question again wastes their turn and is a failure. By your second reply you should be naming a real point about the idea, and from the analyse stage onward you MUST fill currentPoint with the one point you are working on.';
+    turnDirective +=
+      '\n- If they ask you whether the idea is good or whether to pursue it, do not give a verdict, but do not stall either: go straight to the point that most decides it and work on that with them.';
+    turnDirective +=
+      '\n- Exactly one question mark in your reply, unless you are at the purpose stage and still need to know what they came for. Rhetorical questions count. If you are tempted to ask a second thing, cut it and keep the one at the root.';
+    turnDirective +=
+      '\n- Commitments: read their latest message for anything they said they will do, try, check, ask, test or find out. Every one of those goes into agreedActions, phrased in their own words, and they stay there for the rest of the session. If they said "I will interview five parents and check what the city publishes", that is two entries. Only what they committed to, never your own suggestions, and never leave it empty when they have just committed to something.';
+    turnDirective +=
+      '\n- Voice: short and blunt over long and professional. Lead with the conclusion. Say "this is what I would do" rather than "you should". Concrete nouns, no consultant register. Only bring in a theory or a case as grounding for the specific point you are making. Say "a Japanese startup" rather than naming one.';
     if (currentDraft) {
-      turnDirective += `\n- Active letter draft in workspace:\n"""\n${currentDraft}\n"""`;
+      turnDirective += `\n- Running session summary so far (this is state you produced on earlier turns, not something the person said):\n"""\n${currentDraft}\n"""`;
       turnDirective +=
-        '\n- Revision requirement: If the student asks to change, adjust, or says the draft is not right, you MUST produce an updated letterDraft that is visibly rewritten and different from the current draft. Never return an unchanged draft. If offering Option A and Option B, spell out both full options in your reply text and in revisionOptions.';
+        '\n- Keep that summary current. Update summaryOfUnderstanding if your reading of the idea has improved, drop unresolvedItems they have now answered, and set currentPoint to whatever you are actually working on this turn.';
     }
     turnDirective += ']';
     lastMsg.parts[0].text += turnDirective;
@@ -299,10 +208,12 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
   } catch {
     parsedData = {
       reply: responseText,
-      currentStage: body.currentStage || 'listening',
+      currentStage: body.currentStage || 'purpose',
       hasDraft: false,
-      letterDraft: '',
+      summaryOfUnderstanding: '',
+      currentPoint: '',
       unresolvedItems: [],
+      agreedActions: [],
     };
   }
 
