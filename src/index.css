@@ -112,30 +112,32 @@
 .mesh-mint {
   position: relative;
   isolation: isolate;
-  background-color: #f7fbfa;
+  /* A tinted base, not white. Every blob is pale, so any gap between them would
+     otherwise show as a white patch and break the mesh. */
+  background-color: #edf4f2;
 }
 
 .mesh-mint::before {
   content: '';
   position: absolute;
-  /* Over-sized and blurred: the blur would otherwise fade out at the panel
-     edges and show as a band. */
-  inset: -15%;
+  /* Pushed well outside the panel so no blob edge can land on a visible border,
+     and so the blur has somewhere to run out of sight. */
+  inset: -40%;
   z-index: -1;
-  filter: blur(70px);
-  /* Every palette colour appears, each at a low enough alpha that none of them
-     reads as a strong colour on its own - but the hues differ enough across the
-     panel that it is visibly multi-colour rather than one tint fading out.
-     The two dark colours (sea, deep) are the palest of the set, so the white
-     sheet on top keeps a clear edge against them.
-
-     Each blob carries a mid stop: a plain two-stop ramp this wide quantises to
-     8 bits and shows faint rings once blurred. */
+  /* Long transitions: the blobs have to melt into each other, not fade out. */
+  filter: blur(110px);
+  /* Seven overlapping fields, each large enough to reach at least two others.
+     Several centres sit outside the panel (negative or >100% positions) so no
+     edge shows a blob boundary. Mint at 34%/44% and lavender at 56%/38% are
+     placed to collide across the middle, which is where the blended in-between
+     tone comes from. Every colour is pale enough to keep the white sheet on
+     top clearly separate. */
   background-image:
-    radial-gradient(40% 48% at 10% 6%,   rgba(148, 199, 185, 0.62) 0%, rgba(148, 199, 185, 0.26) 46%, rgba(148, 199, 185, 0) 72%),
-    radial-gradient(32% 36% at 80% 12%,  rgba(172, 168, 255, 0.40) 0%, rgba(172, 168, 255, 0.17) 46%, rgba(172, 168, 255, 0) 74%),
-    radial-gradient(36% 32% at 95% 50%,  rgba(89, 131, 142, 0.34) 0%, rgba(89, 131, 142, 0.14) 46%, rgba(89, 131, 142, 0) 72%),
-    radial-gradient(32% 42% at 28% 88%,  rgba(148, 199, 185, 0.52) 0%, rgba(148, 199, 185, 0.22) 46%, rgba(148, 199, 185, 0) 72%),
-    radial-gradient(28% 30% at 64% 80%,  rgba(41, 79, 104, 0.26) 0%, rgba(41, 79, 104, 0.11) 46%, rgba(41, 79, 104, 0) 74%),
-    radial-gradient(26% 28% at 50% 36%,  rgba(172, 168, 255, 0.26) 0%, rgba(172, 168, 255, 0.11) 48%, rgba(172, 168, 255, 0) 76%);
+    radial-gradient(85% 90% at -8% -6%,  rgba(148, 199, 185, 0.70) 0%, rgba(148, 199, 185, 0.40) 45%, rgba(148, 199, 185, 0) 80%),
+    radial-gradient(80% 85% at 108% 8%,  rgba(172, 168, 255, 0.44) 0%, rgba(172, 168, 255, 0.28) 45%, rgba(172, 168, 255, 0) 80%),
+    radial-gradient(90% 80% at 112% 70%, rgba(89, 131, 142, 0.30) 0%, rgba(89, 131, 142, 0.20) 45%, rgba(89, 131, 142, 0) 80%),
+    radial-gradient(85% 90% at -10% 108%, rgba(148, 199, 185, 0.64) 0%, rgba(148, 199, 185, 0.36) 45%, rgba(148, 199, 185, 0) 80%),
+    radial-gradient(75% 70% at 55% 115%, rgba(41, 79, 104, 0.20) 0%, rgba(41, 79, 104, 0.14) 45%, rgba(41, 79, 104, 0) 80%),
+    radial-gradient(70% 75% at 34% 44%,  rgba(148, 199, 185, 0.46) 0%, rgba(148, 199, 185, 0.26) 50%, rgba(148, 199, 185, 0) 82%),
+    radial-gradient(65% 70% at 56% 38%,  rgba(172, 168, 255, 0.38) 0%, rgba(172, 168, 255, 0.22) 50%, rgba(172, 168, 255, 0) 82%);
 }
