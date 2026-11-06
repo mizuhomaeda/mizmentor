@@ -161,16 +161,17 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                 </div>
                 <div>
                   <h3 className="font-serif-body font-semibold text-stone-900 text-lg">
-                    Formal Complaint Ghostwriter
+                    Mizmentor
                   </h3>
                   <p className="text-xs text-stone-500">
-                    Cohort 7 · Confidential drafting assistance
+                    feedback on your early business idea
                   </p>
                 </div>
               </div>
               <p className="text-stone-700 text-sm leading-relaxed mb-4">
-                I am here to help you articulate unsustainable workload and scheduling challenges into a
-                firm, serious, collegial formal complaint letter to the UC Berkeley MDes Program Office.
+                Tell me about your early business or service idea, even if it is only a few lines or
+                just the problem you want to solve. I will tell you how I read it and what I would
+                think about first.
               </p>
               <div className="p-3 bg-stone-50 rounded-lg border border-stone-200/80 text-xs text-stone-600 space-y-1">
                 <p className="font-medium text-stone-800">How we work together:</p>
@@ -195,7 +196,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                     <div>
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-serif-body font-semibold text-stone-900 group-hover:text-[#003262]">
-                          {j.name}'s Experience
+                          {j.name}'s idea
                         </span>
                         <span className="text-[10px] text-stone-400">{j.persona}</span>
                       </div>
@@ -216,7 +217,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             {/* Starter Prompts */}
             <div className="bg-white p-4 rounded-xl border border-stone-200 shadow-2xs">
               <span className="text-xs font-medium text-stone-500 block mb-2">
-                Or describe your own experience directly:
+                Or describe your own idea:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {[
@@ -274,32 +275,32 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   )}
                 </div>
 
-                {/* If the Ghostwriter provided a Summary of Understanding (Reflect Step) */}
+                {/* How the agent has read the idea, for the person to correct */}
                 {m.summaryOfUnderstanding && (
                   <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4 text-xs text-amber-950 space-y-2.5">
                     <div className="flex items-center gap-2 font-semibold text-amber-900">
                       <Sparkles className="w-4 h-4 text-amber-700" />
-                      <span>Summary of What I Understood (For Your Confirmation):</span>
+                      <span>How I have read your idea:</span>
                     </div>
                     <p className="leading-relaxed whitespace-pre-wrap font-serif-body text-sm text-stone-800">
                       {m.summaryOfUnderstanding}
                     </p>
                     <div className="pt-2 border-t border-amber-200/60 flex items-center gap-2 flex-wrap">
                       <span className="text-[11px] text-amber-800">
-                        Does this match what you experienced?
+                        Have I read that right?
                       </span>
                       <button
                         onClick={() => onConfirmUnderstanding(true)}
                         className="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer"
                       >
                         <CheckCircle className="w-3.5 h-3.5" />
-                        <span>Yes, that is accurate</span>
+                        <span>Yes, that is it</span>
                       </button>
                       <button
                         onClick={() => onConfirmUnderstanding(false)}
                         className="px-2.5 py-1 bg-white hover:bg-stone-100 text-stone-700 border border-amber-300 rounded text-xs font-medium transition-colors cursor-pointer"
                       >
-                        Let me clarify something
+                        Not quite
                       </button>
                     </div>
                   </div>
@@ -364,7 +365,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                     {currentStage === 'analyse' && 'Thinking about the most fundamental point...'}
                     {currentStage === 'dig' && 'Taking that point a layer deeper...'}
                     {!['purpose', 'missing', 'analyse', 'dig'].includes(currentStage) &&
-                      'Ghostwriter is formulating response...'}
+                      'Mizmentor is thinking...'}
                   </span>
                 </div>
                 {/* Cancel control while call is in progress */}
@@ -409,27 +410,27 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             Quick prompts:
           </span>
           <button
-            onClick={() => onSendMessage('Can you generate the first full draft of the letter now?')}
+            onClick={() => onSendMessage('What is the most important thing I should be thinking about right now?')}
             className="px-2.5 py-1 bg-white hover:bg-stone-200 border border-stone-300 rounded text-[11px] shrink-0 transition-colors cursor-pointer"
           >
-            Show me a draft
+            What should I think about first?
           </button>
           <button
             onClick={() =>
-              onSendMessage("This one sentence doesn't sound like me, can you rephrase it?")
+              onSendMessage("I am not sure I agree with that. Can you explain why it matters?")
             }
             className="px-2.5 py-1 bg-white hover:bg-stone-200 border border-stone-300 rounded text-[11px] shrink-0 transition-colors cursor-pointer"
           >
-            Doesn't sound like me
+            Why does that matter?
           </button>
           <button
             onClick={() =>
-              onSendMessage('Should I actually send this letter to the MDes office?')
+              onSendMessage('What should I go and do next?')
             }
             className="px-2.5 py-1 bg-white hover:bg-stone-200 border border-stone-300 rounded text-[11px] shrink-0 transition-colors flex items-center gap-1 cursor-pointer"
           >
             <HelpCircle className="w-3 h-3 text-stone-400" />
-            <span>Should I send it?</span>
+            <span>What do I do next?</span>
           </button>
           <button
             onClick={() =>
@@ -467,7 +468,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Tell me what you're experiencing, or ask to adjust the letter..."
+              placeholder="Describe your idea, or answer the question above..."
               rows={2}
               className="w-full px-3 py-2 text-sm text-stone-900 border border-stone-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-[#003262]/20 focus:border-[#003262] resize-none"
             />

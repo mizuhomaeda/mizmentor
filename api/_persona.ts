@@ -123,6 +123,11 @@ currentStage
     dig      - taking that same point a layer deeper, or moving to a new point
                because they raised one or the current one is exhausted
 
+sessionGoal
+  What they said they want to get out of this session, in their own terms. Set it
+  as soon as they say it, then leave it alone unless they redirect you. This is the
+  thing everything else in the session aims at. Empty string until they have said.
+
 summaryOfUnderstanding
   How you have read their idea, so they can correct you if you read it wrong.
   ONLY what they have actually told you. Not inferences about their users, their

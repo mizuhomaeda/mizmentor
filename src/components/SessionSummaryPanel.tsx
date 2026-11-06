@@ -22,6 +22,10 @@ export const buildSummaryText = (summary: SessionSummary): string => {
   lines.push(`Saved ${new Date().toLocaleString()}`);
   lines.push('');
 
+  lines.push('WHAT I WANTED OUT OF THIS SESSION');
+  lines.push(summary.sessionGoal.trim() || '(not yet stated)');
+  lines.push('');
+
   lines.push('HOW THE IDEA WAS UNDERSTOOD');
   lines.push(summary.understanding.trim() || '(not yet established)');
   lines.push('');
@@ -51,7 +55,13 @@ export const buildSummaryText = (summary: SessionSummary): string => {
 
 /** True once the session has produced anything worth keeping or sending. */
 export const summaryHasContent = (s: SessionSummary): boolean =>
-  Boolean(s.understanding.trim() || s.currentPoint.trim() || s.unstated.length || s.actions.length);
+  Boolean(
+    s.sessionGoal.trim() ||
+      s.understanding.trim() ||
+      s.currentPoint.trim() ||
+      s.unstated.length ||
+      s.actions.length
+  );
 
 export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summary, onStart }) => {
   const [copied, setCopied] = useState(false);
@@ -158,6 +168,21 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
           </div>
         ) : (
           <div className="w-full max-w-2xl space-y-4">
+            {/* What you want out of this session */}
+            <section className="bg-white rounded-xl border border-stone-200 shadow-xs p-5 space-y-2">
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-stone-700">
+                <Target className="w-4 h-4 text-stone-500" />
+                <span>What you want out of this session</span>
+              </h3>
+              {summary.sessionGoal.trim() ? (
+                <p className="font-serif-body text-sm leading-relaxed text-stone-800">
+                  {summary.sessionGoal}
+                </p>
+              ) : (
+                <p className="text-xs text-stone-400 italic">Not yet stated.</p>
+              )}
+            </section>
+
             {/* How the idea was understood */}
             <section className="bg-white rounded-xl border border-stone-200 shadow-xs p-5 space-y-2">
               <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-stone-700">

@@ -13,6 +13,7 @@ export interface Message {
   timestamp: string;
   stage?: InteractionStage;
   summaryOfUnderstanding?: string | null;
+  sessionGoal?: string | null;
   currentPoint?: string | null;
   unresolvedItems?: string[];
   agreedActions?: string[];
@@ -25,6 +26,8 @@ export interface Message {
  * so a turn that omits a field does not wipe it.
  */
 export interface SessionSummary {
+  /** What the person wants out of the session. Set once, rarely changes. */
+  sessionGoal: string;
   /** How the agent has read the idea. Replaced when the agent restates it. */
   understanding: string;
   /** The point currently being worked on. Replaced each turn. */
@@ -38,6 +41,7 @@ export interface SessionSummary {
 }
 
 export const EMPTY_SESSION_SUMMARY: SessionSummary = {
+  sessionGoal: '',
   understanding: '',
   currentPoint: '',
   unstated: [],

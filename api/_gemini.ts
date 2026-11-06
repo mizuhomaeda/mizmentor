@@ -36,6 +36,11 @@ export const MODEL_CONFIG = {
         description:
           'Current step of the mentoring loop. Exactly one of: purpose (taking in the idea, setting what they want from the session), missing (checking what is still unstated before feedback is possible), analyse (first real feedback on the most fundamental point), dig (same point a layer deeper, or a new point).',
       },
+      sessionGoal: {
+        type: Type.STRING,
+        description:
+          'What the person said they want to get out of this session, in their own terms, for example "Wants to know what to lock down before pitching internally". Set it as soon as they say it and leave it alone after that unless they redirect. Empty string until they have said.',
+      },
       summaryOfUnderstanding: {
         type: Type.STRING,
         description:
@@ -128,19 +133,35 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
     });
   }
 
+  // Which reply is this? Counted from the conversation itself rather than from the
+  // stage the model reported, so it cannot be bypassed by mislabelling the stage.
+  //
+  // Three rounds of trying to cap the checking stage with prompt sentences failed:
+  // the instruction held on some turns and not others. The cap below is applied in
+  // code, so by reply 3 the model is always told that a point is mandatory.
+  const priorReplies = messages.filter(
+    (m) => m && (m.role === 'assistant' || m.role === 'model') && typeof m.content === 'string' && m.content.trim()
+  ).length;
+  const replyIndex = priorReplies + 1;
+
   const lastMsg = contents[contents.length - 1];
   if (lastMsg && lastMsg.role === 'user') {
     let turnDirective = '\n\n[Instruction for this turn:';
+    turnDirective += `\n- This is reply number ${replyIndex} of the conversation.`;
+    if (replyIndex === 1) {
+      turnDirective +=
+        '\n- Reply 1. Do NOT analyse yet. Take the idea in, say in one or two sentences what is specifically interesting about the choice THEY made, and ask what they want to get out of this session and what they are stuck on. Leave currentPoint empty.';
+    } else if (replyIndex === 2) {
+      turnDirective +=
+        '\n- Reply 2. You may spend this turn checking ONE thing, and only if it is genuinely not known yet: whose problem this is, who the target user is, or what they are trying to make happen. Ask about whichever of those would most change your feedback, as one question in prose. This is a maximum and not a quota: if they have ALREADY told you those things, do not ask anything, go straight to the point and fill currentPoint. Checking is never a box to tick.';
+    } else {
+      turnDirective +=
+        `\n- Reply ${replyIndex}. CHECKING IS OVER. You MUST give a real point about their idea this turn and you MUST fill currentPoint. Work with what you have, even if things are still unknown. If something important is still unstated, name what you do not know in one clause and give the point anyway - for example, say that without knowing who the first customer is you cannot judge X, and then make the point regardless. A reply at this stage that only asks questions and gives no point is a failure, no matter how much is still missing.`;
+    }
     turnDirective +=
       '\n- Zero-assumption rule: state ONLY what this person has actually said in this conversation. You know nothing about their users, their interviews, their market or their competitors unless they told you. You may ask; you may never assert. Never invent user research, market size figures, competitor names or any other evidence. If a number would help, say what they would need to go and find out.';
     turnDirective +=
       '\n- One point only: raise the single most fundamental thing to think about first, not a list of weaknesses. When you first analyse the idea, say what is genuinely good in it before that point - but only that first time, not on every turn. End with one sharp question or the next action, not several questions.';
-    turnDirective +=
-      '\n- Stage ladder. Turn 1 is purpose: do NOT analyse yet, acknowledge the idea in a sentence or two, say what is interesting in it, and ask what they want out of this session and what they are stuck on. Turn 2 is normally missing: before analysing, ask about what has not been stated yet out of whose problem this is, who the target user is, and what vision they are heading toward. From turn 3 on you are at analyse and then dig.';
-    turnDirective +=
-      '\n- At the missing stage, ask about the ONE or TWO of those that would most change your feedback, whichever they are. Not all three. Not a list of questions. Ask it in prose like a person would, as one question. The vision is the compass, so it usually matters most. If they have ALREADY said whose problem it is, who the user is and what the vision is, then nothing is missing: skip straight to analyse rather than asking something again to fill the step. currentPoint may be empty at purpose and at missing, but from analyse onward you MUST fill it.';
-    turnDirective +=
-      '\n- The missing stage lasts ONE turn. After one round of asking, analyse with whatever you have, even if they answered only partly. Never ask what they want out of the session twice, and never ask the same missing question twice - if you already asked it, you have had your turn and you move on. Repeating an opening or a missing question wastes their turn and is a failure.';
     turnDirective +=
       '\n- Next actions must move forward, never repeat. Look at what you already told them to do earlier in this conversation. If you have already said to go and talk to some group of people, that rung is used up: this turn is about how they would actually reach those people, or what exactly to ask them, or what they would do with the answer once they have it. Telling them a second time to go and talk to the same people is a failure.';
     turnDirective +=
@@ -153,6 +174,10 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
       '\n- If they ask you whether the idea is good or whether to pursue it, do not give a verdict, but do not stall either: go straight to the point that most decides it and work on that with them.';
     turnDirective +=
       '\n- Exactly one question mark in your reply, unless you are at the purpose stage and still need to know what they came for. Rhetorical questions count, and so does a sentence that lists alternatives and ends in a question mark ("is it A, is it B, or is it C?") - if you want to lay out alternatives, write them as a statement and keep your one question for the end. If you are tempted to ask a second thing, cut it and keep the one at the root.';
+    turnDirective +=
+      '\n- summaryOfUnderstanding must absorb everything new they said this turn, including what they want out of the session and anything about their users, their vision or their own stake in it. If they added anything at all, this field must come back different from last turn. Returning the same sentence twice in a row when they have just told you something new is a failure - the person is watching this field to check you are keeping up.';
+    turnDirective +=
+      '\n- sessionGoal: as soon as they say what they want out of this session, record it there in their own terms and keep it unchanged afterwards unless they redirect.';
     turnDirective +=
       '\n- Commitments: read their latest message for anything they said they will do, try, check, ask, test or find out. Every one of those goes into agreedActions, phrased in their own words, and they stay there for the rest of the session. If they said "I will interview five parents and check what the city publishes", that is two entries. Only what they committed to, never your own suggestions, and never leave it empty when they have just committed to something.';
     turnDirective +=
