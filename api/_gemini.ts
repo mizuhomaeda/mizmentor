@@ -39,12 +39,12 @@ export const MODEL_CONFIG = {
       sessionGoal: {
         type: Type.STRING,
         description:
-          'What the person said they want to get out of this session, in their own terms, for example "Wants to know what to lock down before pitching internally". Set it as soon as they say it and leave it alone after that unless they redirect. Empty string until they have said.',
+          'What the person said they want to get out of this session, written to them as "you" and starting with the word You, for example "You want to know what to lock down before pitching internally". Never "Wants to know..." or "The user wants...". Set it as soon as they say it and leave it alone after that unless they redirect. Empty string until they have said.',
       },
       summaryOfUnderstanding: {
         type: Type.STRING,
         description:
-          'How you have read their idea, so they can correct a misreading. ONLY what they have actually told you - no inferences about their users, research or market. Restate and improve it as understanding grows. Empty string before they describe an idea.',
+          'How you have read their idea, so they can correct a misreading. WRITTEN TO THEM AS "you": "You are building...", never "The user is building...". ONLY what they have actually told you - no inferences about their users, research or market. Restate and improve it as understanding grows. Empty string before they describe an idea.',
       },
       currentPoint: {
         type: Type.STRING,

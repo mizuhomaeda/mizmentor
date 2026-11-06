@@ -372,3 +372,17 @@ enough that no single hue reads as strong.
 
 Judge it by sampling painted pixels, not by reading the CSS: the panel has no
 flat background colour for the contrast script to resolve against.
+
+## The notes are addressed to the person
+
+The summary panel is the mentor's own notes written TO the person, so every
+field says "you", not "the user". The rule lives in the Behavioral Rules of
+`knowledge/RoleCard_SyntheticPersona.md` (rebuild with `npm run build:knowledge`
+after editing it), and the schema descriptions in `api/_gemini.ts` repeat it per
+field. Do not fix this in the interface wording - the strings come from the
+model.
+
+`agreedActions` holds what the PERSON committed to do themselves, never the
+mentor's suggestions, so its label is "What you said you would go and find out".
+Check the schema description before renaming a summary label: the label has to
+match what the field actually holds.

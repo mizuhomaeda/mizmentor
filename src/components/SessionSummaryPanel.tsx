@@ -22,7 +22,7 @@ export const buildSummaryText = (summary: SessionSummary): string => {
   lines.push(`Written down ${new Date().toLocaleString()}`);
   lines.push('');
 
-  lines.push('WHAT YOU WANTED OUT OF THIS');
+  lines.push('WHAT YOU WANTED OUT OF THIS SESSION');
   lines.push(summary.sessionGoal.trim() || '(you had not said yet)');
   lines.push('');
 
@@ -42,7 +42,7 @@ export const buildSummaryText = (summary: SessionSummary): string => {
   }
   lines.push('');
 
-  lines.push('WHAT YOU SAID YOU WOULD FIND OUT');
+  lines.push('WHAT YOU SAID YOU WOULD GO AND FIND OUT');
   if (summary.actions.length > 0) {
     summary.actions.forEach((item) => lines.push(`- ${item}`));
   } else {
@@ -196,7 +196,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
              labels only - no inner boxes, borders or cards, so this side does
              not read like the chat bubbles on the left. */
           <div className="w-full max-w-2xl h-fit bg-white rounded-2xl shadow-sm px-7 py-7 sm:px-9 sm:py-8">
-            <Section label="What you want out of this" icon={<Target className="w-4 h-4" />}>
+            <Section label="What you want out of this session" icon={<Target className="w-4 h-4" />}>
               {summary.sessionGoal.trim() ? (
                 <p className="font-sans-body text-[15px] font-normal leading-relaxed text-ink-800">
                   {summary.sessionGoal}
@@ -237,7 +237,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
               )}
             </Section>
 
-            <Section label="What you said you would find out" icon={<ListChecks className="w-4 h-4" />}>
+            <Section label="What you said you would go and find out" icon={<ListChecks className="w-4 h-4" />}>
               {summary.actions.length > 0 ? (
                 <Bullets items={summary.actions} />
               ) : (
