@@ -11,6 +11,13 @@ export const TUTORIAL_SEEN_KEY = 'mizmentor_tutorial_seen_v1';
 interface Step {
   /** CSS selector for the area to light up. Omit for a centred step. */
   target?: string;
+  /**
+   * Where the card sits relative to the lit area.
+   * 'auto' tries below, then above - right for a short, wide target.
+   * 'side' puts it beside the target, which is what a tall full-height panel
+   * needs: above or below it there is no room, and the card runs off screen.
+   */
+  placement?: 'auto' | 'side';
   title: string;
   body: string;
 }
@@ -28,6 +35,7 @@ const STEPS: Step[] = [
   },
   {
     target: '[data-tour="notes"]',
+    placement: 'side',
     title: 'Your notes',
     body: 'As we talk, notes build up here. You can download them whenever you like.',
   },
@@ -93,18 +101,35 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
   const isLast = step === STEPS.length - 1;
 
   // Place the card near the lit area when there is one, otherwise centre it.
+  const CARD_W = 330;
+  const GAP = 16;
   let cardStyle: React.CSSProperties = {};
   if (rect) {
-    const below = rect.top + rect.height + 16;
-    const spaceBelow = window.innerHeight - below;
-    const putBelow = spaceBelow > 190;
-    cardStyle = {
-      position: 'fixed',
-      top: putBelow ? below : undefined,
-      bottom: putBelow ? undefined : window.innerHeight - rect.top + 16,
-      left: Math.max(16, Math.min(rect.left, window.innerWidth - 360)),
-      width: 330,
-    };
+    if (current.placement === 'side') {
+      // Beside the target. Prefer the side with more room, so a right-hand panel
+      // gets the card on its left instead of pushed off the top of the window.
+      const roomLeft = rect.left;
+      const roomRight = window.innerWidth - (rect.left + rect.width);
+      const onLeft = roomLeft >= roomRight;
+      const left = onLeft
+        ? Math.max(GAP, rect.left - GAP - CARD_W)
+        : Math.min(window.innerWidth - CARD_W - GAP, rect.left + rect.width + GAP);
+      // Centred on the target vertically, then clamped inside the window so it
+      // cannot run off the top or bottom.
+      const wanted = rect.top + rect.height / 2 - 110;
+      const top = Math.max(GAP, Math.min(wanted, window.innerHeight - 250));
+      cardStyle = { position: 'fixed', top, left, width: CARD_W };
+    } else {
+      const below = rect.top + rect.height + GAP;
+      const putBelow = window.innerHeight - below > 190;
+      cardStyle = {
+        position: 'fixed',
+        top: putBelow ? below : undefined,
+        bottom: putBelow ? undefined : window.innerHeight - rect.top + GAP,
+        left: Math.max(GAP, Math.min(rect.left, window.innerWidth - CARD_W - GAP)),
+        width: CARD_W,
+      };
+    }
   }
 
   return (
@@ -137,17 +162,17 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-3 mb-2">
-          <h2 className="font-sans-body text-base font-semibold text-slate-900">{current.title}</h2>
+          <h2 className="font-sans-body text-base font-semibold text-ink-900">{current.title}</h2>
           <button
             onClick={onClose}
-            className="p-1 -mt-1 -mr-1 rounded text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors shrink-0"
+            className="p-1 -mt-1 -mr-1 rounded text-ink-500 hover:text-ink-700 hover:bg-slate-100 transition-colors shrink-0"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
-        <p className="text-sm text-slate-600 leading-relaxed">{current.body}</p>
+        <p className="text-sm text-ink-600 leading-relaxed">{current.body}</p>
 
         <div className="flex items-center justify-between mt-5">
           <div className="flex items-center gap-1.5" aria-hidden="true">
@@ -165,14 +190,14 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
             {!isLast && (
               <button
                 onClick={onClose}
-                className="px-3 py-1.5 text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+                className="px-3 py-1.5 text-xs font-medium text-ink-500 hover:text-ink-800 hover:bg-slate-100 rounded-lg transition-colors"
               >
                 Skip
               </button>
             )}
             <button
               onClick={() => (isLast ? onClose() : setStep(step + 1))}
-              className="px-4 py-1.5 text-xs font-semibold bg-mint-400 text-deep-900 rounded-lg hover:bg-mint-500 transition-colors"
+              className="px-4 py-1.5 text-xs font-semibold bg-mint-400 text-ink-900 rounded-lg hover:bg-mint-500 transition-colors"
             >
               {isLast ? 'Got it' : 'Next'}
             </button>

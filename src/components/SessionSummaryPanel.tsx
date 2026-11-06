@@ -9,7 +9,6 @@ import { FileText, Download, Copy, Check, Target, ListChecks, Compass, Sparkles 
 
 interface SessionSummaryPanelProps {
   summary: SessionSummary;
-  onStart: () => void;
 }
 
 /**
@@ -63,7 +62,7 @@ export const summaryHasContent = (s: SessionSummary): boolean =>
       s.actions.length
   );
 
-export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summary, onStart }) => {
+export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summary }) => {
   const [copied, setCopied] = useState(false);
   const isEmpty = !summaryHasContent(summary);
 
@@ -100,9 +99,9 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
       {/* Toolbar */}
       <div className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap no-print">
         <div className="flex items-center gap-2">
-          <span className="font-sans-body font-bold text-slate-900 text-sm">Session Summary</span>
+          <span className="font-sans-body font-bold text-ink-900 text-sm">Session Summary</span>
           {summary.updatedAt && (
-            <span className="text-[11px] text-slate-500">
+            <span className="text-[11px] text-ink-500">
               updated{' '}
               {new Date(summary.updatedAt).toLocaleTimeString([], {
                 hour: '2-digit',
@@ -119,7 +118,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
             className={`flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg border transition-all disabled:opacity-40 disabled:cursor-not-allowed ${
               copied
                 ? 'bg-mint-600 text-white border-mint-600'
-                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
+                : 'bg-white hover:bg-slate-50 text-ink-700 border-slate-200'
             }`}
             title="Copy summary to clipboard"
           >
@@ -130,7 +129,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
           <button
             onClick={handleDownload}
             disabled={isEmpty}
-            className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-white hover:bg-slate-50 text-ink-700 border border-slate-200 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             title="Download as a text file (.txt)"
           >
             <Download className="w-3.5 h-3.5" />
@@ -143,114 +142,105 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
       <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 flex justify-center">
         {isEmpty ? (
           <div className="my-auto max-w-md text-center p-8 bg-white/70 rounded-2xl border border-dashed border-slate-300 space-y-4">
-            <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-500 mx-auto flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full bg-slate-100 text-ink-500 mx-auto flex items-center justify-center">
               <FileText className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-sans-body font-semibold text-slate-900 text-lg mb-1">
+              <h3 className="font-sans-body font-semibold text-ink-900 text-lg mb-1">
                 Your notes will show up here
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
+              <p className="text-sm text-ink-600 leading-relaxed">
                 As we talk, I will keep notes here. You can download them whenever you like.
               </p>
-            </div>
-            <div className="pt-2">
-              <button
-                onClick={onStart}
-                className="px-4 py-2 bg-mint-400 hover:bg-mint-500 text-deep-900 rounded-lg text-xs font-semibold shadow-xs transition-colors inline-flex items-center gap-1.5"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-mint-300" />
-                <span>Describe your idea to get started</span>
-              </button>
             </div>
           </div>
         ) : (
           <div className="w-full max-w-2xl space-y-4">
             {/* What you want out of this session */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
-                <Target className="w-4 h-4 text-slate-500" />
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
+                <Target className="w-4 h-4 text-ink-500" />
                 <span>What you want out of this session</span>
               </h3>
               {summary.sessionGoal.trim() ? (
-                <p className="font-sans-body text-sm leading-relaxed text-slate-800">
+                <p className="font-sans-body text-sm leading-relaxed text-ink-800">
                   {summary.sessionGoal}
                 </p>
               ) : (
-                <p className="text-xs text-slate-600 italic">Not yet stated.</p>
+                <p className="text-xs text-ink-600 italic">Not yet stated.</p>
               )}
             </section>
 
             {/* How the idea was understood */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
-                <Compass className="w-4 h-4 text-deep-700" />
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
+                <Compass className="w-4 h-4 text-ink-700" />
                 <span>How the idea was understood</span>
               </h3>
               {summary.understanding.trim() ? (
-                <p className="font-sans-body text-sm leading-relaxed text-slate-800 whitespace-pre-wrap">
+                <p className="font-sans-body text-sm leading-relaxed text-ink-800 whitespace-pre-wrap">
                   {summary.understanding}
                 </p>
               ) : (
-                <p className="text-xs text-slate-600 italic">Not yet established.</p>
+                <p className="text-xs text-ink-600 italic">Not yet established.</p>
               )}
-              <p className="text-[11px] text-slate-500 pt-1">
+              <p className="text-[11px] text-ink-500 pt-1">
                 If this has been read wrong, say so in the chat and it will be corrected.
               </p>
             </section>
 
             {/* The point we are working on */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
-                <Target className="w-4 h-4 text-deep-700" />
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
+                <Target className="w-4 h-4 text-ink-700" />
                 <span>The point we are working on</span>
               </h3>
               {summary.currentPoint.trim() ? (
-                <p className="font-sans-body text-sm leading-relaxed text-slate-800">
+                <p className="font-sans-body text-sm leading-relaxed text-ink-800">
                   {summary.currentPoint}
                 </p>
               ) : (
-                <p className="text-xs text-slate-600 italic">Not yet established.</p>
+                <p className="text-xs text-ink-600 italic">Not yet established.</p>
               )}
             </section>
 
             {/* Still unstated */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
                 <Sparkles className="w-4 h-4 text-mint-600" />
                 <span>Still unstated</span>
               </h3>
               {summary.unstated.length > 0 ? (
                 <ul className="space-y-1.5">
                   {summary.unstated.map((item, idx) => (
-                    <li key={idx} className="flex gap-2 text-sm text-slate-800 leading-relaxed">
+                    <li key={idx} className="flex gap-2 text-sm text-ink-800 leading-relaxed">
                       <span className="text-mint-800 shrink-0">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="text-xs text-slate-600 italic">Nothing outstanding right now.</p>
+                <p className="text-xs text-ink-600 italic">Nothing outstanding right now.</p>
               )}
             </section>
 
             {/* What I said I would go and find out */}
             <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-700">
+              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
                 <ListChecks className="w-4 h-4 text-mint-700" />
                 <span>What I said I would go and find out</span>
               </h3>
               {summary.actions.length > 0 ? (
                 <ul className="space-y-1.5">
                   {summary.actions.map((item, idx) => (
-                    <li key={idx} className="flex gap-2 text-sm text-slate-800 leading-relaxed">
+                    <li key={idx} className="flex gap-2 text-sm text-ink-800 leading-relaxed">
                       <span className="text-mint-800 shrink-0">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="text-xs text-slate-600 italic">Nothing yet.</p>
+                <p className="text-xs text-ink-600 italic">Nothing yet.</p>
               )}
             </section>
           </div>

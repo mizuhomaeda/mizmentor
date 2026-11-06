@@ -9,7 +9,10 @@
  *   mint #94c7b9 - the main accent, and the colour seen most: buttons, the
  *                  user's own speech bubbles, avatars, modal headers
  *   sea  #59838e - secondary, quieter
- *   deep #294f68 - darkest. TEXT AND SMALL DETAILS ONLY, never a large fill
+ *   ink  #10231e - ALL TEXT. A near-black green on the mint's own hue, so that
+ *                  body copy and headings sit with the accent instead of
+ *                  reading as navy. Lightest usable for text is ink-500.
+ *   deep #294f68 - small non-text details only
  *
  * A fourth accent (#aca8ff, periwinkle) was tried and removed: it competed with
  * the mint instead of supporting it. Do not reintroduce a second accent without
@@ -29,6 +32,20 @@
   --color-mint-700: #4a7a6e;
   --color-mint-800: #3a6056;
   --color-mint-900: #2e4d45;
+
+  /* ink: the mint's own hue (about 164deg) taken down to near-black. This is the
+     text colour. Slate was blue-grey and read as navy next to the mint. */
+  --color-ink-50:  #f2faf6;
+  --color-ink-100: #d9e8e4;
+  --color-ink-200: #a8c8bf;
+  --color-ink-300: #7ea99e;
+  --color-ink-400: #5c8a7d;
+  --color-ink-500: #446f63;
+  --color-ink-600: #32584e;
+  --color-ink-700: #23433b;
+  --color-ink-800: #17312a;
+  --color-ink-900: #10231e;
+  --color-ink-950: #08120f;
 
   --color-sea-50:  #f0f5f6;
   --color-sea-100: #dde9ec;

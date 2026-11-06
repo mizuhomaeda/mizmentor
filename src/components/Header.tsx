@@ -6,6 +6,7 @@
 import React from 'react';
 import {
   FileText,
+  PlayCircle,
   RotateCcw,
   Columns2,
   MessageSquare,
@@ -18,6 +19,7 @@ interface HeaderProps {
   setViewMode: (mode: 'split' | 'chat' | 'document') => void;
   onOpenResetModal: () => void;
   onOpenDiagram: () => void;
+  onOpenTutorial: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -25,9 +27,10 @@ export const Header: React.FC<HeaderProps> = ({
   setViewMode,
   onOpenResetModal,
   onOpenDiagram,
+  onOpenTutorial,
 }) => {
   return (
-    <header className="bg-white text-slate-900 border-b border-slate-200 shadow-xs sticky top-0 z-30 no-print">
+    <header className="bg-white text-ink-900 border-b border-slate-200 shadow-xs sticky top-0 z-30 no-print">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
         {/* Top bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -37,11 +40,11 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="font-sans-body text-xl font-bold tracking-tight text-deep-600">
+                <h1 className="font-sans-body text-xl font-bold tracking-tight text-ink-800">
                   Mizmentor
                 </h1>
               </div>
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-ink-600">
                 feedback on your early business idea
               </p>
             </div>
@@ -57,8 +60,8 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => setViewMode('split')}
                 className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded transition-colors ${
                   viewMode === 'split'
-                    ? 'bg-white text-deep-700 shadow-xs'
-                    : 'text-slate-600 hover:text-deep-700'
+                    ? 'bg-white text-ink-700 shadow-xs'
+                    : 'text-ink-600 hover:text-ink-700'
                 }`}
                 title="Split Side-by-Side View"
               >
@@ -69,8 +72,8 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => setViewMode('chat')}
                 className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded transition-colors ${
                   viewMode === 'chat'
-                    ? 'bg-white text-deep-700 shadow-xs'
-                    : 'text-slate-600 hover:text-deep-700'
+                    ? 'bg-white text-ink-700 shadow-xs'
+                    : 'text-ink-600 hover:text-ink-700'
                 }`}
                 title="Chat Focus"
               >
@@ -81,8 +84,8 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => setViewMode('document')}
                 className={`flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded transition-colors ${
                   viewMode === 'document'
-                    ? 'bg-white text-deep-700 shadow-xs'
-                    : 'text-slate-600 hover:text-deep-700'
+                    ? 'bg-white text-ink-700 shadow-xs'
+                    : 'text-ink-600 hover:text-ink-700'
                 }`}
                 title="Session Summary Focus"
               >
@@ -95,21 +98,31 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Reset */}
             <button
               onClick={onOpenResetModal}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:text-deep-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-ink-600 hover:text-ink-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
               title="Reset the session"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset</span>
             </button>
 
+            {/* Replay the tour */}
+            <button
+              onClick={onOpenTutorial}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-ink-600 hover:text-ink-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              title="Replay the quick tour"
+            >
+              <PlayCircle className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Tour</span>
+            </button>
+
             {/* Info Button in Top Right Corner (next to Reset) */}
             <button
               onClick={onOpenDiagram}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-mint-400 hover:bg-mint-300 text-slate-950 rounded-lg transition-colors cursor-pointer shadow-xs border border-mint-300"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-mint-400 hover:bg-mint-300 text-ink-950 rounded-lg transition-colors cursor-pointer shadow-xs border border-mint-300"
               title="How this app works"
               aria-label="How it works"
             >
-              <Info className="w-4 h-4 text-slate-950 shrink-0" />
+              <Info className="w-4 h-4 text-ink-950 shrink-0" />
               <span>How it works</span>
             </button>
           </div>

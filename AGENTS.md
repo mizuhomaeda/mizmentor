@@ -246,13 +246,18 @@ component** - there are currently none left.
 ```
 mint #94c7b9   the main accent, and the colour seen MOST
                buttons, the user's speech bubbles, avatars, modal headers
+ink  #10231e   ALL TEXT. A near-black green on the mint's own hue (~164deg)
 sea  #59838e   secondary, quieter
-deep #294f68   TEXT AND SMALL DETAILS ONLY - never a large fill
+deep #294f68   small NON-TEXT details only (the How it works legend)
 ```
 
-Because mint is light, anything filled with it takes dark text (`text-deep-900`),
-not white. Greys are Tailwind `slate`; errors keep `rose`. There is no dark mode,
-and the header is a white bar.
+**Text is `ink`, never `slate` and never `deep`.** Slate is a blue-grey and read as
+navy beside the mint, which is why it was replaced. `ink-500` is the lightest tone
+usable for text; `ink-400` measures about 3.9:1 on white and fails AA.
+
+Because mint is light, anything filled with it takes dark text (`text-ink-900`),
+not white. Backgrounds and borders still use `slate`; errors keep `rose`. There is
+no dark mode, and the header is a white bar.
 
 A fourth accent (#aca8ff periwinkle, "iris") was tried and removed: it competed
 with the mint rather than supporting it. Do not add a second accent without being
@@ -276,8 +281,8 @@ fixes are fine.
 
 ### Contrast
 
-The UI passes WCAG AA across 193 text elements in three states (empty, mid-session,
-info modal). If you re-check this, note that **Tailwind v4 emits `oklch()` colours**
+The UI passes WCAG AA across 246 text elements in five states (empty, mid-session,
+info modal, and both tutorial steps). If you re-check this, note that **Tailwind v4 emits `oklch()` colours**
 and a naive `rgb()` parser silently reports them as black, which produces false
 passes - an earlier audit here was wrong for exactly that reason. Any checker must
 convert oklch properly, composite semi-transparent backgrounds against their

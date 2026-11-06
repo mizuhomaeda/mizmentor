@@ -43,7 +43,7 @@ interface ChatPanelProps {
  */
 const MentorAvatar: React.FC = () => (
   <div
-    className="w-8 h-8 rounded-full shrink-0 bg-mint-300 text-deep-900 flex items-center justify-center text-xs font-semibold"
+    className="w-8 h-8 rounded-full shrink-0 bg-mint-300 text-ink-900 flex items-center justify-center text-xs font-semibold"
     aria-hidden="true"
   >
     M
@@ -123,9 +123,9 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             <div className="flex gap-2.5">
               <MentorAvatar />
               <div className="min-w-0">
-                <span className="block text-xs font-medium text-slate-600 mb-1 ml-1">Mizmentor</span>
-                <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-slate-200 text-sm leading-relaxed text-slate-800 space-y-3">
-                  <p className="font-medium text-slate-900">So you want some feedback?</p>
+                <span className="block text-xs font-medium text-ink-600 mb-1 ml-1">Mizmentor</span>
+                <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-slate-200 text-sm leading-relaxed text-ink-800 space-y-3">
+                  <p className="font-medium text-ink-900">So you want some feedback?</p>
                   <p>
                     Tell me about your idea. It can be rough, or just the problem you want to solve.
                     We will look at it together, from the design side and the business side, and
@@ -137,7 +137,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
 
             {/* Example ideas */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+              <div className="text-xs font-semibold uppercase tracking-wider text-ink-500 mb-3">
                 Start with an example idea:
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -149,17 +149,17 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   >
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-sans-body font-semibold text-slate-900 group-hover:text-deep-700">
+                        <span className="font-sans-body font-semibold text-ink-900 group-hover:text-ink-700">
                           {j.name}'s idea
                         </span>
-                        <span className="text-[10px] text-slate-500">{j.persona}</span>
+                        <span className="text-[10px] text-ink-500">{j.persona}</span>
                       </div>
                       <p className="text-xs font-medium text-mint-800 mb-1.5">{j.tagline}</p>
-                      <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                      <p className="text-xs text-ink-600 line-clamp-3 leading-relaxed">
                         {j.description}
                       </p>
                     </div>
-                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center text-xs font-medium text-deep-700 gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center text-xs font-medium text-ink-700 gap-1 group-hover:translate-x-0.5 transition-transform">
                       <span>Start here</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>
@@ -170,7 +170,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
 
             {/* Short openers */}
             <div>
-              <span className="text-xs text-slate-600 block mb-2">You can also ask me things like:</span>
+              <span className="text-xs text-ink-600 block mb-2">You can also ask me things like:</span>
               <div className="flex flex-wrap gap-1.5">
                 {[
                   'Is this problem real?',
@@ -181,7 +181,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   <button
                     key={idx}
                     onClick={() => onSendMessage(prompt)}
-                    className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-mint-100 hover:text-deep-700 text-slate-700 rounded-lg transition-colors"
+                    className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-mint-100 hover:text-ink-700 text-ink-700 rounded-lg transition-colors"
                   >
                     {prompt}
                   </button>
@@ -200,7 +200,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
           if (isUser) {
             return (
               <div key={m.id} className="flex justify-end">
-                <div className="max-w-lg px-4 py-2.5 rounded-2xl rounded-br-sm bg-mint-300 text-deep-900 text-sm leading-relaxed">
+                <div className="max-w-lg px-4 py-2.5 rounded-2xl rounded-br-sm bg-mint-300 text-ink-900 text-sm leading-relaxed">
                   <p className="whitespace-pre-wrap">{m.content}</p>
                 </div>
               </div>
@@ -210,8 +210,8 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             <div key={m.id} className="flex gap-2.5 max-w-2xl mr-auto">
               <MentorAvatar />
               <div className="min-w-0">
-                <span className="block text-xs font-medium text-slate-600 mb-1 ml-1">Mizmentor</span>
-                <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-slate-200 text-sm leading-relaxed text-slate-800">
+                <span className="block text-xs font-medium text-ink-600 mb-1 ml-1">Mizmentor</span>
+                <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-slate-200 text-sm leading-relaxed text-ink-800">
                   <p className="whitespace-pre-wrap">{m.content}</p>
                 </div>
               </div>
@@ -229,7 +229,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                 <p className="text-rose-700 text-[11px] mt-0.5 leading-relaxed">
                   {errorNotice.message}
                 </p>
-                <p className="text-slate-500 text-[10px] mt-1">
+                <p className="text-ink-500 text-[10px] mt-1">
                   Your message has been saved in the conversation above. You can retry sending it or type a new message below.
                 </p>
               </div>
@@ -260,12 +260,12 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
         {/* Loading state indicator with Cancel control */}
         {isLoading && (
           <div className="flex gap-3 max-w-xl mr-auto animate-in fade-in">
-            <div className="w-8 h-8 rounded-full bg-mint-200 text-deep-800 font-sans-body shrink-0 flex items-center justify-center text-xs">
+            <div className="w-8 h-8 rounded-full bg-mint-200 text-ink-800 font-sans-body shrink-0 flex items-center justify-center text-xs">
               M
             </div>
             <div className="p-4 bg-white border border-slate-200 rounded-2xl rounded-tl-xs shadow-2xs space-y-2.5 flex-1 min-w-0">
               <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-xs text-slate-600 font-medium truncate">
+                <div className="flex items-center gap-2 text-xs text-ink-600 font-medium truncate">
                   <span className="inline-block w-2 h-2 rounded-full bg-mint-500 animate-pulse shrink-0"></span>
                   <span className="truncate">
                     {currentStage === 'purpose' && 'Taking in the idea...'}
@@ -280,7 +280,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                 <button
                   type="button"
                   onClick={onCancel}
-                  className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-slate-600 hover:text-rose-700 bg-slate-100 hover:bg-rose-50 border border-slate-200 hover:border-rose-300 rounded-lg transition-colors cursor-pointer shrink-0 shadow-2xs"
+                  className="flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-ink-600 hover:text-rose-700 bg-slate-100 hover:bg-rose-50 border border-slate-200 hover:border-rose-300 rounded-lg transition-colors cursor-pointer shrink-0 shadow-2xs"
                   title="Stop waiting and cancel this request"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -303,7 +303,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
           <button
             type="button"
             onClick={() => scrollToBottom('smooth')}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-mint-400 text-deep-900 shadow-md hover:bg-mint-500 rounded-full transition-all border border-mint-500 animate-in fade-in slide-in-from-bottom-2 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-mint-400 text-ink-900 shadow-md hover:bg-mint-500 rounded-full transition-all border border-mint-500 animate-in fade-in slide-in-from-bottom-2 cursor-pointer"
           >
             <ArrowDown className="w-3.5 h-3.5" />
             <span>Jump to latest</span>
@@ -313,8 +313,8 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
 
       {/* Suggested quick follow-up chips when conversation is active */}
       {messages.length > 0 && !isLoading && (
-        <div className="px-4 py-2 bg-slate-100/70 border-t border-slate-200/80 flex items-center gap-1.5 overflow-x-auto text-xs text-slate-600 shrink-0">
-          <span className="text-[10px] text-slate-500 uppercase font-semibold shrink-0">
+        <div className="px-4 py-2 bg-slate-100/70 border-t border-slate-200/80 flex items-center gap-1.5 overflow-x-auto text-xs text-ink-600 shrink-0">
+          <span className="text-[10px] text-ink-500 uppercase font-semibold shrink-0">
             Quick prompts:
           </span>
           <button
@@ -337,7 +337,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             }
             className="px-2.5 py-1 bg-white hover:bg-slate-200 border border-slate-300 rounded text-[11px] shrink-0 transition-colors flex items-center gap-1 cursor-pointer"
           >
-            <HelpCircle className="w-3 h-3 text-slate-500" />
+            <HelpCircle className="w-3 h-3 text-ink-500" />
             <span>What do I do next?</span>
           </button>
           <button
@@ -362,7 +362,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               onKeyDown={handleKeyDown}
               placeholder="Describe your idea, or answer the question above..."
               rows={2}
-              className="w-full px-3 py-2 text-sm text-slate-900 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-mint-400/40 focus:border-mint-500 resize-none"
+              className="w-full px-3 py-2 text-sm text-ink-900 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-mint-400/40 focus:border-mint-500 resize-none"
             />
           </div>
 
@@ -370,7 +370,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
           <button
             type="submit"
             disabled={!inputText.trim() || isLoading}
-            className="p-2.5 rounded-xl bg-mint-400 text-deep-900 hover:bg-mint-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 shadow-xs cursor-pointer"
+            className="p-2.5 rounded-xl bg-mint-400 text-ink-900 hover:bg-mint-500 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shrink-0 shadow-xs cursor-pointer"
             title="Send message"
           >
             <Send className="w-4 h-4" />

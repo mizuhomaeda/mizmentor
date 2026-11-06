@@ -364,6 +364,7 @@ export default function App() {
         setViewMode={setViewMode}
         onOpenResetModal={() => setIsResetModalOpen(true)}
         onOpenDiagram={() => setIsDiagramModalOpen(true)}
+        onOpenTutorial={() => setIsTutorialOpen(true)}
       />
 
       {/* Main Content Workspace */}
@@ -382,10 +383,7 @@ export default function App() {
               onSelectJourney={handleSelectJourney}
               onSelectRevisionOption={handleSelectRevisionOption}
             />
-            <SessionSummaryPanel
-              summary={sessionSummary}
-              onStart={() => document.querySelector<HTMLTextAreaElement>('textarea')?.focus()}
-            />
+            <SessionSummaryPanel summary={sessionSummary} />
           </div>
         ) : viewMode === 'chat' ? (
           <div className="h-full max-w-4xl mx-auto shadow-xs min-h-0">
@@ -404,10 +402,7 @@ export default function App() {
           </div>
         ) : (
           <div className="h-full min-h-0">
-            <SessionSummaryPanel
-              summary={sessionSummary}
-              onStart={() => setViewMode('chat')}
-            />
+            <SessionSummaryPanel summary={sessionSummary} />
           </div>
         )}
       </main>
