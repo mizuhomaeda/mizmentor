@@ -10,13 +10,11 @@ import {
   Columns2,
   MessageSquare,
   FileCheck,
-  Zap,
   Info,
 } from 'lucide-react';
 
 interface HeaderProps {
   viewMode: 'split' | 'chat' | 'document';
-  activeModel?: string;
   setViewMode: (mode: 'split' | 'chat' | 'document') => void;
   onOpenResetModal: () => void;
   onOpenDiagram: () => void;
@@ -24,7 +22,6 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   viewMode,
-  activeModel,
   setViewMode,
   onOpenResetModal,
   onOpenDiagram,
@@ -43,13 +40,6 @@ export const Header: React.FC<HeaderProps> = ({
                 <h1 className="font-sans-body text-xl font-bold tracking-tight text-deep-600">
                   Mizmentor
                 </h1>
-                <span
-                  className="text-[11px] px-2 py-0.5 rounded bg-mint-50 text-mint-800 border border-mint-300 font-mono-code font-medium flex items-center gap-1"
-                  title="Currently active lightweight Gemini model"
-                >
-                  <Zap className="w-3 h-3 text-mint-700" />
-                  <span>Model: {activeModel || 'gemini-3.1-flash-lite'}</span>
-                </span>
               </div>
               <p className="text-xs text-slate-600">
                 feedback on your early business idea
@@ -59,7 +49,9 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Right Action buttons */}
           <div className="flex items-center gap-2 flex-wrap">
-            {/* View Mode Switcher */}
+            {/* View switcher: only useful when the window is too narrow to
+                show both panels at once. Hidden from md: upward. */}
+            <div className="md:hidden">
             <div className="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
               <button
                 onClick={() => setViewMode('split')}
@@ -99,6 +91,7 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             </div>
 
+            </div>
             {/* Reset */}
             <button
               onClick={onOpenResetModal}
@@ -113,11 +106,11 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenDiagram}
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-mint-400 hover:bg-mint-300 text-slate-950 rounded-lg transition-colors cursor-pointer shadow-xs border border-mint-300"
-              title="System Diagram: How this app actually works"
-              aria-label="Info - System Diagram"
+              title="How this app works"
+              aria-label="How it works"
             >
               <Info className="w-4 h-4 text-slate-950 shrink-0" />
-              <span>Info</span>
+              <span>How it works</span>
             </button>
           </div>
         </div>

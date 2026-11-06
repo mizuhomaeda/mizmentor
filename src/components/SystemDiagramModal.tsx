@@ -21,12 +21,14 @@ interface SystemDiagramModalProps {
   isOpen: boolean;
   onClose: () => void;
   activeModel?: string;
+  onReplayTutorial?: () => void;
 }
 
 export const SystemDiagramModal: React.FC<SystemDiagramModalProps> = ({
   isOpen,
   onClose,
   activeModel,
+  onReplayTutorial,
 }) => {
   if (!isOpen) return null;
 
@@ -311,7 +313,17 @@ export const SystemDiagramModal: React.FC<SystemDiagramModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="bg-slate-100 px-6 py-3 border-t border-slate-200 flex justify-end shrink-0">
+        <div className="bg-slate-100 px-6 py-3 border-t border-slate-200 flex justify-between items-center gap-3 shrink-0">
+          {onReplayTutorial ? (
+            <button
+              onClick={onReplayTutorial}
+              className="text-xs font-medium text-deep-700 hover:text-deep-900 hover:underline cursor-pointer"
+            >
+              Show the quick tour again
+            </button>
+          ) : (
+            <span />
+          )}
           <button
             onClick={onClose}
             className="px-4 py-2 text-xs font-semibold bg-mint-400 text-deep-900 rounded-lg hover:bg-mint-500 transition-colors cursor-pointer"

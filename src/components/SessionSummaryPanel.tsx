@@ -96,7 +96,7 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
   };
 
   return (
-    <div className="flex flex-col h-full min-h-0 bg-slate-100/90 relative overflow-hidden">
+    <div data-tour="notes" className="flex flex-col h-full min-h-0 bg-slate-100/90 relative overflow-hidden">
       {/* Toolbar */}
       <div className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap no-print">
         <div className="flex items-center gap-2">
@@ -148,12 +148,10 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
             </div>
             <div>
               <h3 className="font-sans-body font-semibold text-slate-900 text-lg mb-1">
-                Your session notes will build up here
+                Your notes will show up here
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                As you talk through your idea on the left, this panel keeps track of how the idea was
-                understood, what is still unstated, the point you are working on, and anything you
-                said you would go and find out. You can download the whole thing as a text file.
+              <p className="text-sm text-slate-600 leading-relaxed">
+                As we talk, I will keep notes here. You can download them whenever you like.
               </p>
             </div>
             <div className="pt-2">

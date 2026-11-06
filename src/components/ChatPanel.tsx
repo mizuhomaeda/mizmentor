@@ -33,6 +33,23 @@ interface ChatPanelProps {
   onSelectRevisionOption: (optionText: string) => void;
 }
 
+/**
+ * Mizmentor's avatar.
+ *
+ * PLACEHOLDER. To use a real picture, drop the file in `public/` and replace the
+ * whole <div> below with:
+ *   <img src="/mizuho.jpg" alt="" className="w-8 h-8 rounded-full shrink-0 object-cover" />
+ * Nothing else needs to change; every message uses this one component.
+ */
+const MentorAvatar: React.FC = () => (
+  <div
+    className="w-8 h-8 rounded-full shrink-0 bg-mint-300 text-deep-900 flex items-center justify-center text-xs font-semibold"
+    aria-hidden="true"
+  >
+    M
+  </div>
+);
+
 export const ChatPanel: React.FC<ChatPanelProps> = ({
   messages,
   currentStage,
@@ -100,40 +117,28 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
         onScroll={handleScroll}
         className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-6"
       >
-        {/* If no messages yet, show empathy welcome & sample journeys */}
+        {/* Opening message, in the same shape as a real reply */}
         {messages.length === 0 && (
-          <div className="max-w-xl mx-auto py-4 space-y-6">
-            <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-xs">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-full bg-mint-200 text-deep-800 flex items-center justify-center font-sans-body font-bold text-base">
-                  M
-                </div>
-                <div>
-                  <h3 className="font-sans-body font-semibold text-slate-900 text-lg">
-                    Mizmentor
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    feedback on your early business idea
+          <div className="max-w-xl mx-auto py-2 space-y-6">
+            <div className="flex gap-2.5">
+              <MentorAvatar />
+              <div className="min-w-0">
+                <span className="block text-xs font-medium text-slate-600 mb-1 ml-1">Mizmentor</span>
+                <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-slate-200 text-sm leading-relaxed text-slate-800 space-y-3">
+                  <p className="font-medium text-slate-900">So you want some feedback?</p>
+                  <p>
+                    Tell me about your idea. It can be rough, or just the problem you want to solve.
+                    We will look at it together, from the design side and the business side, and
+                    figure out how to make it better.
                   </p>
                 </div>
               </div>
-              <p className="text-slate-700 text-sm leading-relaxed mb-4">
-                Tell me about your early business or service idea, even if it is only a few lines or
-                just the problem you want to solve. I will tell you how I read it and what I would
-                think about first.
-              </p>
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200/80 text-xs text-slate-600 space-y-1">
-                <p className="font-medium text-slate-800">How we work together:</p>
-                <p>• Speak freely, even if your thoughts feel messy or unorganized.</p>
-                <p>• I will take in the idea, say how I read it, and raise the one thing worth thinking about first.</p>
-                <p>• The decision stays yours. This is feedback, not instruction.</p>
-              </div>
             </div>
 
-            {/* Persona Journey Starters */}
+            {/* Example ideas */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3 flex items-center justify-between">
-                <span>Start with an example idea:</span>
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+                Start with an example idea:
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {SAMPLE_JOURNEYS.map((j) => (
@@ -163,24 +168,22 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               </div>
             </div>
 
-            {/* Starter Prompts */}
-            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-              <span className="text-xs font-medium text-slate-500 block mb-2">
-                Or describe your own idea:
-              </span>
+            {/* Short openers */}
+            <div>
+              <span className="text-xs text-slate-600 block mb-2">You can also ask me things like:</span>
               <div className="flex flex-wrap gap-1.5">
                 {[
-                  "I have an idea but I am not sure the problem is real",
-                  "I know the problem, I do not know who would pay for it",
-                  "I have interviewed people but did not learn much",
-                  "I need to pitch this soon and want to know what to cut",
+                  'Is this problem real?',
+                  'Who would pay for this?',
+                  'My interviews taught me nothing',
+                  'What should I cut before pitching?',
                 ].map((prompt, idx) => (
                   <button
                     key={idx}
                     onClick={() => onSendMessage(prompt)}
-                    className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-mint-100 hover:text-deep-700 text-slate-700 rounded-lg transition-colors text-left"
+                    className="text-xs px-3 py-1.5 bg-slate-100 hover:bg-mint-100 hover:text-deep-700 text-slate-700 rounded-lg transition-colors"
                   >
-                    "{prompt}"
+                    {prompt}
                   </button>
                 ))}
               </div>
@@ -191,40 +194,26 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
         {/* Message Feed */}
         {messages.map((m) => {
           const isUser = m.role === 'user';
-          return (
-            <div
-              key={m.id}
-              className={`flex gap-3 max-w-2xl ${isUser ? 'ml-auto flex-row-reverse' : 'mr-auto'}`}
-            >
-              {/* Avatar */}
-              <div
-                className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-medium ${
-                  isUser
-                    ? 'bg-mint-400 text-deep-900'
-                    : 'bg-mint-200 text-deep-800 font-sans-body'
-                }`}
-              >
-                {isUser ? <User className="w-4 h-4" /> : 'M'}
-              </div>
-
-              {/* Message Bubble & Cards */}
-              <div className="space-y-3 flex-1 min-w-0">
-                <div
-                  className={`p-4 rounded-2xl text-sm leading-relaxed shadow-2xs ${
-                    isUser
-                      ? 'bg-mint-300 text-deep-900 rounded-tr-xs'
-                      : 'bg-white text-slate-800 border border-slate-200 rounded-tl-xs'
-                  }`}
-                >
+          // Messaging-app shape: the mentor gets an avatar and a name above the
+          // bubble; your own messages are a right-aligned bubble, as in any
+          // messenger. Your own avatar is not shown - you know who you are.
+          if (isUser) {
+            return (
+              <div key={m.id} className="flex justify-end">
+                <div className="max-w-lg px-4 py-2.5 rounded-2xl rounded-br-sm bg-mint-300 text-deep-900 text-sm leading-relaxed">
                   <p className="whitespace-pre-wrap">{m.content}</p>
-                  {!isUser && (
-                    <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-500 font-mono-code">
-                      <span>Model: {m.modelUsed || 'gemini-3.1-flash-lite'}</span>
-                    </div>
-                  )}
                 </div>
-
-
+              </div>
+            );
+          }
+          return (
+            <div key={m.id} className="flex gap-2.5 max-w-2xl mr-auto">
+              <MentorAvatar />
+              <div className="min-w-0">
+                <span className="block text-xs font-medium text-slate-600 mb-1 ml-1">Mizmentor</span>
+                <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white border border-slate-200 text-sm leading-relaxed text-slate-800">
+                  <p className="whitespace-pre-wrap">{m.content}</p>
+                </div>
               </div>
             </div>
           );
@@ -363,7 +352,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
       )}
 
       {/* Input area: ALWAYS usable even after failure */}
-      <div className="p-3 sm:p-4 bg-white border-t border-slate-200 shrink-0">
+      <div data-tour="composer" className="p-3 sm:p-4 bg-white border-t border-slate-200 shrink-0">
         <form onSubmit={handleSend} className="relative flex items-end gap-2">
           {/* Textarea */}
           <div className="relative flex-1">
@@ -387,10 +376,6 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             <Send className="w-4 h-4" />
           </button>
         </form>
-        <div className="flex items-center justify-between mt-2 text-[11px] text-slate-500 px-1">
-          <span>Press Enter to send · Shift+Enter for new line</span>
-          <span>Drafts are saved locally on your device</span>
-        </div>
       </div>
     </div>
   );
