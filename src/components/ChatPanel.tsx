@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 import profilePhotoUrl from '../assets/profile-photo.png';
 import { Message, InteractionStage, ErrorNotice } from '../types';
 import {
@@ -33,6 +33,10 @@ interface ChatPanelProps {
 }
 
 /** Mizmentor's avatar. Every message the agent sends uses this one component. */
+/** The composer starts at two lines and grows to ten before it scrolls. */
+const MIN_ROWS = 2;
+const MAX_ROWS = 10;
+
 /** The full message the example button puts in the input box, unsent. */
 const EXAMPLE_IDEA_PROMPT =
   'I have an idea for an app that shows students which places on campus still have free seats to study, because the library is always full around exams. I have not talked to anyone about it yet. I am not sure if this is a real problem or just my own annoyance.';
@@ -61,6 +65,26 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  /**
+   * Grow the composer a line at a time as the text gets longer, up to ten
+   * lines, then stop and let it scroll. Height is reset to 'auto' first so the
+   * box shrinks back down again when text is deleted, not only grows.
+   */
+  useLayoutEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    const cs = window.getComputedStyle(el);
+    const line = parseFloat(cs.lineHeight) || 20;
+    const padding = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+    const border = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+    const min = line * MIN_ROWS + padding + border;
+    const max = line * MAX_ROWS + padding + border;
+    el.style.height = 'auto';
+    const next = Math.min(Math.max(el.scrollHeight + border, min), max);
+    el.style.height = `${next}px`;
+    el.style.overflowY = el.scrollHeight + border > max ? 'auto' : 'hidden';
+  }, [inputText]);
 
   // Check if scroll container is at the bottom
   const checkIfAtBottom = useCallback(() => {
@@ -144,12 +168,9 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   setInputText(EXAMPLE_IDEA_PROMPT);
                   textareaRef.current?.focus();
                 }}
-                className="group w-full flex items-center justify-between gap-4 text-left px-5 py-4 rounded-xl bg-mint-400 hover:bg-mint-500 text-ink-900 text-sm font-medium transition-colors"
+                className="group w-full flex items-center justify-between gap-3 text-left px-4 py-4 rounded-xl bg-mint-400 hover:bg-mint-500 text-ink-900 text-[13px] font-medium transition-colors"
               >
-                <span>
-                  An idea that helps students find a free place to study on campus when the library
-                  is full
-                </span>
+                <span>An idea that helps students find a free seat to study when the library is full</span>
                 <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -346,8 +367,8 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Describe your idea, or answer the question above..."
-              rows={2}
-              className="w-full px-3 py-2 text-sm text-ink-900 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-mint-400/40 focus:border-mint-500 resize-none"
+              rows={MIN_ROWS}
+              className="block w-full px-3 py-2 text-sm leading-5 text-ink-900 border border-slate-300 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-mint-400/40 focus:border-mint-500 resize-none overflow-y-hidden"
             />
           </div>
 

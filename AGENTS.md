@@ -386,3 +386,18 @@ model.
 mentor's suggestions, so its label is "What you said you would go and find out".
 Check the schema description before renaming a summary label: the label has to
 match what the field actually holds.
+
+## The tour
+
+It opens on EVERY load while the app is being worked on - nothing is stored
+about having seen it, and there is no seen-key any more. Scripts that drive the
+page must close it first (press Escape until the dialog is gone), or its overlay
+swallows the clicks.
+
+Each step carries an image at the top of the card. Images belong in
+`src/assets/` and must be imported in `Tutorial.tsx` and referenced from the
+STEPS array - dropping a file into `src/assets/` does nothing on its own.
+
+The card height is measured at runtime (`cardH`), not assumed, because the
+image makes each step a different height. The placement maths uses that
+measurement, so a taller card grows upward instead of running off the screen.

@@ -13,7 +13,7 @@ import {
 } from './components/SessionSummaryPanel';
 import { ResetConfirmModal } from './components/ResetConfirmModal';
 import { SystemDiagramModal } from './components/SystemDiagramModal';
-import { Tutorial, TUTORIAL_SEEN_KEY } from './components/Tutorial';
+import { Tutorial } from './components/Tutorial';
 import {
   Message,
   InteractionStage,
@@ -48,26 +48,12 @@ export default function App() {
   // Modals
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isDiagramModalOpen, setIsDiagramModalOpen] = useState(false);
-  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  // The tour opens on every load while the app is being worked on. Nothing is
+  // stored about having seen it, so a reload always shows it again. The Tour
+  // button in the header opens it the same way.
+  const [isTutorialOpen, setIsTutorialOpen] = useState(true);
 
-  // Show the tour on a first visit only. Any failure to read storage (private
-  // mode, blocked site data) simply means it is not shown, never a crash.
-  useEffect(() => {
-    try {
-      if (!localStorage.getItem(TUTORIAL_SEEN_KEY)) setIsTutorialOpen(true);
-    } catch {
-      /* storage unavailable: skip the tour rather than failing to load */
-    }
-  }, []);
-
-  const closeTutorial = () => {
-    setIsTutorialOpen(false);
-    try {
-      localStorage.setItem(TUTORIAL_SEEN_KEY, '1');
-    } catch {
-      /* not fatal: the tour just shows again next time */
-    }
-  };
+  const closeTutorial = () => setIsTutorialOpen(false);
 
   // Load from local storage
   useEffect(() => {

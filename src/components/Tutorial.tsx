@@ -3,10 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
-
-export const TUTORIAL_SEEN_KEY = 'mizmentor_tutorial_seen_v1';
+import tour1 from '../assets/tour-1-idea.jpeg';
+import tour2 from '../assets/tour-2-start.jpeg';
+import tour3 from '../assets/tour-3-notes.jpeg';
 
 interface Step {
   /** CSS selector for the area to light up. Omit for a centred step. */
@@ -20,22 +21,31 @@ interface Step {
   placement?: 'auto' | 'side';
   title: string;
   body: string;
+  /** Sits at the top of the card, above the title. */
+  image: string;
+  alt: string;
 }
 
 const STEPS: Step[] = [
   {
+    image: tour1,
+    alt: 'A lit light bulb surrounded by sketched notes',
     title: 'Feedback on an early idea',
     body:
       'I give you feedback on an early business or service idea, from the design side and the business side, based on how Mizuho actually mentors founders. The point is to work out what to do next.',
   },
   {
     target: '[data-tour="composer"]',
+    image: tour2,
+    alt: 'An open blank notebook with a pencil, beside a small model of a path through trees',
     title: 'Start here',
     body: 'Describe your idea. Rough is fine, even just the problem you want to solve.',
   },
   {
     target: '[data-tour="notes"]',
     placement: 'side',
+    image: tour3,
+    alt: 'A stack of handwritten notes with sticky tabs and paper clips',
     title: 'Your notes',
     body: 'As we talk, notes build up here. You can download them whenever you like.',
   },
@@ -51,6 +61,10 @@ type Rect = { top: number; left: number; width: number; height: number };
 export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(0);
   const [rect, setRect] = useState<Rect | null>(null);
+  // The card is much taller now that it carries an image, and each step's text
+  // is a different length, so its height is measured rather than assumed.
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [cardH, setCardH] = useState(380);
 
   useEffect(() => {
     if (isOpen) setStep(0);
@@ -82,6 +96,17 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
       window.removeEventListener('scroll', measure, true);
     };
   }, [isOpen, step]);
+
+  useLayoutEffect(() => {
+    if (!isOpen) return;
+    const measure = () => {
+      const h = cardRef.current?.offsetHeight;
+      if (h && Math.abs(h - cardH) > 1) setCardH(h);
+    };
+    measure();
+    const id = window.setTimeout(measure, 60); // after the image settles
+    return () => window.clearTimeout(id);
+  }, [isOpen, step, cardH]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -116,12 +141,14 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
         : Math.min(window.innerWidth - CARD_W - GAP, rect.left + rect.width + GAP);
       // Centred on the target vertically, then clamped inside the window so it
       // cannot run off the top or bottom.
-      const wanted = rect.top + rect.height / 2 - 110;
-      const top = Math.max(GAP, Math.min(wanted, window.innerHeight - 250));
+      const wanted = rect.top + rect.height / 2 - cardH / 2;
+      const top = Math.max(GAP, Math.min(wanted, window.innerHeight - cardH - GAP));
       cardStyle = { position: 'fixed', top, left, width: CARD_W };
     } else {
+      // The card grows upward when there is no room beneath the lit area, so a
+      // tall card never overlaps what it is pointing at.
       const below = rect.top + rect.height + GAP;
-      const putBelow = window.innerHeight - below > 190;
+      const putBelow = window.innerHeight - below > cardH + GAP;
       cardStyle = {
         position: 'fixed',
         top: putBelow ? below : undefined,
@@ -155,12 +182,21 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
       )}
 
       <div
-        className={`bg-white rounded-xl shadow-2xl border border-slate-200 p-5 animate-in fade-in zoom-in-95 duration-150 ${
+        ref={cardRef}
+        className={`bg-white rounded-xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150 ${
           rect ? '' : 'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(28rem,calc(100vw-2rem))]'
         }`}
         style={cardStyle}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Full width across the top of the card, with the text underneath. */}
+        <img
+          src={current.image}
+          alt={current.alt}
+          className="block w-full aspect-[16/9] object-cover bg-mint-100"
+        />
+
+        <div className="p-5">
         <div className="flex items-start justify-between gap-3 mb-2">
           <h2 className="font-sans-body text-base font-semibold text-ink-900">{current.title}</h2>
           <button
@@ -202,6 +238,7 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
               {isLast ? 'Got it' : 'Next'}
             </button>
           </div>
+        </div>
         </div>
       </div>
     </div>
