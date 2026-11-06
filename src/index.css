@@ -1,5 +1,65 @@
 @import "tailwindcss";
 
+/*
+ * Mizmentor palette.
+ *
+ * Light base (white and light grey) with a mint-led accent set. Replaces the
+ * Berkeley blue + amber scheme inherited from the complaint letter agent.
+ *
+ *   mint #94c7b9 - the main accent
+ *   sea  #59838e - secondary, quieter
+ *   deep #294f68 - darkest, for text and strong edges
+ *   iris #aca8ff - the standout accent, used sparingly
+ *
+ * Shades are generated around each base so Tailwind utilities (bg-mint-400,
+ * text-deep-600, border-iris-200, and /opacity variants) all work.
+ */
+@theme {
+  --color-mint-50:  #f1f8f6;
+  --color-mint-100: #e2f1ed;
+  --color-mint-200: #c8e4dc;
+  --color-mint-300: #aed7cb;
+  --color-mint-400: #94c7b9;
+  --color-mint-500: #7ab3a3;
+  --color-mint-600: #5f998a;
+  --color-mint-700: #4a7a6e;
+  --color-mint-800: #3a6056;
+  --color-mint-900: #2e4d45;
+
+  --color-sea-50:  #f0f5f6;
+  --color-sea-100: #dde9ec;
+  --color-sea-200: #bdd3d8;
+  --color-sea-300: #98b9c1;
+  --color-sea-400: #769fa9;
+  --color-sea-500: #59838e;
+  --color-sea-600: #4a6f79;
+  --color-sea-700: #3d5b63;
+  --color-sea-800: #33494f;
+  --color-sea-900: #2b3c41;
+
+  --color-deep-50:  #eef3f7;
+  --color-deep-100: #dae5ed;
+  --color-deep-200: #b7cbdb;
+  --color-deep-300: #8daec6;
+  --color-deep-400: #5f88a8;
+  --color-deep-500: #3f6a8c;
+  --color-deep-600: #294f68;
+  --color-deep-700: #234458;
+  --color-deep-800: #1d3a4f;
+  --color-deep-900: #162c3c;
+
+  --color-iris-50:  #f4f3ff;
+  --color-iris-100: #eae8ff;
+  --color-iris-200: #d9d6ff;
+  --color-iris-300: #c6c2ff;
+  --color-iris-400: #aca8ff;
+  --color-iris-500: #918bfa;
+  --color-iris-600: #7a71ef;
+  --color-iris-700: #635ad4;
+  --color-iris-800: #4f48aa;
+  --color-iris-900: #403a85;
+}
+
 @layer base {
   :root {
     --font-serif: 'Crimson Pro', Georgia, Cambria, 'Times New Roman', serif;
@@ -20,7 +80,7 @@
   font-family: var(--font-mono);
 }
 
-/* Print styling specifically for the generated letter */
+/* Print styling */
 @media print {
   body {
     background-color: white !important;
@@ -31,13 +91,5 @@
   }
   .print-only {
     display: block !important;
-  }
-  .letter-paper-print {
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
   }
 }

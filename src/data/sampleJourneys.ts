@@ -27,27 +27,3 @@ export const SAMPLE_JOURNEYS: JourneyTemplate[] = [
       "We are building a service to stop beginners dropping out of a hobby in their first few months. We interviewed ten people and they all said they would use something like this, so we think the problem is validated. We have to pitch to our internal committee in three weeks. What should we lock down before then, and what would you cut?",
   },
 ];
-
-export const M_DES_INFO = {
-  office: 'MDes Program Office',
-  school: 'Master of Design (MDes)',
-  institution: 'University of California, Berkeley',
-  location: 'Jacobs Hall, 2530 Ridge Road, Berkeley, CA 94720',
-  jurisdiction: [
-    'Academic calendar & milestone scheduling',
-    'Cross-course workload coordination & conflict mitigation',
-    'Program requirements & graduation checks',
-    'Student academic policy and cohort well-being escalation',
-  ],
-  notInJurisdiction: [
-    'Individual course grades and grading rubrics',
-    'Specific pedagogical content taught inside individual electives',
-  ],
-  suggestedPhrases: [
-    'I am writing to raise an urgent concern regarding the current scheduling of cohort deliverables...',
-    'I would like to bring the following structural workload challenges to your attention.',
-    'This sustained pacing has severely compromised our ability to maintain academic rigor and personal health.',
-    'I would appreciate the opportunity to discuss constructive scheduling adjustments with the program leadership.',
-    'I would be grateful for an acknowledgement of this letter and a response by [date].',
-  ],
-};

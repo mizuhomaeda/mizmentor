@@ -12,9 +12,10 @@ mentoring notes rather than general startup theory.
 Left panel: the conversation. Right panel: a running session summary the person
 can download as a text file.
 
-This project was converted from a formal complaint letter ghostwriter. If you find
-anything referring to letters, drafts, complaints, MDes or UC Berkeley, it is
-leftover from that and not intended behaviour. See "Known leftovers" below.
+This project was converted from a formal complaint letter ghostwriter. That
+conversion is complete: `src/` and `index.html` no longer contain any reference to
+letters, drafts, complaints, MDes or UC Berkeley. If you reintroduce one, it is a
+bug. See "What was removed with the ghostwriter" below.
 
 The project owner is a design student, not a terminal user. Explain shell commands
 in plain language before running them, and say when something fails rather than
@@ -87,7 +88,7 @@ Treat any change that could weaken these as needing the owner's explicit sign-of
 
 ## All of the knowledge is sent on every request
 
-About 86,000 characters, roughly 20,000 tokens, on every single message. There is no
+About 88,000 characters, roughly 21,000 tokens, on every single message. There is no
 retrieval step, no embeddings, no vector store. This is a deliberate choice: correct
 behaviour first, machinery only once there is a problem to solve.
 
@@ -110,10 +111,13 @@ any prompt change, because they will come back.
    empty. Fixed by adding it to the schema's `required` array *and* saying it is
    mandatory from the analyse stage onward. Listing a field in the schema is not
    enough on its own.
-2. **Stuck at the purpose stage.** An instruction not to analyse on the first turn
-   made it ask "what do you want out of this session?" twice in a row. Fixed by
-   pairing it with an explicit "the purpose stage lasts one turn, then move on".
-   Any stage-discipline instruction needs a matching progression rule.
+2. **Stuck at the purpose stage, then never leaving the checking stage.** Prompt
+   sentences could not hold this invariant: they held on some turns and not others.
+   It is now enforced in code - `processChatRequest` counts the replies already in
+   the conversation and injects a different instruction for reply 1, reply 2 and
+   reply 3+. The count comes from the message history, not from the stage the model
+   reports, so mislabelling the stage cannot bypass it. **Do not move this back into
+   the prompt.** Three rounds of trying that failed.
 3. **Examples get copied verbatim.** A `currentPoint` example written about childcare
    came back word for word when the test idea was about childcare. Keep every example
    in a domain unrelated to anything a user would plausibly bring, and say not to
@@ -233,24 +237,53 @@ cannot load into Mizmentor.
   gated on `DISABLE_HMR` to stop flickering during agent edits.
 - Run `npm run lint` before declaring work finished. It currently passes clean.
 
-## Known leftovers from the ghostwriter
+## Look and feel
 
-The visual design has deliberately **not** been reworked yet; the owner wants to do
-that as a separate pass. These are known and intentional for now:
+Light theme only: white and light grey base, with the palette defined as Tailwind
+scales at the top of `src/index.css`.
 
-- `src/components/PolicyGuideModal.tsx` — MDes Program Office guidelines. Still
-  reachable from the "MDes Guidelines" button in the header.
-- `src/components/ToneAuditModal.tsx` — audits a letter draft. Its trigger button is
-  hidden by passing `hasDraft={false}` from `App.tsx`, since there is no draft to
-  audit. Both the modal and that prop should go in the design pass.
-- `src/components/QuickFillModal.tsx` — filled `[bracketed]` placeholders in a letter.
-  No longer mounted.
-- `src/components/SystemDiagramModal.tsx` — describes the old architecture.
-- `src/data/sampleJourneys.ts` — `SAMPLE_JOURNEYS` has been replaced with two
-  business-idea starters, but `M_DES_INFO` in the same file still feeds
-  `PolicyGuideModal`.
-- `api/fill-placeholder.ts` — generic and harmless, but nothing calls it.
-- The Berkeley blue `#003262` palette and the serif/letter styling throughout.
+```
+mint #94c7b9   the main accent        -> bg-mint-*, text-mint-*
+sea  #59838e   secondary, quieter     -> bg-sea-*
+deep #294f68   darkest, text & edges  -> bg-deep-*, text-deep-*
+iris #aca8ff   the standout accent    -> bg-iris-*
+```
+
+Greys are Tailwind `slate`. Errors keep `rose`. There is no dark mode and the
+header is a white bar, not the navy one the complaint agent had. If you need a
+colour that is not in the palette, add a shade to the `@theme` block rather than
+hardcoding a hex value in a component.
+
+The owner is a design student and intends to rework the **layout** separately. Do
+not restructure panels, spacing or hierarchy without being asked; colour and copy
+fixes are fine.
+
+## What was removed with the ghostwriter
+
+These are gone, not hidden. Do not reintroduce them:
+
+- `PolicyGuideModal` (MDes Program Office guidelines) and the header button that
+  opened it.
+- `ToneAuditModal` (audited a letter draft for tone).
+- `QuickFillModal` (filled `[bracketed]` placeholders in a letter).
+- `M_DES_INFO` in `src/data/sampleJourneys.ts`.
+- `.letter-paper-print` in `src/index.css`.
+- The understanding block in the chat, with its confirm buttons - the owner found
+  it repetitive under every reply. `summaryOfUnderstanding` still exists and is
+  shown once, in the summary panel.
+
+`SystemDiagramModal` was kept but its content was rewritten: it described the
+letter architecture, the 6-step loop and the MDes office. It now describes the
+real pipeline, including that the turn rule is counted in code. **If you change
+how a turn works, update that modal too** - it is user-facing documentation and it
+has already been wrong once.
+
+## Diagram
+
+`docs/system-diagram.svg` is a standalone diagram of the request pipeline, made for
+a class presentation. It is generated by hand, not by a script, so if the pipeline
+changes it has to be edited. It and `SystemDiagramModal` say the same thing in two
+places; keep them in step.
 
 ## Browser testing
 
