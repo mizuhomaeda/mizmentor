@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
-import profilePhotoUrl from '../assets/profile-photo.png';
+import profilePhotoUrl from '../assets/profile-photo-2-avatar.jpeg';
 import { Message, InteractionStage, ErrorNotice } from '../types';
 import {
   ArrowRight,

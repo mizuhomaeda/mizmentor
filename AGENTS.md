@@ -402,3 +402,25 @@ STEPS array - dropping a file into `src/assets/` does nothing on its own.
 The card height is measured at runtime (`cardH`), not assumed, because the
 image makes each step a different height. The placement maths uses that
 measurement, so a taller card grows upward instead of running off the screen.
+
+## Knowledge files and their precedence
+
+Six files are baked in (`npm run build:knowledge`) and all of them are sent on
+every request. Adding one means registering it in `scripts/build-knowledge.mjs`
+AND wiring the constant into `api/_persona.ts`; the first alone does nothing.
+
+The precedence is written out in the prompt, not merely implied by the order the
+files appear in it:
+
+1. `Knowledge_VoiceSamples` - tone, register, phrasing. Only those.
+2. The role card - behaviour, structure, boundaries.
+3. `Knowledge_HowIThink` - WHAT TO PAY ATTENTION TO and in what order. It
+   outranks MentoringPatterns and LectureMaterial when they disagree.
+4. `Knowledge_WorkedExamples` - reference only, below HowIThink.
+5. `Knowledge_MentoringPatterns`, `Knowledge_LectureMaterial` - substance and
+   backing.
+
+RULE 0 in the prompt guards the worked examples: several of the five cases are
+close to situations people will actually bring, and the failure mode is handing
+the example back nearly verbatim. Test for that with an n-gram overlap check
+against `knowledge/Knowledge_WorkedExamples.md`, not by reading and hoping.

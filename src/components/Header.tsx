@@ -31,9 +31,14 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header className="bg-white text-ink-900 border-b border-slate-200 shadow-xs sticky top-0 z-30 no-print">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-        {/* Top bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      {/* No max-width here. The two sides line up with the panels underneath
+          instead: the left block sits in a half-width column with the chat
+          panel's own padding and max-w-xl centring, so the logo starts exactly
+          where the message avatars do; the right block uses the notes
+          toolbar's px-4, so the last button ends where Download ends. */}
+      <div className="py-3 flex items-center justify-between gap-3">
+        <div className="min-w-0 w-full md:w-1/2 shrink-0 px-4 sm:px-6 md:border-r md:border-transparent">
+          <div className="max-w-xl mx-auto">
           {/* h-[30px] is the rendered height of the "How it works" button, so
               the bar's py-3 leaves the same 12px above and below both sides.
               The logo is 15px, the cap height of the word next to it. */}
@@ -52,8 +57,11 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Right Action buttons */}
-          <div className="flex items-center gap-2 flex-wrap">
+          </div>
+        </div>
+
+        {/* Right Action buttons */}
+          <div className="flex items-center gap-2 flex-wrap pr-4">
             {/* View switcher: only useful when the window is too narrow to
                 show both panels at once. Hidden from md: upward. */}
             <div className="md:hidden">
@@ -128,8 +136,6 @@ export const Header: React.FC<HeaderProps> = ({
               <span>How it works</span>
             </button>
           </div>
-        </div>
-
       </div>
     </header>
   );

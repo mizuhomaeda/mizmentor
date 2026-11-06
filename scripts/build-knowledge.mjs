@@ -19,8 +19,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const SOURCES = [
   { constName: 'ROLE_CARD', file: 'RoleCard_SyntheticPersona.md' },
+  { constName: 'KNOWLEDGE_HOW_I_THINK', file: 'Knowledge_HowIThink.md' },
   { constName: 'KNOWLEDGE_MENTORING_PATTERNS', file: 'Knowledge_MentoringPatterns.md' },
   { constName: 'KNOWLEDGE_LECTURE_MATERIAL', file: 'Knowledge_LectureMaterial.md' },
+  { constName: 'KNOWLEDGE_WORKED_EXAMPLES', file: 'Knowledge_WorkedExamples.md' },
   { constName: 'KNOWLEDGE_VOICE_SAMPLES', file: 'Knowledge_VoiceSamples.md' },
 ];
 
