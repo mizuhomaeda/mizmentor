@@ -5,7 +5,8 @@
 
 import React, { useState } from 'react';
 import { SessionSummary } from '../types';
-import { FileText, Download, Copy, Check, Target, ListChecks, Compass, Sparkles } from 'lucide-react';
+import { Download, Copy, Check } from 'lucide-react';
+import noteIconUrl from '../assets/note_icon.jpeg';
 
 interface SessionSummaryPanelProps {
   summary: SessionSummary;
@@ -62,6 +63,29 @@ export const summaryHasContent = (s: SessionSummary): boolean =>
       s.actions.length
   );
 
+/** A labelled section of the sheet. The label is the only separator. */
+const Section: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
+  <section className="space-y-1.5">
+    <h3 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-500">{label}</h3>
+    {children}
+  </section>
+);
+
+const Blank: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <p className="text-xs text-ink-500 italic">{children}</p>
+);
+
+const Bullets: React.FC<{ items: string[] }> = ({ items }) => (
+  <ul className="space-y-1.5">
+    {items.map((item, idx) => (
+      <li key={idx} className="flex gap-2 text-sm text-ink-800 leading-relaxed">
+        <span className="text-mint-800 shrink-0">•</span>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+);
+
 export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summary }) => {
   const [copied, setCopied] = useState(false);
   const isEmpty = !summaryHasContent(summary);
@@ -95,9 +119,9 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
   };
 
   return (
-    <div data-tour="notes" className="flex flex-col h-full min-h-0 bg-slate-100/90 relative overflow-hidden">
+    <div data-tour="notes" className="mesh-mint flex flex-col h-full min-h-0 relative overflow-hidden">
       {/* Toolbar */}
-      <div className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap no-print">
+      <div className="bg-white/80 backdrop-blur-sm border-b border-mint-200 px-4 py-2.5 flex items-center justify-between gap-2 flex-wrap no-print">
         <div className="flex items-center gap-2">
           <span className="font-sans-body font-bold text-ink-900 text-sm">Session Summary</span>
           {summary.updatedAt && (
@@ -141,10 +165,12 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
       {/* Body */}
       <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 flex justify-center">
         {isEmpty ? (
-          <div className="my-auto max-w-md text-center p-8 bg-white/70 rounded-2xl border border-dashed border-slate-300 space-y-4">
-            <div className="w-12 h-12 rounded-full bg-slate-100 text-ink-500 mx-auto flex items-center justify-center">
-              <FileText className="w-5 h-5" />
-            </div>
+          <div className="my-auto max-w-md text-center p-8 bg-white rounded-2xl shadow-sm space-y-4">
+            <img
+              src={noteIconUrl}
+              alt="A notepad with a pen resting on it"
+              className="w-20 h-20 mx-auto rounded-xl object-cover"
+            />
             <div>
               <h3 className="font-sans-body font-semibold text-ink-900 text-lg mb-1">
                 Your notes will show up here
@@ -155,94 +181,58 @@ export const SessionSummaryPanel: React.FC<SessionSummaryPanelProps> = ({ summar
             </div>
           </div>
         ) : (
-          <div className="w-full max-w-2xl space-y-4">
-            {/* What you want out of this session */}
-            <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
-                <Target className="w-4 h-4 text-ink-500" />
-                <span>What you want out of this session</span>
-              </h3>
+          /* One sheet of paper. The sections are separated by spacing and small
+             labels only - no inner boxes, borders or cards, so this side does
+             not read like the chat bubbles on the left. */
+          <div className="w-full max-w-2xl h-fit bg-white rounded-2xl shadow-sm px-7 py-7 sm:px-9 sm:py-8 space-y-7">
+            <Section label="What you want out of this session">
               {summary.sessionGoal.trim() ? (
                 <p className="font-sans-body text-sm leading-relaxed text-ink-800">
                   {summary.sessionGoal}
                 </p>
               ) : (
-                <p className="text-xs text-ink-600 italic">Not yet stated.</p>
+                <Blank>Not yet stated.</Blank>
               )}
-            </section>
+            </Section>
 
-            {/* How the idea was understood */}
-            <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
-                <Compass className="w-4 h-4 text-ink-700" />
-                <span>How the idea was understood</span>
-              </h3>
+            <Section label="How the idea was understood">
               {summary.understanding.trim() ? (
                 <p className="font-sans-body text-sm leading-relaxed text-ink-800 whitespace-pre-wrap">
                   {summary.understanding}
                 </p>
               ) : (
-                <p className="text-xs text-ink-600 italic">Not yet established.</p>
+                <Blank>Not yet established.</Blank>
               )}
               <p className="text-[11px] text-ink-500 pt-1">
                 If this has been read wrong, say so in the chat and it will be corrected.
               </p>
-            </section>
+            </Section>
 
-            {/* The point we are working on */}
-            <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
-                <Target className="w-4 h-4 text-ink-700" />
-                <span>The point we are working on</span>
-              </h3>
+            <Section label="The point we are working on">
               {summary.currentPoint.trim() ? (
                 <p className="font-sans-body text-sm leading-relaxed text-ink-800">
                   {summary.currentPoint}
                 </p>
               ) : (
-                <p className="text-xs text-ink-600 italic">Not yet established.</p>
+                <Blank>Not yet established.</Blank>
               )}
-            </section>
+            </Section>
 
-            {/* Still unstated */}
-            <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
-                <Sparkles className="w-4 h-4 text-mint-600" />
-                <span>Still unstated</span>
-              </h3>
+            <Section label="Still unstated">
               {summary.unstated.length > 0 ? (
-                <ul className="space-y-1.5">
-                  {summary.unstated.map((item, idx) => (
-                    <li key={idx} className="flex gap-2 text-sm text-ink-800 leading-relaxed">
-                      <span className="text-mint-800 shrink-0">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <Bullets items={summary.unstated} />
               ) : (
-                <p className="text-xs text-ink-600 italic">Nothing outstanding right now.</p>
+                <Blank>Nothing outstanding right now.</Blank>
               )}
-            </section>
+            </Section>
 
-            {/* What I said I would go and find out */}
-            <section className="bg-white rounded-xl border border-slate-200 shadow-xs p-5 space-y-2">
-              <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-ink-700">
-                <ListChecks className="w-4 h-4 text-mint-700" />
-                <span>What I said I would go and find out</span>
-              </h3>
+            <Section label="What I said I would go and find out">
               {summary.actions.length > 0 ? (
-                <ul className="space-y-1.5">
-                  {summary.actions.map((item, idx) => (
-                    <li key={idx} className="flex gap-2 text-sm text-ink-800 leading-relaxed">
-                      <span className="text-mint-800 shrink-0">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <Bullets items={summary.actions} />
               ) : (
-                <p className="text-xs text-ink-600 italic">Nothing yet.</p>
+                <Blank>Nothing yet.</Blank>
               )}
-            </section>
+            </Section>
           </div>
         )}
       </div>

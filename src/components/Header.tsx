@@ -35,22 +35,20 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Top bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            {/* h-11 matches the stacked name and tagline; w-auto keeps the
-                drawn mark's own proportions rather than stretching it. */}
+            {/* The logo is sized to the same height as the "How it works"
+                button on the right (32px), and the bar's own py-3 then gives
+                both sides the same space above and below. */}
             <img
               src={logoUrl}
               alt="Mizmentor logo: a hand-drawn mint green squiggle"
-              className="h-11 w-auto shrink-0"
+              className="h-8 w-auto shrink-0"
             />
-            <div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="font-sans-body text-xl font-bold tracking-tight text-ink-800">
-                  Mizmentor
-                </h1>
-              </div>
-              <p className="text-xs text-ink-600">
-                feedback on your early business idea
-              </p>
+            {/* Name and tagline on one line. */}
+            <div className="flex items-baseline gap-2.5 min-w-0">
+              <h1 className="font-sans-body text-xl font-bold tracking-tight text-ink-800 shrink-0">
+                Mizmentor
+              </h1>
+              <p className="text-xs text-ink-600 truncate">feedback on your early business idea</p>
             </div>
           </div>
 

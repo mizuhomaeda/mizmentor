@@ -349,3 +349,12 @@ them in a top-level `images/` folder — Vite does not serve that, so the files
 - `src/assets/profile-photo.png` — Mizuho's face, used by the single
   `MentorAvatar` component in `ChatPanel.tsx`. Every agent message, the opening
   bubble and the loading state all go through that one component.
+- `src/assets/note_icon.jpeg` — the empty-state illustration on the notes side.
+
+Resize images to roughly twice their displayed size before committing them.
+The note icon arrived as a 2048px, 1.6MB JPEG for an 80px slot; it is now 160px
+and 5.9KB. `sips -Z <px> -s formatOptions 80 <file> --out <file>` does the job
+on macOS, no extra tooling.
+
+Never keep source images in `dist/` - that directory is build output and is
+wiped by every `vite build`.

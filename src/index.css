@@ -99,3 +99,19 @@
     display: block !important;
   }
 }
+
+/*
+ * Soft mint mesh for the notes side, so the white summary sheet reads as paper
+ * lying on a coloured surface. Four overlapping radial gradients at low alpha
+ * over a near-white base: light enough that the sheet still clearly separates
+ * from it, and no image file needed.
+ */
+.mesh-mint {
+  background-color: #f6fbf9;
+  background-image:
+    radial-gradient(at 18% 14%, rgba(148, 199, 185, 0.50) 0px, transparent 55%),
+    radial-gradient(at 86% 22%, rgba(174, 215, 203, 0.46) 0px, transparent 50%),
+    radial-gradient(at 72% 88%, rgba(148, 199, 185, 0.42) 0px, transparent 55%),
+    radial-gradient(at 8% 80%, rgba(194, 228, 220, 0.48) 0px, transparent 50%);
+  background-attachment: local;
+}
