@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
               <h1 className="font-sans-body text-xl font-bold tracking-tight text-ink-800 leading-none shrink-0">
                 Mizmentor
               </h1>
-              <p className="text-xs text-ink-600 truncate">feedback on your early business idea</p>
+              <p className="text-xs text-ink-600 truncate">Feedback on your early business idea</p>
             </div>
           </div>
 

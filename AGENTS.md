@@ -346,9 +346,12 @@ them in a top-level `images/` folder — Vite does not serve that, so the files
 
 - `src/assets/logo.png` — the app mark, in the header left of the name. Sized
   `h-11 w-auto` so it is never stretched.
-- `src/assets/profile-photo.png` — Mizuho's face, used by the single
+- `src/assets/avatar-mentor.jpeg` — Mizuho's face, used by the single
   `MentorAvatar` component in `ChatPanel.tsx`. Every agent message, the opening
-  bubble and the loading state all go through that one component.
+  bubble and the loading state all go through that one component. It arrives
+  pre-cropped and sized; do not re-crop or recompress it.
+- `src/assets/profile-photo-2.jpeg` — source image only. Kept on purpose and
+  referenced by nothing. Do not import it and do not delete it as "unused".
 - `src/assets/note_icon.jpeg` — the empty-state illustration on the notes side.
 
 Resize images to roughly twice their displayed size before committing them.

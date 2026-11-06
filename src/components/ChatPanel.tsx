@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
-import profilePhotoUrl from '../assets/profile-photo-2-avatar.jpeg';
+import mentorAvatarUrl from '../assets/avatar-mentor.jpeg';
 import { Message, InteractionStage, ErrorNotice } from '../types';
 import {
   ArrowRight,
@@ -43,7 +43,7 @@ const EXAMPLE_IDEA_PROMPT =
 
 const MentorAvatar: React.FC = () => (
   <img
-    src={profilePhotoUrl}
+    src={mentorAvatarUrl}
     alt="Mizuho, the mentor"
     className="w-8 h-8 rounded-full shrink-0 object-cover"
   />

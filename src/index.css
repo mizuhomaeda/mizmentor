@@ -14,9 +14,11 @@
  *                  reading as navy. Lightest usable for text is ink-500.
  *   deep #294f68 - small non-text details only
  *
- * A fourth accent (#aca8ff, periwinkle) was tried and removed: it competed with
- * the mint instead of supporting it. Do not reintroduce a second accent without
- * being asked.
+ *   lav  #c7cef1 - pale periwinkle. A second accent, used in exactly two
+ *                  places and nowhere else: the example button on the first
+ *                  screen, which has to not look like one of the person's own
+ *                  mint speech bubbles, and the mesh behind the notes sheet.
+ *                  Do not spread it further without being asked.
  *
  * Shades are generated around each base so Tailwind utilities (bg-mint-400,
  * text-deep-600, border-mint-200, and /opacity variants) all work.
@@ -50,16 +52,16 @@
   /* lav: the lavender accent. Used ONLY where something must not be mistaken
      for the mint - the example button, which would otherwise look like a
      message the person had already sent. */
-  --color-lav-50:  #f5f4ff;
-  --color-lav-100: #eceaff;
-  --color-lav-200: #dedbff;
-  --color-lav-300: #c9c5ff;
-  --color-lav-400: #aca8ff;
-  --color-lav-500: #948fff;
-  --color-lav-600: #7a74f0;
-  --color-lav-700: #625cd1;
-  --color-lav-800: #4e49a8;
-  --color-lav-900: #3f3b85;
+  --color-lav-50:  #f7f8fd;
+  --color-lav-100: #eef0fa;
+  --color-lav-200: #e0e4f6;
+  --color-lav-300: #d3d9f3;
+  --color-lav-400: #c7cef1;
+  --color-lav-500: #aab4e7;
+  --color-lav-600: #8c99da;
+  --color-lav-700: #6f7dc2;
+  --color-lav-800: #58659f;
+  --color-lav-900: #47527f;
 
   --color-sea-50:  #f0f5f6;
   --color-sea-100: #dde9ec;
@@ -148,10 +150,10 @@
      top clearly separate. */
   background-image:
     radial-gradient(85% 90% at -8% -6%,  rgba(148, 199, 185, 0.42) 0%, rgba(148, 199, 185, 0.22) 45%, rgba(148, 199, 185, 0) 80%),
-    radial-gradient(80% 85% at 108% 8%,  rgba(172, 168, 255, 0.26) 0%, rgba(172, 168, 255, 0.15) 45%, rgba(172, 168, 255, 0) 80%),
+    radial-gradient(80% 85% at 108% 8%,  rgba(199, 206, 241, 0.42) 0%, rgba(199, 206, 241, 0.24) 45%, rgba(199, 206, 241, 0) 80%),
     radial-gradient(90% 80% at 112% 70%, rgba(89, 131, 142, 0.17) 0%, rgba(89, 131, 142, 0.10) 45%, rgba(89, 131, 142, 0) 80%),
     radial-gradient(85% 90% at -10% 108%, rgba(148, 199, 185, 0.38) 0%, rgba(148, 199, 185, 0.20) 45%, rgba(148, 199, 185, 0) 80%),
     radial-gradient(75% 70% at 55% 115%, rgba(41, 79, 104, 0.11) 0%, rgba(41, 79, 104, 0.07) 45%, rgba(41, 79, 104, 0) 80%),
     radial-gradient(70% 75% at 34% 44%,  rgba(148, 199, 185, 0.28) 0%, rgba(148, 199, 185, 0.15) 50%, rgba(148, 199, 185, 0) 82%),
-    radial-gradient(65% 70% at 56% 38%,  rgba(172, 168, 255, 0.23) 0%, rgba(172, 168, 255, 0.13) 50%, rgba(172, 168, 255, 0) 82%);
+    radial-gradient(65% 70% at 56% 38%,  rgba(199, 206, 241, 0.36) 0%, rgba(199, 206, 241, 0.20) 50%, rgba(199, 206, 241, 0) 82%);
 }
