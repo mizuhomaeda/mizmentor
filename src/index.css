@@ -47,6 +47,20 @@
   --color-ink-900: #10231e;
   --color-ink-950: #08120f;
 
+  /* lav: the lavender accent. Used ONLY where something must not be mistaken
+     for the mint - the example button, which would otherwise look like a
+     message the person had already sent. */
+  --color-lav-50:  #f5f4ff;
+  --color-lav-100: #eceaff;
+  --color-lav-200: #dedbff;
+  --color-lav-300: #c9c5ff;
+  --color-lav-400: #aca8ff;
+  --color-lav-500: #948fff;
+  --color-lav-600: #7a74f0;
+  --color-lav-700: #625cd1;
+  --color-lav-800: #4e49a8;
+  --color-lav-900: #3f3b85;
+
   --color-sea-50:  #f0f5f6;
   --color-sea-100: #dde9ec;
   --color-sea-200: #bdd3d8;

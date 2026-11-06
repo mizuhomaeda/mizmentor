@@ -168,7 +168,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   setInputText(EXAMPLE_IDEA_PROMPT);
                   textareaRef.current?.focus();
                 }}
-                className="group w-full flex items-center justify-between gap-3 text-left px-4 py-4 rounded-xl bg-mint-400 hover:bg-mint-500 text-ink-900 text-[13px] font-medium transition-colors"
+                className="group w-full flex items-center justify-between gap-3 text-left px-4 py-4 rounded-xl bg-lav-400 hover:bg-lav-500 text-ink-950 text-[13px] font-medium transition-colors"
               >
                 <span>An idea that helps students find a free seat to study when the library is full</span>
                 <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
