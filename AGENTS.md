@@ -358,3 +358,17 @@ on macOS, no extra tooling.
 
 Never keep source images in `dist/` - that directory is build output and is
 wiped by every `vite build`.
+
+## The notes-side mesh
+
+`.mesh-mint` in `src/index.css`. The blobs live on a blurred `::before` layer,
+not on the element itself, and the layer is inset by -15% so the blur does not
+fade out at the panel edges and show as a band. Each blob has a mid stop: a
+two-stop ramp this wide quantises to 8 bits and shows faint rings once blurred.
+
+This is the one place purple is allowed. It was dropped everywhere else, but
+Mizuho asked for all four palette colours in the mesh specifically, each pale
+enough that no single hue reads as strong.
+
+Judge it by sampling painted pixels, not by reading the CSS: the panel has no
+flat background colour for the contrast script to resolve against.

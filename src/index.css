@@ -122,11 +122,20 @@
      edges and show as a band. */
   inset: -15%;
   z-index: -1;
-  filter: blur(60px);
+  filter: blur(70px);
+  /* Every palette colour appears, each at a low enough alpha that none of them
+     reads as a strong colour on its own - but the hues differ enough across the
+     panel that it is visibly multi-colour rather than one tint fading out.
+     The two dark colours (sea, deep) are the palest of the set, so the white
+     sheet on top keeps a clear edge against them.
+
+     Each blob carries a mid stop: a plain two-stop ramp this wide quantises to
+     8 bits and shows faint rings once blurred. */
   background-image:
-    radial-gradient(38% 46% at 12% 8%,   #b9dcd1 0%, rgba(185, 220, 209, 0) 70%),
-    radial-gradient(26% 30% at 78% 16%,  #cfe6e6 0%, rgba(207, 230, 230, 0) 72%),
-    radial-gradient(46% 34% at 92% 62%,  #a9d4c6 0%, rgba(169, 212, 198, 0) 68%),
-    radial-gradient(30% 40% at 34% 84%,  #c6e7dd 0%, rgba(198, 231, 221, 0) 70%),
-    radial-gradient(22% 26% at 60% 44%,  #dcebe6 0%, rgba(220, 235, 230, 0) 74%);
+    radial-gradient(40% 48% at 10% 6%,   rgba(148, 199, 185, 0.62) 0%, rgba(148, 199, 185, 0.26) 46%, rgba(148, 199, 185, 0) 72%),
+    radial-gradient(32% 36% at 80% 12%,  rgba(172, 168, 255, 0.40) 0%, rgba(172, 168, 255, 0.17) 46%, rgba(172, 168, 255, 0) 74%),
+    radial-gradient(36% 32% at 95% 50%,  rgba(89, 131, 142, 0.34) 0%, rgba(89, 131, 142, 0.14) 46%, rgba(89, 131, 142, 0) 72%),
+    radial-gradient(32% 42% at 28% 88%,  rgba(148, 199, 185, 0.52) 0%, rgba(148, 199, 185, 0.22) 46%, rgba(148, 199, 185, 0) 72%),
+    radial-gradient(28% 30% at 64% 80%,  rgba(41, 79, 104, 0.26) 0%, rgba(41, 79, 104, 0.11) 46%, rgba(41, 79, 104, 0) 74%),
+    radial-gradient(26% 28% at 50% 36%,  rgba(172, 168, 255, 0.26) 0%, rgba(172, 168, 255, 0.11) 48%, rgba(172, 168, 255, 0) 76%);
 }
