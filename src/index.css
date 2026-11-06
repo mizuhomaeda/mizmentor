@@ -114,7 +114,7 @@
   isolation: isolate;
   /* A tinted base, not white. Every blob is pale, so any gap between them would
      otherwise show as a white patch and break the mesh. */
-  background-color: #edf4f2;
+  background-color: #f3f8f7;
 }
 
 .mesh-mint::before {
@@ -133,11 +133,11 @@
      tone comes from. Every colour is pale enough to keep the white sheet on
      top clearly separate. */
   background-image:
-    radial-gradient(85% 90% at -8% -6%,  rgba(148, 199, 185, 0.70) 0%, rgba(148, 199, 185, 0.40) 45%, rgba(148, 199, 185, 0) 80%),
-    radial-gradient(80% 85% at 108% 8%,  rgba(172, 168, 255, 0.44) 0%, rgba(172, 168, 255, 0.28) 45%, rgba(172, 168, 255, 0) 80%),
-    radial-gradient(90% 80% at 112% 70%, rgba(89, 131, 142, 0.30) 0%, rgba(89, 131, 142, 0.20) 45%, rgba(89, 131, 142, 0) 80%),
-    radial-gradient(85% 90% at -10% 108%, rgba(148, 199, 185, 0.64) 0%, rgba(148, 199, 185, 0.36) 45%, rgba(148, 199, 185, 0) 80%),
-    radial-gradient(75% 70% at 55% 115%, rgba(41, 79, 104, 0.20) 0%, rgba(41, 79, 104, 0.14) 45%, rgba(41, 79, 104, 0) 80%),
-    radial-gradient(70% 75% at 34% 44%,  rgba(148, 199, 185, 0.46) 0%, rgba(148, 199, 185, 0.26) 50%, rgba(148, 199, 185, 0) 82%),
-    radial-gradient(65% 70% at 56% 38%,  rgba(172, 168, 255, 0.38) 0%, rgba(172, 168, 255, 0.22) 50%, rgba(172, 168, 255, 0) 82%);
+    radial-gradient(85% 90% at -8% -6%,  rgba(148, 199, 185, 0.42) 0%, rgba(148, 199, 185, 0.22) 45%, rgba(148, 199, 185, 0) 80%),
+    radial-gradient(80% 85% at 108% 8%,  rgba(172, 168, 255, 0.26) 0%, rgba(172, 168, 255, 0.15) 45%, rgba(172, 168, 255, 0) 80%),
+    radial-gradient(90% 80% at 112% 70%, rgba(89, 131, 142, 0.17) 0%, rgba(89, 131, 142, 0.10) 45%, rgba(89, 131, 142, 0) 80%),
+    radial-gradient(85% 90% at -10% 108%, rgba(148, 199, 185, 0.38) 0%, rgba(148, 199, 185, 0.20) 45%, rgba(148, 199, 185, 0) 80%),
+    radial-gradient(75% 70% at 55% 115%, rgba(41, 79, 104, 0.11) 0%, rgba(41, 79, 104, 0.07) 45%, rgba(41, 79, 104, 0) 80%),
+    radial-gradient(70% 75% at 34% 44%,  rgba(148, 199, 185, 0.28) 0%, rgba(148, 199, 185, 0.15) 50%, rgba(148, 199, 185, 0) 82%),
+    radial-gradient(65% 70% at 56% 38%,  rgba(172, 168, 255, 0.23) 0%, rgba(172, 168, 255, 0.13) 50%, rgba(172, 168, 255, 0) 82%);
 }
