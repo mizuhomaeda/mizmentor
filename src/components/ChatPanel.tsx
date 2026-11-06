@@ -4,8 +4,10 @@
  */
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import profilePhotoUrl from '../assets/profile-photo.png';
 import { Message, InteractionStage, ErrorNotice } from '../types';
 import {
+  ArrowRight,
   Send,
   User,
   Sparkles,
@@ -30,25 +32,17 @@ interface ChatPanelProps {
   onSelectRevisionOption: (optionText: string) => void;
 }
 
-/**
- * Mizmentor's avatar.
- *
- * PLACEHOLDER. To use a real picture, drop the file in `public/` and replace the
- * whole <div> below with:
- *   <img src="/mizuho.jpg" alt="" className="w-8 h-8 rounded-full shrink-0 object-cover" />
- * Nothing else needs to change; every message uses this one component.
- */
+/** Mizmentor's avatar. Every message the agent sends uses this one component. */
 /** The full message the example button puts in the input box, unsent. */
 const EXAMPLE_IDEA_PROMPT =
   'I want to build a service for international students who cannot tell which part-time jobs accept their visa status.';
 
 const MentorAvatar: React.FC = () => (
-  <div
-    className="w-8 h-8 rounded-full shrink-0 bg-mint-300 text-ink-900 flex items-center justify-center text-xs font-semibold"
-    aria-hidden="true"
-  >
-    M
-  </div>
+  <img
+    src={profilePhotoUrl}
+    alt="Mizuho, the mentor"
+    className="w-8 h-8 rounded-full shrink-0 object-cover"
+  />
 );
 
 export const ChatPanel: React.FC<ChatPanelProps> = ({
@@ -137,7 +131,8 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             </div>
 
             {/* One example. Indented by the avatar width (w-8) plus the gap
-                (gap-2.5) so its left edge lines up with the bubble above. */}
+                (gap-2.5) so its left edge lines up with the bubble above.
+                No wrapping card: just the label and the mint bar. */}
             <div className="ml-[42px]">
               <div className="text-xs font-semibold uppercase tracking-wider text-ink-500 mb-2">
                 Try an example
@@ -149,9 +144,10 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   setInputText(EXAMPLE_IDEA_PROMPT);
                   textareaRef.current?.focus();
                 }}
-                className="w-full text-left px-4 py-3 bg-white hover:bg-mint-50 border border-slate-200 hover:border-mint-500 rounded-xl transition-colors shadow-2xs text-sm text-ink-800"
+                className="group w-full flex items-center justify-between gap-4 text-left px-5 py-4 rounded-xl bg-mint-400 hover:bg-mint-500 text-ink-900 text-sm font-medium transition-colors"
               >
-                An idea that helps international students find jobs their visa allows.
+                <span>An idea that helps international students find jobs their visa allows.</span>
+                <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
 
@@ -247,9 +243,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
         {/* Loading state indicator with Cancel control */}
         {isLoading && (
           <div className="flex gap-3 max-w-xl mr-auto animate-in fade-in">
-            <div className="w-8 h-8 rounded-full bg-mint-200 text-ink-800 font-sans-body shrink-0 flex items-center justify-center text-xs">
-              M
-            </div>
+            <MentorAvatar />
             <div className="p-4 bg-white border border-slate-200 rounded-2xl rounded-tl-xs shadow-2xs space-y-2.5 flex-1 min-w-0">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2 text-xs text-ink-600 font-medium truncate">

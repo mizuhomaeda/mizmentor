@@ -335,3 +335,17 @@ confirm the app is alive.
 
 The Vercel CLI is installed but **not logged in**, and nothing has been deployed.
 Don't run `vercel deploy` without being asked directly.
+
+## Images
+
+Static images live in `src/assets/` and are imported, not referenced by a path
+string: `import logoUrl from '../assets/logo.png'`. Vite then fingerprints and
+bundles them, so they work locally, in `vite build`, and on Vercel. Do not put
+them in a top-level `images/` folder — Vite does not serve that, so the files
+404 in the browser.
+
+- `src/assets/logo.png` — the app mark, in the header left of the name. Sized
+  `h-11 w-auto` so it is never stretched.
+- `src/assets/profile-photo.png` — Mizuho's face, used by the single
+  `MentorAvatar` component in `ChatPanel.tsx`. Every agent message, the opening
+  bubble and the loading state all go through that one component.
