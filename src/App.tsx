@@ -13,8 +13,7 @@ import {
 } from './components/SessionSummaryPanel';
 import { ResetConfirmModal } from './components/ResetConfirmModal';
 import { SystemDiagramModal } from './components/SystemDiagramModal';
-import { Tutorial } from './components/Tutorial';
-import { WelcomeScreen } from './components/WelcomeScreen';
+import { Tutorial, TUTORIAL_SEEN_KEY } from './components/Tutorial';
 import {
   Message,
   InteractionStage,
@@ -49,21 +48,25 @@ export default function App() {
   // Modals
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isDiagramModalOpen, setIsDiagramModalOpen] = useState(false);
-  // The welcome screen opens on every load while the app is being worked on.
-  // Nothing is stored about having seen it, so a reload always shows it again.
-  // The tour no longer opens by itself: it is started from the welcome screen,
-  // or from the Tour button in the header.
-  const [isWelcomeOpen, setIsWelcomeOpen] = useState(true);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
 
-  const closeTutorial = () => setIsTutorialOpen(false);
+  // Show the tour on a first visit only. Any failure to read storage (private
+  // mode, blocked site data) simply means it is not shown, never a crash.
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(TUTORIAL_SEEN_KEY)) setIsTutorialOpen(true);
+    } catch {
+      /* storage unavailable: skip the tour rather than failing to load */
+    }
+  }, []);
 
-  // Taking the tour from the welcome screen: the welcome closes first, because
-  // the tour spotlights the composer and the notes panel and they sit behind
-  // this screen. The chat is therefore already there when the tour ends.
-  const startTourFromWelcome = () => {
-    setIsWelcomeOpen(false);
-    setIsTutorialOpen(true);
+  const closeTutorial = () => {
+    setIsTutorialOpen(false);
+    try {
+      localStorage.setItem(TUTORIAL_SEEN_KEY, '1');
+    } catch {
+      /* not fatal: the tour just shows again next time */
+    }
   };
 
   // Load from local storage
@@ -416,13 +419,6 @@ export default function App() {
       />
 
       <Tutorial isOpen={isTutorialOpen} onClose={closeTutorial} />
-
-      {isWelcomeOpen && (
-        <WelcomeScreen
-          onStart={() => setIsWelcomeOpen(false)}
-          onTakeTour={startTourFromWelcome}
-        />
-      )}
     </div>
   );
 }

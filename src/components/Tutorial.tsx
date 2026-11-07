@@ -9,6 +9,9 @@ import tour1 from '../assets/tour-1-idea.jpeg';
 import tour2 from '../assets/tour-2-start.jpeg';
 import tour3 from '../assets/tour-3-notes.jpeg';
 
+/** Set once the tour has been seen, so a reload does not show it again. */
+export const TUTORIAL_SEEN_KEY = 'mizmentor_tutorial_seen_v1';
+
 interface Step {
   /** CSS selector for the area to light up. Omit for a centred step. */
   target?: string;

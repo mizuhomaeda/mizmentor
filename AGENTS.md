@@ -393,10 +393,11 @@ match what the field actually holds.
 
 ## The tour
 
-It opens on EVERY load while the app is being worked on - nothing is stored
-about having seen it, and there is no seen-key any more. Scripts that drive the
-page must close it first (press Escape until the dialog is gone), or its overlay
-swallows the clicks.
+It opens on a first visit only. `TUTORIAL_SEEN_KEY` in `Tutorial.tsx` is set
+when it closes, so a reload does not show it again, and the Tour button in the
+header replays it at any time. Scripts that drive the page must close it first
+(press Escape until the dialog is gone) or set that key before loading, or its
+overlay swallows the clicks.
 
 Each step carries an image at the top of the card. Images belong in
 `src/assets/` and must be imported in `Tutorial.tsx` and referenced from the
@@ -428,21 +429,3 @@ close to situations people will actually bring, and the failure mode is handing
 the example back nearly verbatim. Test for that with an n-gram overlap check
 against `knowledge/Knowledge_WorkedExamples.md`, not by reading and hoping.
 
-## The welcome screen
-
-`src/components/WelcomeScreen.tsx`, shown on EVERY load while the app is being
-worked on (no stored flag, same as the tour was). Scripts that drive the page
-must click Start first, or it covers everything.
-
-Two traps in it, both already hit once:
-
-- `.mesh-mint` sets `position: relative`, and that beats Tailwind's `fixed`
-  utility because it is defined later in `index.css`. A full-screen overlay
-  therefore needs its own positioned wrapper with the mesh on an inner layer.
-- The header behind the overlay has a logo, the word Mizmentor and the same
-  subtitle. Any measurement of the welcome screen must be scoped to
-  `[data-welcome]`, or it silently measures the header instead.
-
-Taking the tour from here closes the welcome first. The tour spotlights the
-composer and the notes panel, which sit behind this screen, so it cannot run
-with the welcome still up.
