@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import systemDiagramUrl from '../assets/system-diagram.png';
 import {
   X,
   ArrowRight,
@@ -56,6 +57,25 @@ export const SystemDiagramModal: React.FC<SystemDiagramModalProps> = ({
 
         {/* Modal Body */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-6 text-sm text-ink-800">
+          {/* The diagram itself. The type inside it is small at modal width, so
+              the whole thing opens full size in a new tab. */}
+          <a
+            href={systemDiagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block group"
+            title="Open the full size diagram in a new tab"
+          >
+            <img
+              src={systemDiagramUrl}
+              alt="System diagram of Mizmentor in six numbered stages. What goes in: the user's message each turn, the saved conversation from browser storage, the knowledge files baked in at build time, and the API key from an environment variable. The browser sends one request holding the conversation, the session summary and the step of the loop. The server counts the replies and picks this turn's instruction: reply 1 asks what the user wants from the session, reply 2 may ask for one missing piece, reply 3 onward must give feedback rather than only questions. Sent to the model: the whole system instruction of 112,923 characters per request, being the role card, five knowledge files, the conversation and this turn's instruction, all sent every time with no retrieval or selection; the model is gemini-3.1-flash-lite with three fallbacks. What comes back is one JSON answer of eight fields in a shape fixed by code, with the reply and the summary fields generated fresh each time. What you see on screen is the reply in the chat, the notes updated every turn, and the notes downloadable as a text file. A colour key marks what comes from code files, what Gemini generates, and what comes from the user, the browser or the knowledge files. The model never gets web search, a database, the user's files, or memory of past sessions."
+              className="w-full h-auto rounded-lg border border-slate-200 group-hover:border-mint-500 transition-colors"
+            />
+            <span className="block mt-2 text-xs text-ink-500 group-hover:text-ink-700 transition-colors">
+              Click the diagram to open it full size in a new tab.
+            </span>
+          </a>
+
           {/* Legend Banner */}
           <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-lg flex flex-wrap items-center justify-between gap-3 text-xs">
             <span className="font-semibold text-ink-700 uppercase tracking-wider text-[11px]">
