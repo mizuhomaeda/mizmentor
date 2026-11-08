@@ -411,11 +411,6 @@ export default function App() {
       <SystemDiagramModal
         isOpen={isDiagramModalOpen}
         onClose={() => setIsDiagramModalOpen(false)}
-        activeModel={activeModel}
-        onReplayTutorial={() => {
-          setIsDiagramModalOpen(false);
-          setIsTutorialOpen(true);
-        }}
       />
 
       <Tutorial isOpen={isTutorialOpen} onClose={closeTutorial} />
