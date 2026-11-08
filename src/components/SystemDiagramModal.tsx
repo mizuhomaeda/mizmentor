@@ -29,7 +29,7 @@ export const SystemDiagramModal: React.FC<SystemDiagramModalProps> = ({ isOpen, 
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-6xl bg-[#F8FAFC]"
+        className="relative w-full max-w-6xl bg-[#F8FAFC] rounded-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Still clickable. Nothing on screen says so: no caption, not even

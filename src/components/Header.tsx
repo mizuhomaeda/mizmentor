@@ -38,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
           toolbar's px-4, so the last button ends where Download ends. */}
       <div className="py-3 flex items-center justify-between gap-3">
         <div className="min-w-0 w-full md:w-1/2 shrink-0 px-4 sm:px-6 md:border-r md:border-transparent">
-          <div className="max-w-xl mx-auto">
+          <div className="max-w-2xl mx-auto">
           {/* h-[30px] is the rendered height of the "How it works" button, so
               the bar's py-3 leaves the same 12px above and below both sides.
               The logo is 15px, the cap height of the word next to it. */}

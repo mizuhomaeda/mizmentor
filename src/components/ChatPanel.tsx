@@ -134,11 +134,15 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
       <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
-        className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-6"
+        className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6"
       >
+        {/* Everything in the feed shares one centred column, so the opening
+            message, every later message and the header logo all start at the
+            same x. */}
+        <div className="max-w-2xl mx-auto space-y-6">
         {/* Opening message, in the same shape as a real reply */}
         {messages.length === 0 && (
-          <div className="max-w-xl mx-auto py-2 space-y-6">
+          <div className="py-2 space-y-6">
             <div className="flex gap-2.5">
               <MentorAvatar />
               <div className="min-w-0">
@@ -214,7 +218,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             );
           }
           return (
-            <div key={m.id} className="flex gap-2.5 max-w-2xl mr-auto">
+            <div key={m.id} className="flex gap-2.5 mr-auto">
               <MentorAvatar />
               <div className="min-w-0">
                 <span className="block text-xs font-medium text-ink-600 mb-1 ml-1">Mizmentor</span>
@@ -228,7 +232,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
 
         {/* INLINE ERROR NOTICE: Small inline notice visually separate from agent replies */}
         {errorNotice && (
-          <div className="max-w-2xl mx-auto my-2 p-3 bg-rose-50/90 border border-rose-200/90 rounded-xl text-xs text-rose-900 flex items-start justify-between gap-3 shadow-2xs animate-in fade-in">
+          <div className="my-2 p-3 bg-rose-50/90 border border-rose-200/90 rounded-xl text-xs text-rose-900 flex items-start justify-between gap-3 shadow-2xs animate-in fade-in">
             <div className="flex items-start gap-2.5">
               <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
               <div>
@@ -266,7 +270,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
 
         {/* Loading state indicator with Cancel control */}
         {isLoading && (
-          <div className="flex gap-3 max-w-xl mr-auto animate-in fade-in">
+          <div className="flex gap-3 mr-auto animate-in fade-in">
             <MentorAvatar />
             <div className="p-4 bg-white border border-slate-200 rounded-2xl rounded-tl-xs shadow-2xs space-y-2.5 flex-1 min-w-0">
               <div className="flex items-center justify-between gap-3">
@@ -300,6 +304,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
             </div>
           </div>
         )}
+        </div>
       </div>
 
       {/* Floating "Jump to latest" button when user has scrolled up */}

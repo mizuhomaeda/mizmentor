@@ -435,3 +435,18 @@ close to situations people will actually bring, and the failure mode is handing
 the example back nearly verbatim. Test for that with an n-gram overlap check
 against `knowledge/Knowledge_WorkedExamples.md`, not by reading and hoping.
 
+
+## Header alignment
+
+The header logo lines up with the chat avatars because both sit in the same
+column: the header's left block is `w-1/2` with a transparent 1px right border
+(reproducing the chat panel's own border) and an inner `max-w-2xl mx-auto`, and
+the chat feed wraps ALL of its content in one `max-w-2xl mx-auto`.
+
+That feed wrapper matters. Before it, the empty-state opening block was centred
+(`max-w-xl mx-auto`) while real message rows were left-aligned
+(`max-w-2xl mr-auto`), so the avatar jumped left the moment a conversation
+started. Measuring the empty state alone showed perfect alignment and hid the
+bug; at 1920px the real gap was 167px. **Measure alignment with messages on
+screen, not on the empty state.** Seed them through
+`localStorage['mizmentor_session_v1']` rather than calling the API.
