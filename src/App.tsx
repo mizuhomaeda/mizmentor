@@ -14,6 +14,7 @@ import {
 import { ResetConfirmModal } from './components/ResetConfirmModal';
 import { SystemDiagramModal } from './components/SystemDiagramModal';
 import { Tutorial, TUTORIAL_SEEN_KEY } from './components/Tutorial';
+import { SplashScreen, SHOW_SPLASH_SCREEN, splashAlreadyDone } from './components/SplashScreen';
 import {
   Message,
   InteractionStage,
@@ -49,10 +50,14 @@ export default function App() {
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isDiagramModalOpen, setIsDiagramModalOpen] = useState(false);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  const [isSplashOpen, setIsSplashOpen] = useState(SHOW_SPLASH_SCREEN && !splashAlreadyDone());
 
   // Show the tour on a first visit only. Any failure to read storage (private
   // mode, blocked site data) simply means it is not shown, never a crash.
+  // With the splash screen on, its two buttons decide instead, so this does
+  // nothing; turn the splash screen off and this is exactly the old behaviour.
   useEffect(() => {
+    if (SHOW_SPLASH_SCREEN) return;
     try {
       if (!localStorage.getItem(TUTORIAL_SEEN_KEY)) setIsTutorialOpen(true);
     } catch {
@@ -414,6 +419,18 @@ export default function App() {
       />
 
       <Tutorial isOpen={isTutorialOpen} onClose={closeTutorial} />
+
+      {isSplashOpen && (
+        <SplashScreen
+          onTakeTour={() => {
+            // The splash goes first: the tour spotlights the composer and the
+            // notes panel, which sit behind it.
+            setIsSplashOpen(false);
+            setIsTutorialOpen(true);
+          }}
+          onGoToChat={() => setIsSplashOpen(false)}
+        />
+      )}
     </div>
   );
 }

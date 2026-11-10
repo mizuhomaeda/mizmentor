@@ -450,3 +450,22 @@ started. Measuring the empty state alone showed perfect alignment and hid the
 bug; at 1920px the real gap was 167px. **Measure alignment with messages on
 screen, not on the empty state.** Seed them through
 `localStorage['mizmentor_session_v1']` rather than calling the API.
+
+## The splash screen
+
+`src/components/SplashScreen.tsx`, controlled by `SHOW_SPLASH_SCREEN` at the
+top of that same file. Set it to false and the app opens on the chat exactly as
+it did before, with the tour back to opening by itself on a first visit and
+nothing of the screen left in the layout. To remove it for good: flag to false,
+delete the file, delete the three lines in `App.tsx` that mention SplashScreen.
+
+The key visual is imported once, in that file only, so swapping the picture is
+a one-line change.
+
+Two things worth knowing. The background is `mint-700`, not the brand
+`mint-400`: white text on #94c7b9 measures 1.9:1 and fails AA badly, while
+mint-700 gives 4.88:1. And the logo is drawn in mint, so it is turned white
+with `filter: brightness(0) invert(1)` rather than shipping a second file.
+
+Taking the tour from here dismisses the splash first, because the tour
+spotlights the composer and the notes panel and they sit behind it.
