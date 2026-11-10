@@ -32,6 +32,15 @@ export const splashAlreadyDone = (): boolean => {
   }
 };
 
+/** Forget that the screen was dismissed, so it shows again. Used by Reset. */
+export const clearSplashDone = () => {
+  try {
+    sessionStorage.removeItem(SPLASH_DONE_KEY);
+  } catch {
+    /* nothing stored, nothing to clear */
+  }
+};
+
 const markSplashDone = () => {
   try {
     sessionStorage.setItem(SPLASH_DONE_KEY, '1');

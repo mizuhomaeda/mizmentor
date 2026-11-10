@@ -469,3 +469,7 @@ with `filter: brightness(0) invert(1)` rather than shipping a second file.
 
 Taking the tour from here dismisses the splash first, because the tour
 spotlights the composer and the notes panel and they sit behind it.
+
+Reset brings the screen back: `handleConfirmReset` in `App.tsx` calls
+`clearSplashDone()` and reopens it, so Reset is the way back to the splash
+once it has been dismissed. With the flag off that block does nothing.

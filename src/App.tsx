@@ -14,7 +14,12 @@ import {
 import { ResetConfirmModal } from './components/ResetConfirmModal';
 import { SystemDiagramModal } from './components/SystemDiagramModal';
 import { Tutorial, TUTORIAL_SEEN_KEY } from './components/Tutorial';
-import { SplashScreen, SHOW_SPLASH_SCREEN, splashAlreadyDone } from './components/SplashScreen';
+import {
+  SplashScreen,
+  SHOW_SPLASH_SCREEN,
+  splashAlreadyDone,
+  clearSplashDone,
+} from './components/SplashScreen';
 import {
   Message,
   InteractionStage,
@@ -355,6 +360,12 @@ export default function App() {
     setSessionSummary(EMPTY_SESSION_SUMMARY);
     setErrorNotice(null);
     setIsLoading(false);
+    // Reset also goes back to the splash screen, forgetting that it was
+    // dismissed. With SHOW_SPLASH_SCREEN off this does nothing.
+    if (SHOW_SPLASH_SCREEN) {
+      clearSplashDone();
+      setIsSplashOpen(true);
+    }
   };
 
   return (
