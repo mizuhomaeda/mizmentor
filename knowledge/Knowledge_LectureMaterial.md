@@ -157,7 +157,7 @@ They are willing to pay and are actually able to buy. Not just wanting it, but a
 
 Persona is not segmentation
 
-Segmentation cuts by attributes, age, job, industry, and focuses on what is different between groups. Attributes alone do not determine preference or behaviour.
+Segmentation cuts by attributes, age, job, industry, and focuses on what is different between groups. Attributes alone do not determine preference or behavior.
 
 A persona focuses on the sameness of values and goals that exists across segments. Focus on the sameness in values and goals that exists across segments. Choosing a persona whose needs and goals can spread across segments is how you end up with enough market, rather than by widening the attribute net.
 
@@ -177,7 +177,7 @@ It is legitimate to make a provisional persona before you have the research, but
 What a strong persona contains
 
 A photograph, chosen last. To avoid building a stereotyped persona that gets pulled along by appearance, it's important to decide this last, after everything else is created. Avoid famous faces.
-Demographic information, noting that the grouping itself carries little meaning since attributes do not determine preference or behaviour. It is there to make the picture concrete.
+Demographic information, noting that the grouping itself carries little meaning since attributes do not determine preference or behavior. It is there to make the picture concrete.
 One line that captures this persona, a keyword or short statement that makes them memorable and easy to feel.
 The goal, which is the most important element. What the user cares about is not using the tool but reaching the goal. Write the reason behind the goal, not only what and how but why. Note: the user's goal isn't always simply "being able to do something easily, conveniently, and efficiently."
 A living story, the persona in context including the time when they are not using the service.
@@ -207,7 +207,7 @@ It is better than the alternatives.
 When you cannot decide what to show in a prototype, go back to these three.
 
 
-The tree that organises value and function
+The tree that organizes value and function
 
 Three levels, read from the top down, getting more concrete as you go.
 
@@ -266,7 +266,7 @@ Maintain a neutral attitude throughout. Do not start explaining or persuading wh
 
 When a user asks what the maker intended, do not tell them. Ask back: what do you think, why does it strike you that way. Sometimes you need to stick to acting like you know nothing about the maker's intention. The exception is when you have a specific point to confirm, where it is fine to pose it conditionally, if this feature were X, then.
 
-Build rapport first, because users find it hard to criticise an idea to the person who made it.
+Build rapport first, because users find it hard to criticize an idea to the person who made it.
 
 Show me. When a user mentions an app, a photo, a website, ask to see it. The mental image and the real thing differ, and words alone do not guarantee you are picturing the same thing.
 
@@ -279,7 +279,7 @@ Do not counter-argue when they push back, even though the urge is understandable
 
 Do not treat requested features as a roadmap. Users can't put into their own words what they truly want. Asking what they would want is weak input. It is fine to ask what they would do if they had magic, or what they would change about this idea, but the prize is the reason. Building exactly what is requested produces It tends to end up overloaded with features, like a TV remote., the TV remote problem. Rather than building exactly what's asked for, let's build a business that solves it with an idea that goes beyond what the user imagined.
 
-When a user talks about what everyone thinks rather than themselves, I think everyone would want something like this., bring it back to them personally. Generalised talk is defensive, personal talk reveals.
+When a user talks about what everyone thinks rather than themselves, I think everyone would want something like this., bring it back to them personally. Generalized talk is defensive, personal talk reveals.
 
 
 Never ask whether they think they would buy it
@@ -288,7 +288,7 @@ This is one of her core positions, not a technique.
 
 Do not ask . Asking whether someone thinks they would want to buy tells you nothing. The person carries no risk when they answer, so the answer costs them nothing and predicts nothing. The same goes for asking whether they would want it if it existed, or what they would buy instead.
 
-If you want to know about purchase intent, make it possible to actually buy, reserve or sign, and then ask Will you buy it?. Until someone parts with something of their own, you do not know. Validate through behaviour, not opinion.
+If you want to know about purchase intent, make it possible to actually buy, reserve or sign, and then ask Will you buy it?. Until someone parts with something of their own, you do not know. Validate through behavior, not opinion.
 
 In a test, ask instead: "Which part did you like?" "Which part left you unsure?" "Why is that?"
 
@@ -297,7 +297,7 @@ She has written this up at https://blog.btrax.com/jp/prototyping/ and it is one 
 
 Asking why, and the faster horse
 
-Do not ask what they want. Dig into why, and get at the purpose behind the behaviour.
+Do not ask what they want. Dig into why, and get at the purpose behind the behavior.
 
 The user says they want a faster horse. Ask why. They want to get to the destination quickly. Do not stop here. Ask why again, and it can branch:
 
@@ -372,7 +372,7 @@ Why bother with a revenue plan
 
 Because I can't bet my own life on something that might just keep bleeding losses and never turn a profit.
 
-How she actually built hers, which was messy. She asked the tech members, asked the contract manufacturer for production costs, asked the app developer for development costs, asked founder mentors what things normally cost, and googled the rest. She studied comparable services to find how many users they had by which month, taking the numbers from articles, press releases and investor updates, and worked backwards from the target revenue. Then she took it to mentors and got grilled by the CTO and the VC advisers repeatedly until the numbers held. It's less about finance and more a test of your arithmetic and Excel skills.
+How she actually built hers, which was messy. She asked the tech members, asked the contract manufacturer for production costs, asked the app developer for development costs, asked founder mentors what things normally cost, and googled the rest. She studied comparable services to find how many users they had by which month, taking the numbers from articles, press releases and investor updates, and worked backward from the target revenue. Then she took it to mentors and got grilled by the CTO and the VC advisers repeatedly until the numbers held. It's less about finance and more a test of your arithmetic and Excel skills.
 
 The way she thinks about acquisition numbers. Decompose it like an equation. Purchases equal impressions times conversion rate. Impressions are made up of several routes, display advertising, social, articles, direct traffic, and each route has its own formula with its own parameters. Broken down that far, you can see with actual numbers which lever to pull. The detail of the model matters less than the habit of decomposing it until the next move is visible.
 
@@ -471,7 +471,7 @@ Descriptions that fail
 
 All three of these she marks as "Hmm 🤔": "we are going to transform the relationship between individuals and information", "a meritocratic decision support system", "learning and sharing knowledge about data science and artificial intelligence". Her diagnosis is the same every time: Because every noun written here is abstract, it's hard to picture what kind of service this actually is. Every noun is abstract so you cannot picture it.
 
-What works, both real pitches from well known companies. Airbnb: the first online marketplace that lets travellers book rooms with locals instead of hotels. Dropbox: synchronises files across your or your team's computers. Concrete nouns you can see.
+What works, both real pitches from well known companies. Airbnb: the first online marketplace that lets travelers book rooms with locals instead of hotels. Dropbox: synchronises files across your or your team's computers. Concrete nouns you can see.
 
 Her instruction when cutting: Adjectives and adverbs other than the noun itself have room to be cut. Push yourself to figure out: what is this in one noun?
 
@@ -506,7 +506,7 @@ Outline before slides. Rework gets big, so not jumping straight into making slid
 
 Then: People don't move just because they're told something logically correct. Being logically correct does not move anyone. Make them picture it, with images, with "for example", with description real enough to trigger imagination. But do not add pictures that are not needed, because they become noise.
 
-A memorable keyword matters, because people forget most of what they heard the day before, and after the logic what carries it is passion and conviction. Being a little over the top is just about right. She tells people to practise at least forty times and to film themselves. Small techniques: use a quiet voice as well as a loud one, slow down on the keyword, and deliberately leave a pause instead of fearing silence.
+A memorable keyword matters, because people forget most of what they heard the day before, and after the logic what carries it is passion and conviction. Being a little over the top is just about right. She tells people to practice at least forty times and to film themselves. Small techniques: use a quiet voice as well as a loud one, slow down on the keyword, and deliberately leave a pause instead of fearing silence.
 
 
 The concept sheet she makes teams fill in

@@ -4,7 +4,7 @@
  */
 
 /** The four steps of Mizuho's mentoring loop. See knowledge/RoleCard_SyntheticPersona.md */
-export type InteractionStage = 'purpose' | 'missing' | 'analyse' | 'dig';
+export type InteractionStage = 'purpose' | 'missing' | 'analyze' | 'dig';
 
 export interface Message {
   id: string;

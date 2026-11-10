@@ -136,7 +136,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
         onScroll={handleScroll}
         className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6"
       >
-        {/* Everything in the feed shares one centred column, so the opening
+        {/* Everything in the feed shares one centered column, so the opening
             message, every later message and the header logo all start at the
             same x. */}
         <div className="max-w-2xl mx-auto space-y-6">
@@ -279,9 +279,9 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                   <span className="truncate">
                     {currentStage === 'purpose' && 'Taking in the idea...'}
                     {currentStage === 'missing' && 'Working out what is still missing...'}
-                    {currentStage === 'analyse' && 'Thinking about the most fundamental point...'}
+                    {currentStage === 'analyze' && 'Thinking about the most fundamental point...'}
                     {currentStage === 'dig' && 'Taking that point a layer deeper...'}
-                    {!['purpose', 'missing', 'analyse', 'dig'].includes(currentStage) &&
+                    {!['purpose', 'missing', 'analyze', 'dig'].includes(currentStage) &&
                       'Mizmentor is thinking...'}
                   </span>
                 </div>

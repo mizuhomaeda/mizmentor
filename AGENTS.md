@@ -21,14 +21,14 @@ The project owner is a design student, not a terminal user. Explain shell comman
 in plain language before running them, and say when something fails rather than
 quietly working around it.
 
-## Where the behaviour lives
+## Where the behavior lives
 
 **`knowledge/` is the source of truth for how the agent behaves. Edit the markdown,
 not the TypeScript.**
 
 ```
 knowledge/RoleCard_SyntheticPersona.md     How the agent behaves. The spec.
-knowledge/Knowledge_MentoringPatterns.md   Her mentoring notes, organised by topic.
+knowledge/Knowledge_MentoringPatterns.md   Her mentoring notes, organized by topic.
 knowledge/Knowledge_LectureMaterial.md     Her lecture material and pitch Q&A.
 knowledge/Knowledge_VoiceSamples.md        Her unedited writing. Tone authority.
 ```
@@ -56,10 +56,10 @@ is committed on purpose so a Vercel build never has to run the script.
 ### Precedence when the knowledge disagrees with itself
 
 1. **Voice samples win on tone, register and phrasing.** Unedited writing is the
-   truest record of how she sounds. Where the organised files read smoother or more
+   truest record of how she sounds. Where the organized files read smoother or more
    formal, the voice samples are right.
-2. **The role card wins on behaviour, structure and boundaries.**
-3. **The organised files supply the substance.**
+2. **The role card wins on behavior, structure and boundaries.**
+3. **The organized files supply the substance.**
 
 This order is stated in the system instruction and should stay that way.
 
@@ -90,7 +90,7 @@ Treat any change that could weaken these as needing the owner's explicit sign-of
 
 About 88,000 characters, roughly 21,000 tokens, on every single message. There is no
 retrieval step, no embeddings, no vector store. This is a deliberate choice: correct
-behaviour first, machinery only once there is a problem to solve.
+behavior first, machinery only once there is a problem to solve.
 
 The signals that would justify adding retrieval, per the owner:
 
@@ -109,7 +109,7 @@ any prompt change, because they will come back.
 
 1. **Empty `currentPoint`.** The model left it blank, so the panel section stayed
    empty. Fixed by adding it to the schema's `required` array *and* saying it is
-   mandatory from the analyse stage onward. Listing a field in the schema is not
+   mandatory from the analyze stage onward. Listing a field in the schema is not
    enough on its own.
 2. **Stuck at the purpose stage, then never leaving the checking stage.** Prompt
    sentences could not hold this invariant: they held on some turns and not others.
@@ -173,7 +173,7 @@ project settings), not in a committed file.
 ## Layout
 
 ```
-knowledge/                   Behaviour and knowledge, as markdown. Edit here.
+knowledge/                   Behavior and knowledge, as markdown. Edit here.
 scripts/build-knowledge.mjs  Bakes knowledge/ into api/_knowledge.generated.ts
 api/_knowledge.generated.ts  GENERATED. Do not edit by hand.
 api/_persona.ts              Composes SYSTEM_INSTRUCTION from role card + knowledge
@@ -212,7 +212,7 @@ The merge rules are deliberate and documented in the code:
 - `actions` **accumulate**, de-duplicated, because something committed to earlier in
   the session is still committed to.
 
-The whole summary is sent back to the model each turn as `currentDraft`, labelled as
+The whole summary is sent back to the model each turn as `currentDraft`, labeled as
 state the agent produced rather than something the person said. That field keeps its
 old name so the API contract did not have to change.
 
@@ -225,7 +225,7 @@ cannot load into Mizmentor.
 - **Imports of local files need explicit `.js` extensions**, even though the sources
   are `.ts` — e.g. `from './_persona.js'`. Required by ES modules with
   `"type": "module"`.
-- The mentoring loop stages are `purpose`, `missing`, `analyse`, `dig`, defined in
+- The mentoring loop stages are `purpose`, `missing`, `analyze`, `dig`, defined in
   `src/types.ts` as `InteractionStage`. They are rendered in `Header.tsx` and used for
   the loading text in `ChatPanel.tsx`. Change the union and you must change both.
 - Models are configured at the top of `api/_gemini.ts`: `PRIMARY_MODEL` with a
@@ -239,19 +239,19 @@ cannot load into Mizmentor.
 
 ## Look and feel
 
-Light theme only: white and light grey base. The palette is defined as Tailwind
+Light theme only: white and light gray base. The palette is defined as Tailwind
 scales at the top of `src/index.css`. **Use the scales, never a raw hex value in a
 component** - there are currently none left.
 
 ```
-mint #94c7b9   the main accent, and the colour seen MOST
+mint #94c7b9   the main accent, and the color seen MOST
                buttons, the user's speech bubbles, avatars, modal headers
 ink  #10231e   ALL TEXT. A near-black green on the mint's own hue (~164deg)
 sea  #59838e   secondary, quieter
 deep #294f68   small NON-TEXT details only (the How it works legend)
 ```
 
-**Text is `ink`, never `slate` and never `deep`.** Slate is a blue-grey and read as
+**Text is `ink`, never `slate` and never `deep`.** Slate is a blue-gray and read as
 navy beside the mint, which is why it was replaced. `ink-500` is the lightest tone
 usable for text; `ink-400` measures about 3.9:1 on white and fails AA.
 
@@ -270,19 +270,19 @@ regression. `font-mono-code` is still used for the model name.
 Deliberately removed from the UI, do not restore without being asked:
 
 - The Interaction Loop indicator in the header (Purpose / What is missing /
-  Analyse / Dig). It exposed internal state users do not need. The `currentStage`
+  Analyze / Dig). It exposed internal state users do not need. The `currentStage`
   value still exists and is still sent to the server; it is just not displayed.
   The space left behind is intentionally empty.
 - The microphone / dictation button, along with its SpeechRecognition setup.
 
 The owner is a design student and reworks the **layout** separately. Do not
-restructure panels, spacing or hierarchy without being asked; colour and copy
+restructure panels, spacing or hierarchy without being asked; color and copy
 fixes are fine.
 
 ### Contrast
 
 The UI passes WCAG AA across 246 text elements in five states (empty, mid-session,
-info modal, and both tutorial steps). If you re-check this, note that **Tailwind v4 emits `oklch()` colours**
+info modal, and both tutorial steps). If you re-check this, note that **Tailwind v4 emits `oklch()` colors**
 and a naive `rgb()` parser silently reports them as black, which produces false
 passes - an earlier audit here was wrong for exactly that reason. Any checker must
 convert oklch properly, composite semi-transparent backgrounds against their
@@ -328,8 +328,8 @@ Playwright with Chromium is installed (`@playwright/test`). There is no
 scripts against `http://localhost:3000` that send real messages and assert on the
 JSON from `/api/chat`.
 
-When testing behaviour, check the things that actually broke before: one question mark
-per reply, `currentPoint` non-empty from the analyse stage, `agreedActions` populated
+When testing behavior, check the things that actually broke before: one question mark
+per reply, `currentPoint` non-empty from the analyze stage, `agreedActions` populated
 after the person commits to something, the stage advancing past `purpose`, and no
 invented evidence in the reply.
 
@@ -381,7 +381,7 @@ because mint made it read as a message the person had already sent. Everywhere
 else it stays dropped.
 
 Judge it by sampling painted pixels, not by reading the CSS: the panel has no
-flat background colour for the contrast script to resolve against.
+flat background color for the contrast script to resolve against.
 
 ## The notes are addressed to the person
 
@@ -410,7 +410,7 @@ Each step carries an image at the top of the card. Images belong in
 STEPS array - dropping a file into `src/assets/` does nothing on its own.
 
 The card height is measured at runtime (`cardH`), not assumed, because the
-image makes each step a different height. The placement maths uses that
+image makes each step a different height. The placement math uses that
 measurement, so a taller card grows upward instead of running off the screen.
 
 ## Knowledge files and their precedence
@@ -423,7 +423,7 @@ The precedence is written out in the prompt, not merely implied by the order the
 files appear in it:
 
 1. `Knowledge_VoiceSamples` - tone, register, phrasing. Only those.
-2. The role card - behaviour, structure, boundaries.
+2. The role card - behavior, structure, boundaries.
 3. `Knowledge_HowIThink` - WHAT TO PAY ATTENTION TO and in what order. It
    outranks MentoringPatterns and LectureMaterial when they disagree.
 4. `Knowledge_WorkedExamples` - reference only, below HowIThink.
@@ -443,7 +443,7 @@ column: the header's left block is `w-1/2` with a transparent 1px right border
 (reproducing the chat panel's own border) and an inner `max-w-2xl mx-auto`, and
 the chat feed wraps ALL of its content in one `max-w-2xl mx-auto`.
 
-That feed wrapper matters. Before it, the empty-state opening block was centred
+That feed wrapper matters. Before it, the empty-state opening block was centered
 (`max-w-xl mx-auto`) while real message rows were left-aligned
 (`max-w-2xl mr-auto`), so the avatar jumped left the moment a conversation
 started. Measuring the empty state alone showed perfect alignment and hid the

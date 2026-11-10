@@ -34,7 +34,7 @@ export const MODEL_CONFIG = {
       currentStage: {
         type: Type.STRING,
         description:
-          'Current step of the mentoring loop. Exactly one of: purpose (taking in the idea, setting what they want from the session), missing (checking what is still unstated before feedback is possible), analyse (first real feedback on the most fundamental point), dig (same point a layer deeper, or a new point).',
+          'Current step of the mentoring loop. Exactly one of: purpose (taking in the idea, setting what they want from the session), missing (checking what is still unstated before feedback is possible), analyze (first real feedback on the most fundamental point), dig (same point a layer deeper, or a new point).',
       },
       sessionGoal: {
         type: Type.STRING,
@@ -49,7 +49,7 @@ export const MODEL_CONFIG = {
       currentPoint: {
         type: Type.STRING,
         description:
-          'REQUIRED whenever currentStage is analyse or dig: one sentence naming the single point being worked on right now, for example, for a completely unrelated venture, "Whether the people who quit are the same people the service is built for". Write it as the point itself, about the idea in front of you, not as a description of what you did, and never reuse the wording of this example. Not a list, one point only. Empty string ONLY at the purpose and missing stages, before any feedback has been given.',
+          'REQUIRED whenever currentStage is analyze or dig: one sentence naming the single point being worked on right now, for example, for a completely unrelated venture, "Whether the people who quit are the same people the service is built for". Write it as the point itself, about the idea in front of you, not as a description of what you did, and never reuse the wording of this example. Not a list, one point only. Empty string ONLY at the purpose and missing stages, before any feedback has been given.',
       },
       unresolvedItems: {
         type: Type.ARRAY,
@@ -150,7 +150,7 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
     turnDirective += `\n- This is reply number ${replyIndex} of the conversation.`;
     if (replyIndex === 1) {
       turnDirective +=
-        '\n- Reply 1. Do NOT analyse yet. Take the idea in, say in one or two sentences what is specifically interesting about the choice THEY made, and ask what they want to get out of this session and what they are stuck on. Leave currentPoint empty.';
+        '\n- Reply 1. Do NOT analyze yet. Take the idea in, say in one or two sentences what is specifically interesting about the choice THEY made, and ask what they want to get out of this session and what they are stuck on. Leave currentPoint empty.';
     } else if (replyIndex === 2) {
       turnDirective +=
         '\n- Reply 2. You may spend this turn checking ONE thing, and only if it is genuinely not known yet: whose problem this is, who the target user is, or what they are trying to make happen. Ask about whichever of those would most change your feedback, as one question in prose. This is a maximum and not a quota: if they have ALREADY told you those things, do not ask anything, go straight to the point and fill currentPoint. Checking is never a box to tick.';
@@ -165,7 +165,7 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
     turnDirective +=
       '\n- Zero-assumption rule: state ONLY what this person has actually said in this conversation. You know nothing about their users, their interviews, their market or their competitors unless they told you. You may ask; you may never assert. Never invent user research, market size figures, competitor names or any other evidence. If a number would help, say what they would need to go and find out.';
     turnDirective +=
-      '\n- One point only: raise the single most fundamental thing to think about first, not a list of weaknesses. When you first analyse the idea, say what is genuinely good in it before that point - but only that first time, not on every turn. End with one sharp question or the next action, not several questions.';
+      '\n- One point only: raise the single most fundamental thing to think about first, not a list of weaknesses. When you first analyze the idea, say what is genuinely good in it before that point - but only that first time, not on every turn. End with one sharp question or the next action, not several questions.';
     turnDirective +=
       '\n- Next actions must move forward, never repeat. Look at what you already told them to do earlier in this conversation. If you have already said to go and talk to some group of people, that rung is used up: this turn is about how they would actually reach those people, or what exactly to ask them, or what they would do with the answer once they have it. Telling them a second time to go and talk to the same people is a failure.';
     turnDirective +=
@@ -173,7 +173,7 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
     turnDirective +=
       '\n- Never begin two replies in a row with the same construction. If your last reply opened by praising their problem choice ("It is a clear...", "It is a real...", "It is interesting that..."), this one opens some other way entirely: with the point itself, with what follows from what they just said, or with your disagreement. Read your own previous reply before writing this one and deliberately start differently.';
     turnDirective +=
-      '\n- Vary the shape. Say how you read the idea and what is good in it when you FIRST analyse it, and not again after that. On later turns do not restate their idea back to them, do not compliment it again, and do not open the same way you opened last turn. Pick up from where the conversation actually is and go one step further. Later replies should be shorter than the first analysis, not the same template refilled.';
+      '\n- Vary the shape. Say how you read the idea and what is good in it when you FIRST analyze it, and not again after that. On later turns do not restate their idea back to them, do not compliment it again, and do not open the same way you opened last turn. Pick up from where the conversation actually is and go one step further. Later replies should be shorter than the first analysis, not the same template refilled.';
     turnDirective +=
       '\n- If they ask you whether the idea is good or whether to pursue it, do not give a verdict, but do not stall either: go straight to the point that most decides it and work on that with them.';
     turnDirective +=
@@ -181,7 +181,7 @@ export async function processChatRequest(body: ChatRequestBody): Promise<any> {
     turnDirective +=
       '\n- summaryOfUnderstanding must absorb everything new they said this turn, including what they want out of the session and anything about their users, their vision or their own stake in it. If they added anything at all, this field must come back different from last turn. Returning the same sentence twice in a row when they have just told you something new is a failure - the person is watching this field to check you are keeping up.';
     turnDirective +=
-      '\n- sessionGoal: as soon as they say what they want out of this session, record it there in their own terms and keep it unchanged afterwards unless they redirect.';
+      '\n- sessionGoal: as soon as they say what they want out of this session, record it there in their own terms and keep it unchanged afterward unless they redirect.';
     turnDirective +=
       '\n- Commitments: read their latest message for anything they said they will do, try, check, ask, test or find out. Every one of those goes into agreedActions, phrased in their own words, and they stay there for the rest of the session. If they said "I will interview five parents and check what the city publishes", that is two entries. Only what they committed to, never your own suggestions, and never leave it empty when they have just committed to something.';
     turnDirective +=

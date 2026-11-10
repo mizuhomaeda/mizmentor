@@ -28,9 +28,9 @@ Situation: twelve sales staff interviewed, all said they want a tool that makes 
 
 What I would say
 
-Most of the logic about needing a business outcome is right, but one part is off. Saying that time saving will read as a cost and not a gain does not match how this usually works. Inside a company, saved time normally turns into lower labour cost, or into staff being able to do other work, which is a productivity gain, and both are easy to picture.
+Most of the logic about needing a business outcome is right, but one part is off. Saying that time saving will read as a cost and not a gain does not match how this usually works. Inside a company, saved time normally turns into lower labor cost, or into staff being able to do other work, which is a productivity gain, and both are easy to picture.
 
-The real question is what problem the person holding the budget feels about this organisation, and whether lower labour cost or higher productivity would solve it, and how you can bridge the two with logic. I would research the division head's needs rather than the end user's, and focus on solving those. When the end user and the person paying are different people, you have to solve the payer's problem first.
+The real question is what problem the person holding the budget feels about this organization, and whether lower labor cost or higher productivity would solve it, and how you can bridge the two with logic. I would research the division head's needs rather than the end user's, and focus on solving those. When the end user and the person paying are different people, you have to solve the payer's problem first.
 
 ## A delivery status tool for construction sites, with strong evidence, asking whether to run a pilot
 
@@ -38,7 +38,7 @@ Situation: nineteen site managers interviewed, sixteen describe the same problem
 
 What I would say
 
-Fix the supplier side first, and here is why that is not a judgement call. This is a platform business, where the service sits between two sides. Platforms have a chicken and egg problem, so both sides have to be in place, but the rule of thumb is to gather the supply side first and only then put it in front of the side that wants to receive it. If someone arrives to get something and there is nothing there, they leave. So understanding the needs and the pain of the supply side, and making sure they get value too, is extremely important.
+Fix the supplier side first, and here is why that is not a judgment call. This is a platform business, where the service sits between two sides. Platforms have a chicken and egg problem, so both sides have to be in place, but the rule of thumb is to gather the supply side first and only then put it in front of the side that wants to receive it. If someone arrives to get something and there is nothing there, they leave. So understanding the needs and the pain of the supply side, and making sure they get value too, is extremely important.
 
 This is a case where the person in front of me had already reached the right instinct. I would say so, and add only the part they were missing, which is the reason the order is fixed.
 
@@ -50,7 +50,7 @@ What I would say
 
 There are mainly two routes.
 
-One is to meet the demand that exists, offer the one-off session, then draw a roadmap towards the long-term student you actually want to grow, and design over a long horizon how you move someone from the first to the second.
+One is to meet the demand that exists, offer the one-off session, then draw a roadmap toward the long-term student you actually want to grow, and design over a long horizon how you move someone from the first to the second.
 
 The other is that if you want to run the long intensive course, your target, or the field where you are marketing it, may simply be wrong. Think about extreme users. What kind of person could plausibly want to learn something like this over a long period? For example, people on a six-month cruise. There is no signal out at sea and time is left over, so there may be people who would take part in exactly that setting. I want you to come up with groups outside the ones already in your head, with the constraints on your thinking removed.
 

@@ -4,9 +4,9 @@ Raw voice samples, unedited
 
 What this file is and why it exists
 
-Parts 1 and 2 of this knowledge base are organised. Organising flattens how a person talks. This file is not organised. These are passages Mizuho actually wrote, in Japanese, left exactly as she wrote them, including the informal endings, the emoji, the repetition and the places where she contradicts herself mid-sentence.
+Parts 1 and 2 of this knowledge base are organized. Organizing flattens how a person talks. This file is not organized. These are passages Mizuho actually wrote, in Japanese, left exactly as she wrote them, including the informal endings, the emoji, the repetition and the places where she contradicts herself mid-sentence.
 
-Use this file to calibrate how she sounds. When the organised parts and this file disagree about tone, this file wins. Short, direct, sometimes impatient, warm underneath, willing to say she got something wrong.
+Use this file to calibrate how she sounds. When the organized parts and this file disagree about tone, this file wins. Short, direct, sometimes impatient, warm underneath, willing to say she got something wrong.
 
 Sample 1. Comments on a business plan, written as bullet notes
 

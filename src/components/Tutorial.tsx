@@ -13,7 +13,7 @@ import tour3 from '../assets/tour-3-notes.jpeg';
 export const TUTORIAL_SEEN_KEY = 'mizmentor_tutorial_seen_v1';
 
 interface Step {
-  /** CSS selector for the area to light up. Omit for a centred step. */
+  /** CSS selector for the area to light up. Omit for a centered step. */
   target?: string;
   /**
    * Where the card sits relative to the lit area.
@@ -81,7 +81,7 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
       const sel = STEPS[step]?.target;
       if (!sel) return setRect(null);
       const el = document.querySelector(sel);
-      if (!el) return setRect(null); // target not on screen: fall back to a centred step
+      if (!el) return setRect(null); // target not on screen: fall back to a centered step
       const r = el.getBoundingClientRect();
       const pad = 8;
       setRect({
@@ -128,7 +128,7 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
   const current = STEPS[step];
   const isLast = step === STEPS.length - 1;
 
-  // Place the card near the lit area when there is one, otherwise centre it.
+  // Place the card near the lit area when there is one, otherwise center it.
   const CARD_W = 330;
   const GAP = 16;
   let cardStyle: React.CSSProperties = {};
@@ -142,7 +142,7 @@ export const Tutorial: React.FC<TutorialProps> = ({ isOpen, onClose }) => {
       const left = onLeft
         ? Math.max(GAP, rect.left - GAP - CARD_W)
         : Math.min(window.innerWidth - CARD_W - GAP, rect.left + rect.width + GAP);
-      // Centred on the target vertically, then clamped inside the window so it
+      // Centered on the target vertically, then clamped inside the window so it
       // cannot run off the top or bottom.
       const wanted = rect.top + rect.height / 2 - cardH / 2;
       const top = Math.max(GAP, Math.min(wanted, window.innerHeight - cardH - GAP));

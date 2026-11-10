@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="bg-white text-ink-900 border-b border-slate-200 shadow-xs sticky top-0 z-30 no-print">
       {/* No max-width here. The two sides line up with the panels underneath
           instead: the left block sits in a half-width column with the chat
-          panel's own padding and max-w-xl centring, so the logo starts exactly
+          panel's own padding and max-w-xl centering, so the logo starts exactly
           where the message avatars do; the right block uses the notes
           toolbar's px-4, so the last button ends where Download ends. */}
       <div className="py-3 flex items-center justify-between gap-3">

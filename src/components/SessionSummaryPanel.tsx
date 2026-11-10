@@ -64,7 +64,7 @@ export const summaryHasContent = (s: SessionSummary): boolean =>
   );
 
 /**
- * A labelled section of the sheet. No box or border: the title does the
+ * A labeled section of the sheet. No box or border: the title does the
  * separating. It is a size up from the body and much heavier, and carries more
  * space above it than below, so it reads as a heading of the text under it.
  */

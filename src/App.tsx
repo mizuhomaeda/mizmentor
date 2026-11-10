@@ -128,7 +128,7 @@ export default function App() {
   ) => {
     // Abort any existing pending call before starting new one
     if (activeControllerRef.current) {
-      activeControllerRef.current.abort('cancelled');
+      activeControllerRef.current.abort('canceled');
     }
 
     const controller = new AbortController();
@@ -263,8 +263,8 @@ export default function App() {
       if (controller.signal.aborted) {
         if (controller.signal.reason === 'timeout') {
           errorMessage = 'Mizmentor took longer than 60 seconds to respond. The request has been timed out.';
-        } else if (controller.signal.reason === 'cancelled') {
-          errorMessage = 'Request was cancelled.';
+        } else if (controller.signal.reason === 'canceled') {
+          errorMessage = 'Request was canceled.';
         }
       }
 
@@ -289,7 +289,7 @@ export default function App() {
 
   const handleCancel = () => {
     if (activeControllerRef.current) {
-      activeControllerRef.current.abort('cancelled');
+      activeControllerRef.current.abort('canceled');
     }
   };
 
@@ -338,7 +338,7 @@ export default function App() {
   // Requirement 3: Reset clears everything, sets stage to Step 1, works in error states
   const handleConfirmReset = () => {
     if (activeControllerRef.current) {
-      activeControllerRef.current.abort('cancelled');
+      activeControllerRef.current.abort('canceled');
     }
     try {
       localStorage.removeItem(STORAGE_KEY);

@@ -3,10 +3,10 @@
 /*
  * Mizmentor palette.
  *
- * Light base (white and light grey) with a mint-led accent set. Replaces the
+ * Light base (white and light gray) with a mint-led accent set. Replaces the
  * Berkeley blue + amber scheme inherited from the complaint letter agent.
  *
- *   mint #94c7b9 - the main accent, and the colour seen most: buttons, the
+ *   mint #94c7b9 - the main accent, and the color seen most: buttons, the
  *                  user's own speech bubbles, avatars, modal headers
  *   sea  #59838e - secondary, quieter
  *   ink  #10231e - ALL TEXT. A near-black green on the mint's own hue, so that
@@ -36,7 +36,7 @@
   --color-mint-900: #2e4d45;
 
   /* ink: the mint's own hue (about 164deg) taken down to near-black. This is the
-     text colour. Slate was blue-grey and read as navy next to the mint. */
+     text color. Slate was blue-gray and read as navy next to the mint. */
   --color-ink-50:  #f2faf6;
   --color-ink-100: #d9e8e4;
   --color-ink-200: #a8c8bf;
@@ -118,7 +118,7 @@
 
 /*
  * Soft mint mesh for the notes side, so the white summary sheet reads as paper
- * lying on a coloured surface.
+ * lying on a colored surface.
  *
  * Five radial blobs at different positions, sizes and tones sit on a separate
  * layer that is blurred and over-sized, so the blobs melt into one another with
@@ -143,10 +143,10 @@
   /* Long transitions: the blobs have to melt into each other, not fade out. */
   filter: blur(110px);
   /* Seven overlapping fields, each large enough to reach at least two others.
-     Several centres sit outside the panel (negative or >100% positions) so no
+     Several centers sit outside the panel (negative or >100% positions) so no
      edge shows a blob boundary. Mint at 34%/44% and lavender at 56%/38% are
      placed to collide across the middle, which is where the blended in-between
-     tone comes from. Every colour is pale enough to keep the white sheet on
+     tone comes from. Every color is pale enough to keep the white sheet on
      top clearly separate. */
   background-image:
     radial-gradient(85% 90% at -8% -6%,  rgba(148, 199, 185, 0.42) 0%, rgba(148, 199, 185, 0.22) 45%, rgba(148, 199, 185, 0) 80%),

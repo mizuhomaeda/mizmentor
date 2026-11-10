@@ -5,7 +5,7 @@ How Mizuho Gives Feedback on New Ventures
 
 Source
 
-These are Mizuho's own mentoring notes, written while mentoring around 40 new venture teams and while judging pitch events, plus written messages she sent to founders. The notes were originally in Japanese and covered specific ventures in education, mobility, counselling, fishing, parking and child safety. The domain details have been removed on purpose. What is kept is the reasoning that repeats across all of them.
+These are Mizuho's own mentoring notes, written while mentoring around 40 new venture teams and while judging pitch events, plus written messages she sent to founders. The notes were originally in Japanese and covered specific ventures in education, mobility, counseling, fishing, parking and child safety. The domain details have been removed on purpose. What is kept is the reasoning that repeats across all of them.
 
 
 1. Understanding the user
@@ -76,7 +76,7 @@ Think about what value the user needs before thinking about features.
 - Are you confusing having a feature with being valuable?
 - Could something else solve the same problem?
 - Why are existing services or workarounds not enough?
-- Does a solution need to be provided at all? Could the behaviour change instead?
+- Does a solution need to be provided at all? Could the behavior change instead?
 - What is the single most important value in this solution? Can everything else be cut for now?
 - Is the user's benefit mixed up with what is convenient for the provider?
 
@@ -99,7 +99,7 @@ A hypothesis is not made to be right. It is made to make clear what needs to be 
 - Write down what you do not know, what you are saying on instinct, and which assumptions are unverified.
 - Align hypotheses across the team. If members hold different premises, the solution never settles.
 - Writing the hypothesis down is what makes interview questions specific.
-- Do not validate something vague like "the problem". Validate specific behaviour, specific feelings, specific conditions.
+- Do not validate something vague like "the problem". Validate specific behavior, specific feelings, specific conditions.
 - Do not treat the number of interviews as the goal. Asking the same hypothesis repeatedly stops producing learning.
 - Update the hypothesis after each round, then test a new one.
 - Spending tens of hours debating a hypothesis is worse than testing quickly, but increasing the number of tests without thinking is also wrong.
@@ -157,7 +157,7 @@ Nothing beats hearing it from the user. Not being able to reach users is not an 
 - Surveys and secondary sources have their place. Do not use them as a substitute for primary research.
 - What matters is not that interviews happened, but what was learned.
 
-From her own practice: she joined two startup programmes and interviewed the other founders, used her own network and social media, attended events on the topic to build relationships with potential users, asked for announcement slots when speaking at events, and emailed academics and well known mentors directly. Some of it was unpaid and she was told off occasionally, but her view was that being embarrassed or disliked costs nothing compared to the problem she wanted to solve. Eighty to ninety percent of it was legwork rather than paid platforms, because there was no budget.
+From her own practice: she joined two startup programs and interviewed the other founders, used her own network and social media, attended events on the topic to build relationships with potential users, asked for announcement slots when speaking at events, and emailed academics and well known mentors directly. Some of it was unpaid and she was told off occasionally, but her view was that being embarrassed or disliked costs nothing compared to the problem she wanted to solve. Eighty to ninety percent of it was legwork rather than paid platforms, because there was no budget.
 
 Her mentor's instruction, which she repeats: you are a founder now, so do not look for reasons you cannot do it. Work out how to meet users without spending money, and go where they are, regularly, and build the relationship yourself.
 
@@ -202,7 +202,7 @@ Will the social problem you named actually be solved? Does the solution create n
 - You may deliver value to the user in front of you, but could someone else be disadvantaged?
 - Does the structure make things worse for people who cannot afford it?
 - If someone uses the product and the problem still happens, does that leave them with false expectations or misplaced blame?
-- The psychology and behaviour the provider assumes may not match reality.
+- The psychology and behavior the provider assumes may not match reality.
 - Do not design on the assumption of common sense or good intentions. Understand how the people involved actually behave.
 - The more sensitive the subject, the more the wording, marketing, delivery and social side effects have to be thought through.
 - Hold the social vision and the need to make money at the same time.
@@ -224,7 +224,7 @@ To keep a venture going, the people doing it have to be convinced themselves abo
 
 - Why do you want to do this? What do you actually want?
 - Why do you want to solve that problem?
-- Why does it need to be this organisation, this company, this environment?
+- Why does it need to be this organization, this company, this environment?
 - Did you choose this environment because it is the best option for the user?
 - When the company's interest and the user's interest collide, how will you decide?
 - Do you understand the cost you are taking on, in time, money and mental health?
@@ -266,10 +266,10 @@ Her own pitch feedback criteria, written for a pitch event:
 Cross cutting patterns
 
 Question the premise. Is this really a problem, and does this really need to happen?
-Go one layer down. Look past the surface inconvenience to the psychology, behaviour and structure behind it.
+Go one layer down. Look past the surface inconvenience to the psychology, behavior and structure behind it.
 Narrow sharply. Do not solve everything. Find the one that matters.
 Start from the user. Value is defined from their side, not from what is convenient to build.
-Insist on primary sources. Confirm actual behaviour and actual words, not imagination or generalities.
+Insist on primary sources. Confirm actual behavior and actual words, not imagination or generalities.
 Separate hypothesis from fact. Make assumptions visible so they can be tested.
 Test small. Validate with the minimum before building the finished thing.
 Look at viability. Social meaning is not enough. Revenue, market and sustainability matter.

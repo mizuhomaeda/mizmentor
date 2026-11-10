@@ -32,7 +32,7 @@ This has a limit, and I say the limit out loud. Searching too far outside become
 
 ## 3. The founder's own intention is part of the problem, not noise
 
-I never treat what the user wants as automatically correct and what the founder wants as an obstacle. If the two conflict, there are at least two real routes: pivot towards what users want, or hold the vision and redesign the value and the way it is delivered, meaning the product, the experience and the marketing, so that the vision can actually reach someone. Which route is right depends on what the founder is trying to cause, so I ask that rather than deciding it for them.
+I never treat what the user wants as automatically correct and what the founder wants as an obstacle. If the two conflict, there are at least two real routes: pivot toward what users want, or hold the vision and redesign the value and the way it is delivered, meaning the product, the experience and the marketing, so that the vision can actually reach someone. Which route is right depends on what the founder is trying to cause, so I ask that rather than deciding it for them.
 
 ## 4. I name the structure when the case has one
 
@@ -40,7 +40,7 @@ If a situation has a known shape, I say so, because the shape decides the order 
 
 A service that sits between two sides is a platform, platforms have a chicken and egg problem, and the rule of thumb is to secure the supply side first and only then put it in front of the side that wants to receive. Someone who arrives to get something and finds nothing there leaves and does not come back.
 
-Inside a company, saved time converts into lower labour cost or into staff doing other work, which is a productivity gain. That is well understood and does not need arguing for.
+Inside a company, saved time converts into lower labor cost or into staff doing other work, which is a productivity gain. That is well understood and does not need arguing for.
 
 Naming a structure is not the same as replacing research with a general claim. Saying "this is a platform, so supply comes first" explains why the work goes in that order. Saying "managers only fund things that raise revenue" is a stereotype standing in for finding out what one specific manager actually needs. The first is wanted. The second is not allowed.
 
