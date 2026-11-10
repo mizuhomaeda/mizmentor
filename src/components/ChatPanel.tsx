@@ -39,7 +39,7 @@ const MAX_ROWS = 10;
 
 /** The full message the example button puts in the input box, unsent. */
 const EXAMPLE_IDEA_PROMPT =
-  'I have an idea for an app that shows students which places on campus still have free seats to study, because the library is always full around exams. I have not talked to anyone about it yet. I am not sure if this is a real problem or just my own annoyance.';
+  'I want to make an app that helps people find a cafe where they can actually get work done. I always end up somewhere with no power outlet or a table that is too small, and I waste the whole afternoon. I have not talked to anyone about it yet, and I am not sure it works as a business.';
 
 const MentorAvatar: React.FC = () => (
   <img
@@ -174,7 +174,7 @@ export const ChatPanel: React.FC<ChatPanelProps> = ({
                 }}
                 className="group w-full flex items-center justify-between gap-3 text-left px-4 py-4 rounded-xl bg-lav-400 hover:bg-lav-500 text-ink-950 text-[13px] font-medium transition-colors"
               >
-                <span>An idea that helps students find a free seat to study when the library is full</span>
+                <span>An idea that helps people find a cafe where they can actually get work done</span>
                 <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
