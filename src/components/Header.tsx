@@ -37,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({
           where the message avatars do; the right block uses the notes
           toolbar's px-4, so the last button ends where Download ends. */}
       <div className="py-3 flex items-center justify-between gap-3">
-        <div className="min-w-0 w-full md:w-1/2 shrink-0 px-4 sm:px-6 md:border-r md:border-transparent">
+        <div className="min-w-0 flex-1 md:flex-none md:w-1/2 md:shrink-0 px-4 sm:px-6 md:border-r md:border-transparent">
           <div className="max-w-2xl mx-auto">
           {/* h-[30px] is the rendered height of the "How it works" button, so
               the bar's py-3 leaves the same 12px above and below both sides.
@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Right Action buttons */}
-          <div className="flex items-center gap-2 flex-wrap pr-4">
+          <div className="flex items-center gap-2 shrink-0 pr-4">
             {/* View switcher: only useful when the window is too narrow to
                 show both panels at once. Hidden from md: upward. */}
             <div className="md:hidden">
